@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:51 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/21 12:23:25 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/21 12:47:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <limits.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../submodules/42.libft/libft.h"
 # include "minishell.function.h"
 # include "minishell.define.h"

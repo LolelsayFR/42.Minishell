@@ -2,7 +2,7 @@ NAME			=	minishell
 
 SRC				=	$(wildcard srcs/*.c)\
 
-CFLAGS			=	-Wall -Werror -Wextra
+CFLAGS			=	-Wall -Werror -Wextra -lreadline
 
 LIBFT_PATH		=	./submodules/42.libft
 LIBFT			=	$(LIBFT_PATH)/libft.a
