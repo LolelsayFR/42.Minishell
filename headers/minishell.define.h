@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/21 13:42:58 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:36:10 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../submodules/42.libft/libft.h"
 
 # define EXIT_SUCCESS 0
-# define EXIT_ERROR 2
+# define EXIT_ERROR 1
 # define TRUE 1
 # define FALSE 0
 
@@ -26,7 +26,7 @@ typedef struct s_ms_data
 {
 	t_bool	is_inited;
 	t_bool	is_running;
-	t_list	*prompts;
+	char	*prompt;
 }	t_ms_data;
 
 #endif
