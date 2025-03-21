@@ -1,0 +1,6 @@
+[submodule "submodules/42.libft"]
+	path = submodules/42.libft
+	url = git@github.com:LolelsayFR/42.libft.git
+[submodule "submodules/42.ft_printf"]
+	path = submodules/42.ft_printf
+	url = git@github.com:LolelsayFR/42.ft_printf.git
