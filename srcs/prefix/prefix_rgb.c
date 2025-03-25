@@ -6,12 +6,11 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 18:22:20 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/21 18:23:00 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/25 09:08:59 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.define.h"
-
+#include "../../headers/minishell.function.h"
 
 static size_t	sum_of_char(char *str)
 {
@@ -34,7 +33,10 @@ static t_rgb	random_rgb(char *prompt)
 	t_rgb			rgb;
 	static int		appel = 0;
 
-	seed += (++appel * sum_of_char(prompt) + (uintptr_t)prompt) % 256;
+	if (prompt == NULL)
+		seed += ++appel * 1 + 1 % 256;
+	else
+		seed += (++appel * sum_of_char(prompt) + (long long)prompt) % 256;
 	seed *= (seed + 2025) % 256;
 	rgb.r = (seed % 128);
 	seed *= (seed + 2025) % 256;
@@ -44,7 +46,7 @@ static t_rgb	random_rgb(char *prompt)
 	return (rgb);
 }
 
-static char	*prefix_rgb_format(char *prompt)
+char	*ms_prefix_rgb_format(char *prompt, t_ms_data *data)
 {
 	char	*temp;
 	char	*result;
@@ -65,9 +67,10 @@ static char	*prefix_rgb_format(char *prompt)
 	ft_strcat(&temp, ";");
 	ft_strcat(&result, temp);
 	nufree(temp);
-	ft_strcat(&result, "1m MINI MICHEL ⤵ \e[0m\n");
+	ft_strcat(&result, "1m ");
+	ft_strcat(&result, data->prefix);
+	ft_strcat(&result, "\e[0m");
 	nufree(rgb);
+	ft_alist_add_back(result);
 	return (result);
 }
-
-

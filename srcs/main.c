@@ -6,11 +6,11 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/21 17:39:26 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/25 09:07:46 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.include.h"
+#include "../headers/minishell.function.h"
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 {
 	dumb(0, envp);
+	data->prefix = ft_strdup_lst(LANG_PREFIX RES);
 	data->is_inited = TRUE;
 	return (NULL);
 }
@@ -39,7 +40,7 @@ int	minishell_main_loop(t_ms_data *data)
 	data->is_running = TRUE;
 	while (data->is_running == TRUE)
 	{
-		data->prompt = readline("\e[48;2;20;100;20;1m MINI MICHEL ⤵ \e[0m\n");
+		data->prompt = readline(ms_prefix(data));
 		add_history(data->prompt);
 		ft_printfd(1, "The prompt is : %s\n", data->prompt);
 		if (!ft_strncmp(data->prompt, "exit", 5))

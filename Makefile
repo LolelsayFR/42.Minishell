@@ -1,6 +1,7 @@
 NAME			=	minishell
 
 SRC				=	$(wildcard srcs/*.c)\
+					$(wildcard srcs/*/*.c)\
 
 CFLAGS			=	-Wall -Werror -Wextra -lreadline
 
@@ -10,7 +11,7 @@ LIBFT			=	$(LIBFT_PATH)/libft.a
 all:	hello $(NAME)
 
 hello:
-	@echo "\e[48;2;100;0;0;1m WILDCARD BLYAT !\e[0m\n"
+	@echo "\e[48;2;100;0;00;1m WILDCARD BLYAT !\e[0m\n"
 	@echo "\e[48;2;100;0;100;1m Welcome to "$(NAME)" Makefile !\e[0m\n"
 
 d_info: hello
