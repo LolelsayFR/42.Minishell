@@ -2,6 +2,7 @@ NAME			=	minishell
 
 SRC				=	$(wildcard srcs/*.c)\
 					$(wildcard srcs/*/*.c)\
+					$(wildcard srcs/*/*/*.c)\
 
 CFLAGS			=	-Wall -Werror -Wextra -Iheaders -lreadline
 
