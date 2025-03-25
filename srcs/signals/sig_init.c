@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prefix.c                                           :+:      :+:    :+:   */
+/*   sig_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/23 01:32:43 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/25 15:43:14 by emaillet         ###   ########.fr       */
+/*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
+/*   Updated: 2025/03/25 15:10:22 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-char	*ms_prefix(t_ms_data *data)
+static void	ms_sig_handler(int sig)
 {
-	if (data->prompt == NULL)
-		return (data->prefix);
-	if (data->easter_rgb == FALSE && !strncmp(data->prompt, "rgb\0", 4))
-		data->easter_rgb = TRUE;
-	else if (data->easter_rgb == TRUE && !strncmp(data->prompt, "rgb\0", 4))
-		data->easter_rgb = FALSE;
-	if (data->easter_rgb == TRUE)
-		return (ms_prefix_rgb_format(data->prompt, data));
-	return (data->prefix);
+	if (sig == SIGINT)
+	{
+		ft_printfd(1, "\n%s", ms_get_data()->prefix);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+	}
+}
+
+t_bool	ms_sig_init(t_ms_data *data)
+{
+	dumb(0, data);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ms_sig_handler);
+	signal(SIGSEGV, ms_sig_handler);
+	return (TRUE);
 }

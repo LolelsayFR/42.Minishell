@@ -3,7 +3,7 @@ NAME			=	minishell
 SRC				=	$(wildcard srcs/*.c)\
 					$(wildcard srcs/*/*.c)\
 
-CFLAGS			=	-Wall -Werror -Wextra -lreadline
+CFLAGS			=	-Wall -Werror -Wextra -Iheaders -lreadline
 
 LIBFT_PATH		=	./submodules/42.libft
 LIBFT			=	$(LIBFT_PATH)/libft.a
@@ -11,12 +11,8 @@ LIBFT			=	$(LIBFT_PATH)/libft.a
 all:	hello $(NAME)
 
 hello:
-	@echo "\e[48;2;100;0;00;1m WILDCARD BLYAT !\e[0m\n"
+	@echo "\e[48;2;100;0;00;1m WILDCARD !\e[0m\n"
 	@echo "\e[48;2;100;0;100;1m Welcome to "$(NAME)" Makefile !\e[0m\n"
-
-d_info: hello
-	@echo "\e[48;2;70;70;70;1m "$(NAME)" usage : \e[0m\n"
-	@echo "./d_philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [number_of_times_each_philosopher_must_eat]\n"
 
 $(NAME): ${SRC} ${LIBFT}
 	@echo "\e[48;2;0;155;0;1m Compile "$(NAME)" \e[0m\n"

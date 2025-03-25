@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   prefix_rgb.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emaillet <emaillet@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 18:22:20 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/25 09:08:59 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:49:05 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.function.h"
+#include "minishell.function.h"
 
 static size_t	sum_of_char(char *str)
 {
@@ -69,7 +69,7 @@ char	*ms_prefix_rgb_format(char *prompt, t_ms_data *data)
 	nufree(temp);
 	ft_strcat(&result, "1m ");
 	ft_strcat(&result, data->prefix);
-	ft_strcat(&result, "\e[0m");
+	ft_strcat(&result, "\e[0m ");
 	nufree(rgb);
 	ft_alist_add_back(result);
 	return (result);
