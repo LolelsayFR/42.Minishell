@@ -6,13 +6,10 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/03/31 17:26:30 by artgirar         ###   ########.fr       */
-=======
-/*   Updated: 2025/03/31 17:35:33 by emaillet         ###   ########.fr       */
->>>>>>> 97f9537 (strlstdup fix for env var)
+/*   Updated: 2025/03/31 17:46:54 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.function.h"
 
@@ -51,6 +48,7 @@ int	minishell_main_loop(t_ms_data *data)
 		ft_printfd(1, "The prompt is : %s\n", data->prompt);
 		if (!ft_strncmp(data->prompt, "exit", 4))
 			ms_exit(data->prompt + 5);
+
 		else if (!ft_strncmp(data->prompt, "pwd", 3))
 			ms_pwd();
 		else if (!ft_strncmp(data->prompt, "env", 3))
