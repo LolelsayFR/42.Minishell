@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/31 15:50:05 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:06:32 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	minishell_main_loop(t_ms_data *data)
 			data->is_running = FALSE;
 		if (!ft_strncmp(data->prompt, "pwd", 4))
 			pwd();
+		if (!ft_strncmp(data->prompt, "echo", 4))
+			echo(data->prompt, 1);
 	}
 	return (EXIT_SUCCESS);
 }
