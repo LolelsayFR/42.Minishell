@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/25 15:10:22 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:08:40 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	ms_sig_init(t_ms_data *data)
 {
 	dumb(0, data);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ms_sig_handler);
+	//signal(SIGINT, ms_sig_handler);
 	signal(SIGSEGV, ms_sig_handler);
 	return (TRUE);
 }
