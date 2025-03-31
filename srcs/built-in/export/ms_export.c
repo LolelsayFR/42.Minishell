@@ -6,8 +6,13 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/03/25 15:09:26 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:33:13 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
+
+// int ms_export(char *arg)
+// {
+//     t_list *temp;
+// }
