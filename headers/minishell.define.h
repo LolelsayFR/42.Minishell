@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/31 16:29:48 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:35:25 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_ms_data
 	char	**env_var;
 	char	*prefix;
 	char	*prompt;
+	int		last_return;
+
 }	t_ms_data;
 
 #endif
