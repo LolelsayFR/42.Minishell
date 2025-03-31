@@ -1,3 +1,7 @@
 minishell
+*.swp
+*.a
+*.out
+*.o
 .vscode
 en.subject.pdf
