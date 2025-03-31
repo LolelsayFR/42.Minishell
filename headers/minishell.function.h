@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/31 16:46:07 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:07:33 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char		*ms_prefix(t_ms_data *data);
 /*  Built-In : Echo functions                                                 */
 /* ************************************************************************** */
 
-int	echo(char *str, t_bool option);
+int			echo(char *str, t_bool option);
 
 /* ************************************************************************** */
 /*  Built-In : Cd functions                                                   */
@@ -69,7 +69,7 @@ int	echo(char *str, t_bool option);
 /*  Built-In : Pwd functions                                                  */
 /* ************************************************************************** */
 
-int	pwd(void);
+int			pwd(void);
 
 /* ************************************************************************** */
 /*  Built-In : Export functions                                               */
@@ -83,7 +83,7 @@ int	pwd(void);
 /*  Built-In : Env functions                                                  */
 /* ************************************************************************** */
 
-int	env(char **envp);
+int			env(char **envp);
 
 /* ************************************************************************** */
 /*  Built-In : Exit functions                                                 */
