@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/31 16:27:43 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:29:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 
 t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 {
-	data->envar = ft_strtabdup(envp);
+	data->env_var = ft_strtabdup(envp);
 	data->prefix = ft_strdup_lst(LANG_PREFIX);
 	data->is_inited = TRUE;
 	ms_sig_init(data);
