@@ -6,11 +6,11 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/25 16:38:39 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/31 08:29:19 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.function.h"
+#include "minishell.function.h"
 
 int	main(int argc, char **argv, char **envp)
 {
