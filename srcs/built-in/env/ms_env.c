@@ -6,17 +6,18 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/03/31 16:33:17 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:44:16 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-void	env(char **envp)
+int	env(char **envp)
 {
 	while (*envp != NULL)
 	{
 		printf("%s\n", *envp);
 		envp++;
 	}
+	return (0);
 }
