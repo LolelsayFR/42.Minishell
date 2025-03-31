@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/31 17:00:14 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:26:30 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ int	minishell_main_loop(t_ms_data *data)
 		if (data->prompt[0] != '\0')
 			add_history(data->prompt);
 		ft_printfd(1, "The prompt is : %s\n", data->prompt);
-		if (!ft_strncmp(data->prompt, "exit", 5))
-			data->is_running = FALSE;
+		if (!ft_strncmp(data->prompt, "exit", 4))
+			ms_exit(data->prompt + 5);
 		else if (!ft_strncmp(data->prompt, "pwd", 3))
-			pwd();
+			ms_pwd();
 		else if (!ft_strncmp(data->prompt, "env", 3))
-			env(data->env_var);
+			ms_env(data->env_var);
 		else if (!ft_strncmp(data->prompt, "echo", 4))
-			echo(data->prompt, 1);
+			ms_echo(data->prompt, 1);
 	}
 	return (EXIT_SUCCESS);
 }

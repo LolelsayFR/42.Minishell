@@ -6,13 +6,13 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/03/31 16:44:16 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:27:31 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	env(char **envp)
+int	ms_env(char **envp)
 {
 	while (*envp != NULL)
 	{
