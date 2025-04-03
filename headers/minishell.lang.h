@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:01 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/31 08:47:22 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:08:30y emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 /*  Other language constant                                                   */
 /* ************************************************************************** */
 # define LANG_PREFIX "MINI MISHELL : "
+# define LANG_PARS_ERROR "Parsing error : %s\n"
+# define LANG_MALLOC_ERROR "Malloc error : %s\n"
 
 #endif
 /* ************************************************************************** */
