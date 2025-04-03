@@ -16,13 +16,15 @@
 /* ************************************************************************** */
 /*  Error and warn messages                                                   */
 /* ************************************************************************** */
+# define LANG_EXIT_ERROR "%sexit: -: numeric argument required\n"
+# define LANG_PARS_ERROR "%sParsing error : %s\n"
+# define LANG_MALLOC_ERROR "%sMalloc error : %s\n"
+# define LMEPC "Parsing/Context"
 
 /* ************************************************************************** */
 /*  Other language constant                                                   */
 /* ************************************************************************** */
 # define LANG_PREFIX "MINI MISHELL : "
-# define LANG_PARS_ERROR "Parsing error : %s\n"
-# define LANG_MALLOC_ERROR "Malloc error : %s\n"
 
 #endif
 /* ************************************************************************** */
