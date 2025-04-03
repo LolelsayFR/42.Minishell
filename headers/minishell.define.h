@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/31 16:35:25 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/03 07:51:28 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ typedef int	t_bool;
 /* ************************************************************************** */
 /*  Typedef of struct                                                         */
 /* ************************************************************************** */
+typedef struct s_ms_tokken
+{
+	int		type;
+	char	*content;
+	int		id;
+}	t_ms_tokken;
+
+typedef struct s_ms_context
+{
+	t_bool	as_heredoc;
+}	t_ms_context;
 typedef struct s_ms_data
 {
 	t_bool	is_inited;
