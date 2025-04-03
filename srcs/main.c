@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/31 17:53:08 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:53:50 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	minishell_data_init(data, envp);
 	if (data->is_inited == TRUE)
 		minishell_main_loop(data);
-	ft_alist_free();
+	ms_exit(EXIT_SUCCESS, data);
 	return (EXIT_SUCCESS);
 }
 
@@ -32,6 +32,8 @@ t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 	data->env_var = ft_strtabdup_lst(envp);
 	data->prefix = ft_strdup_lst(LANG_PREFIX);
 	data->is_inited = TRUE;
+	data->context = NULL;
+	data->tokkens = NULL;
 	ms_sig_init(data);
 	return (NULL);
 }
@@ -46,15 +48,10 @@ int	minishell_main_loop(t_ms_data *data)
 			break ;
 		if (data->prompt[0] != '\0')
 			add_history(data->prompt);
-		ft_printfd(1, "The prompt is : %s\n", data->prompt);
-		if (!ft_strncmp(data->prompt, "exit", 4))
-			ms_exit(data->prompt + 5);
-		else if (!ft_strncmp(data->prompt, "pwd", 3))
-			ms_pwd();
-		else if (!ft_strncmp(data->prompt, "env", 3))
-			ms_env(data->env_var);
-		else if (!ft_strncmp(data->prompt, "echo", 4))
-			ms_echo(data->prompt, 1);
+		if (prompt_handler(data) == EXIT_SUCCESS)
+			;
+		else
+			ft_printfd(STDERR_FILENO, LANG_PARS_ERROR, data->prompt);
 	}
 	return (EXIT_SUCCESS);
 }
