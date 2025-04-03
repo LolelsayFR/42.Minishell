@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/03 11:53:50 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:28:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	minishell_main_loop(t_ms_data *data)
 		if (prompt_handler(data) == EXIT_SUCCESS)
 			;
 		else
-			ft_printfd(STDERR_FILENO, LANG_PARS_ERROR, data->prompt);
+			ft_printfd(2, LANG_PARS_ERROR, ms_prefix(data), data->prompt);
 	}
 	return (EXIT_SUCCESS);
 }
