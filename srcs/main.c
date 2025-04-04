@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 08:52:45 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:43:19 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,12 @@ t_ms_data	*ms_get_data(void)
 	if (data == NULL)
 		return (NULL);
 	return (data);
+}
+
+void	ms_close(unsigned char exit_value, t_ms_data *data)
+{
+	if (data->tokkens != NULL)
+		(ft_lstclear(&data->tokkens, tokken_destructor), data->context = NULL);
+	ft_alist_free();
+	exit((unsigned char)exit_value);
 }

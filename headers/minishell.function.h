@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/03 14:55:41 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:42:36 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 t_ms_data	*minishell_data_init(t_ms_data *data, char **envp);
 int			minishell_main_loop(t_ms_data *data);
 t_ms_data	*ms_get_data(void);
+void		ms_close(unsigned char exit_value, t_ms_data *data);
 
 /* ************************************************************************** */
 /*  Minishel signals functions                                                */
@@ -56,6 +57,7 @@ char		*ms_prefix(t_ms_data *data);
 /* ************************************************************************** */
 
 int			prompt_handler(t_ms_data *data);
+void		tokken_destructor(void *tokken);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
