@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 08:51:17 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:24:00 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@
 # define FALSE 0
 
 /* ************************************************************************** */
+/*  Type bool (t_bool) values                                                 */
+/* ************************************************************************** */
+
+# define INF 0
+# define H_D 1
+# define CMD 2
+# define OUTF_R 3
+# define OUTF_A 4
+
+/* ************************************************************************** */
 /*  Typedef of types                                                          */
 /* ************************************************************************** */
 typedef int	t_bool;
@@ -45,7 +55,8 @@ typedef struct s_ms_tokken
 
 typedef struct s_ms_context
 {
-	int		heredocs;
+	int	heredocs;
+	int	nb_cmd;
 }	t_ms_context;
 
 typedef struct s_ms_data
