@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 15:16:52 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:38:59 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
 			&& (quote + d_quote) % 2 == 0)
 			return (EXIT_FAILURE);
 		else if ((data->prompt[i] == '&' || data->prompt[i] == ';'
-				|| data->prompt[i] == '*') && (quote + d_quote) % 2 == 0)
+				|| data->prompt[i] == '*' || data->prompt[i] == '\\')
+			&& (quote + d_quote) % 2 == 0)
 			return (EXIT_FAILURE);
 		else if (data->prompt[i] == '<' && data->prompt[i + 1] == '<'
 			&& data->prompt[i + 2] == '<' && (quote + d_quote) % 2 == 1)
