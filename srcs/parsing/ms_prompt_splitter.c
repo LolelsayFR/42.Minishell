@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 16:51:29 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:10:36 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	tokken_count(t_ms_data *data, int quote, int d_quote, int i)
 {
 	int	count;
 
+	count = 0;
 	while (data->prompt[i])
 	{
 		while (data->prompt[i] != '"' && d_quote % 2 == 1)
@@ -26,11 +27,11 @@ static int	tokken_count(t_ms_data *data, int quote, int d_quote, int i)
 			d_quote++;
 		else if (data->prompt[i] == *("'") && d_quote % 2 == 0)
 			quote++;
-		else if (data->prompt[i] == '|' && (quote + d_quote) % 2 == 1)
+		else if (data->prompt[i] == '|' && (quote + d_quote) % 2 == 0)
 			count++;
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (count);
 }
 
 char	**prompt_splitter(t_ms_data *data, int quote, int d_quote, int i)
