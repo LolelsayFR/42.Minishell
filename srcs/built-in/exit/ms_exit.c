@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/04 17:35:38 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:54:49 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ int	ms_exit(char *exit_status, t_ms_data *data)
 	int		k;
 
 	ft_putstr_fd("exit\n", 2);
-	if (exit_status == NULL || exit_status[0] == '\0')
-		ms_close(data->last_return, data);
 	exit_args = ft_split_lst(exit_status, ' ');
-	if (ft_tabstr_len(exit_args) == 1)
+	if (exit_status == NULL || ft_tabstr_len(exit_args) < 1
+		|| exit_status[0] == '\0')
 		ms_close((unsigned char)data->last_return, data);
 	i = 0;
 	j = 0;
