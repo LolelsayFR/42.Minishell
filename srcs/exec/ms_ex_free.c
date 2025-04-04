@@ -6,12 +6,12 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 09:28:18 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:38:51 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-#include "ms_exec.h"
+#include "exec.h"
 
 void    files_clear(t_files *files)
 {
