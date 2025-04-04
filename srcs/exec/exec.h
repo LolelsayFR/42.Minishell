@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 09:46:09 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 11:22:17 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_pids
 
 t_files	*open_all(t_list *tokkens);
 void	files_clear(t_files *files);
+
 t_files	*new_files(void);
+t_pids	*new_pids(void);
 
 #endif

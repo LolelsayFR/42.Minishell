@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:00:40 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 10:52:25 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 11:15:28 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	outfile_open(t_ms_tokken *tokken, t_files *files)
 	}
 	free(buff);
 	files->fd = fd;
+	files->file_t = tokken->type;
 }
 
 void	infile_open(t_ms_tokken *tokken, t_files *files)
@@ -51,6 +52,7 @@ void	infile_open(t_ms_tokken *tokken, t_files *files)
 		return (file_error(files));
 	fd = open(tokken->content, O_RDONLY);
 	files->fd = fd;
+	files->file_t = tokken->type;
 }
 
 t_files	*open_all(t_list *tokkens)
