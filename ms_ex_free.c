@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   ms_ex_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 09:31:27 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/04 09:28:18 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "minishell.function.h"
+#include "ms_exec.h"
 
-typedef struct s_files
+void    files_clear(t_files *files)
 {
-	int				fd;
-	int				file_t;
-	struct s_files	*next;
-}	t_files;
+	t_files	*temp;
 
-typedef struct s_pids
-{
-	pid_t			pid;
-	struct s_pids	next;
-}	t_pids;
-
-void	files_clear(t_files *files);
-t_files	*new_files(void);
-
-#endif
+	temp = files;
+	while (temp != NULL)
+	{
+		close(temp->fd);
+		temp = temp->next;
+		free(files);
+		files = temp;
+	}
+}
