@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/03 11:28:40 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 08:51:17 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ typedef struct s_ms_tokken
 {
 	int		type;
 	char	*content;
+	int		flag;
 	int		id;
 }	t_ms_tokken;
 
 typedef struct s_ms_context
 {
-	t_bool	as_heredoc;
+	int		heredocs;
 }	t_ms_context;
 
 typedef struct s_ms_data
