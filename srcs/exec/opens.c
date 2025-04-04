@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:00:40 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 09:39:19 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:32:28 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,22 @@ t_files	open_all(t_list *tokkens)
 {
 	t_files	*files;
 	t_list	*temp;
+	t_ms_tokken	*tokken;
 
 	files = malloc(sizeof(t_files));
 	files->next = NULL;
 	temp = tokkens;
 	while (temp != NULL)
 	{
-		if (temp->content->type == OUTF_R || temp->content->type == OUTF_A)
+		tokken = temp->content;
+		if (tokken->type == OUTF_R || tokken->type == OUTF_A)
 		{
-			outfile_open(temp->content, files);
+			outfile_open(tokken, files);
 			files = files_next;
 		}
-		else if (temp->content->type == INF || temp->content->type == H_D)
+		else if (tokken->type == INF || tokken->type == H_D)
 		{
-			infile_open(temp->content, files);
+			infile_open(tokken, files);
 			files = files->next;
 		}
 		temp = temp->next;
