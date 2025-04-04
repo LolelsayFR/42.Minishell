@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 14:49:22 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:26:39 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 static int	parsing_init(t_ms_data *data)
 {
-	//if (data->context != NULL)
-	//	nufree(data->context);
+	ft_bzero(data->context, sizeof(t_ms_context));
 	if (data->tokkens != NULL)
 		(ft_lstclear(&data->tokkens, tokken_destructor), data->context = NULL);
-	ft_alist_add_front(data->context = ft_calloc(1, sizeof(t_ms_context)));
 	if (data->context == NULL)
 		return (ft_printfd(2, LANG_MALLOC_ERROR, ms_prefix(data), LMEPC));
 	return (EXIT_SUCCESS);
@@ -65,14 +63,15 @@ static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
 		else if (data->prompt[i] == '|' && data->prompt[i + 1] == '|'
 			&& (quote + d_quote) % 2 == 0)
 			return (EXIT_FAILURE);
-		else if (data->prompt[i] == '&' && data->prompt[i] == ';'
-			&& data->prompt[i] == '*' && (quote + d_quote) % 2 == 0)
+		else if ((data->prompt[i] == '&' || data->prompt[i] == ';'
+				|| data->prompt[i] == '*' || data->prompt[i] == '\\')
+			&& (quote + d_quote) % 2 == 0)
 			return (EXIT_FAILURE);
 		else if (data->prompt[i] == '<' && data->prompt[i + 1] == '<'
-			&& data->prompt[i + 2] == '<' && (quote + d_quote) % 2 == 0)
+			&& data->prompt[i + 2] == '<' && (quote + d_quote) % 2 == 1)
 			return (EXIT_FAILURE);
 		else if (data->prompt[i] == '>' && data->prompt[i + 1] == '>'
-			&& data->prompt[i + 2] == '>' && (quote + d_quote) % 2 == 0)
+			&& data->prompt[i + 2] == '>' && (quote + d_quote) % 2 == 1)
 			return (EXIT_FAILURE);
 		i++;
 	}
@@ -92,7 +91,7 @@ int	prompt_handler(t_ms_data *data)
 		return (EXIT_FAILURE);
 	parsing_init(data);
 	((void)count, (void)i);
-	split_prompt = prompt_splitter(data);
+	split_prompt = prompt_splitter(data, 0, 0, 0);
 	nufree(split_prompt);
 	if (!ft_strncmp(data->prompt, "exit", 4))
 		ms_exit(data->prompt + 5, data);
