@@ -6,11 +6,11 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:52:13 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/03 15:20:15 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:32:42 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.function.h"
+#include "minishell.function.h"
 
 static void	ft_freeall(char **result, size_t j)
 {
