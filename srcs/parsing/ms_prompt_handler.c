@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 10:51:40 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:49:22 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	parsing_init(t_ms_data *data)
 	return (EXIT_SUCCESS);
 }
 
-static t_list	*tokken_creator(char *content, t_ms_data *data)
+void	*tokken_init(char *content, t_ms_data *data, int id)
 {
 	t_ms_tokken	*new_tokken;
 	t_list		*new;
@@ -39,7 +39,9 @@ static t_list	*tokken_creator(char *content, t_ms_data *data)
 				ms_prefix(data), "Tokken/Link"), NULL);
 	new->content = new_tokken;
 	new_tokken->content = content;
-	return (new);
+	new_tokken->id = id;
+	ft_lstadd_back(&data->tokkens, new);
+	return (new_tokken);
 }
 
 void	tokken_destructor(void *tokken)
@@ -52,6 +54,33 @@ void	tokken_destructor(void *tokken)
 	nufree(tokken);
 }
 
+static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
+{
+	while (data->prompt[i])
+	{
+		if (data->prompt[i] == '"' && quote % 2 == 0)
+			d_quote++;
+		else if (data->prompt[i] == *("'") && d_quote % 2 == 0)
+			quote++;
+		else if (data->prompt[i] == '|' && data->prompt[i + 1] == '|'
+			&& (quote + d_quote) % 2 == 0)
+			return (EXIT_FAILURE);
+		else if (data->prompt[i] == '&' && data->prompt[i] == ';'
+			&& data->prompt[i] == '*' && (quote + d_quote) % 2 == 0)
+			return (EXIT_FAILURE);
+		else if (data->prompt[i] == '<' && data->prompt[i + 1] == '<'
+			&& data->prompt[i + 2] == '<' && (quote + d_quote) % 2 == 0)
+			return (EXIT_FAILURE);
+		else if (data->prompt[i] == '>' && data->prompt[i + 1] == '>'
+			&& data->prompt[i + 2] == '>' && (quote + d_quote) % 2 == 0)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	if (quote % 2 != 0 || d_quote % 2 != 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 int	prompt_handler(t_ms_data *data)
 {
 	int		count[4];
@@ -59,14 +88,12 @@ int	prompt_handler(t_ms_data *data)
 	int		i;
 
 	i = 0;
+	if (prompt_checker(data, 0, 0, 0) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	parsing_init(data);
-	((void)count);
-	split_prompt = ft_split_spacer(data->prompt);
-	while (split_prompt[i] != NULL)
-		ft_lstadd_back(&data->tokkens, tokken_creator(split_prompt[i++], data));
+	((void)count, (void)i);
+	split_prompt = prompt_splitter(data);
 	nufree(split_prompt);
-	if (split_prompt == NULL)
-		return (ft_printfd(2, LANG_MALLOC_ERROR, ms_prefix(data), "Split"));
 	if (!ft_strncmp(data->prompt, "exit", 4))
 		ms_exit(data->prompt + 5, data);
 	else if (!ft_strncmp(data->prompt, "pwd", 3))
