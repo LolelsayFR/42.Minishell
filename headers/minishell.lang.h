@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:01 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 13:39:00 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:33:10 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define LANG_PARS_ERROR "%sParsing error : %s\n"
 # define LANG_MALLOC_ERROR "%sMalloc error : %s\n"
 # define LMEPC "Parsing/Context"
+# define COUNT_WRONG " : too many arguments\n"
+# define NUMERIC_ERROR "numeric argument required\n"
 
 /* ************************************************************************** */
 /*  Other language constant                                                   */
