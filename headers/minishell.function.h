@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 10:42:36 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:37:12 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		tokken_destructor(void *tokken);
 /*  Exec functions                                                            */
 /* ************************************************************************** */
 
-int			ms_exec(t_list *tokkens, t_ms_context *context, t_ms_data *data);
+int			ms_exec(t_list *tokkens, t_ms_data *data);
 
 /* ************************************************************************** */
 /*  Built-In : Echo functions                                                 */

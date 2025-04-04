@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_ex_free.c                                       :+:      :+:    :+:   */
+/*   print_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 12:30:34 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/04 11:26:58 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/04 12:20:28 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 #include "exec.h"
 
-void	files_clear(t_files *files)
+void	print_files(t_files *files)
 {
 	t_files	*temp;
 
 	temp = files;
 	while (temp != NULL)
 	{
-		close(temp->fd);
+		printf("%d\t%d\n", temp->fd, temp->file_t);
 		temp = temp->next;
-		free(files);
-		files = temp;
 	}
 }
 
-void	pids_clear(t_pids *pids)
+void	print_pids(t_pids *pids)
 {
 	t_pids	*temp;
 
 	temp = pids;
 	while (temp != NULL)
 	{
+		printf("%d\n", temp->pid);
 		temp = temp->next;
-		free(pids);
-		pids = temp;
 	}
 }

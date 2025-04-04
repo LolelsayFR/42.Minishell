@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_ex_free.c                                       :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 12:30:34 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/04 13:31:32 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 #include "exec.h"
 
-void	files_clear(t_files *files)
+char	*add_path(char *cmd, char **env)
 {
-	t_files	*temp;
+	char	*joined;
+	char	*temp;
 
-	temp = files;
-	while (temp != NULL)
+	if (access(cmd, X_OK) == 0)
+		return (cmd);
+	while (env != NULL && *env != NULL)
 	{
-		close(temp->fd);
-		temp = temp->next;
-		free(files);
-		files = temp;
+		temp = ft_strjoin(*env, "/");
+		joined = ft_strjoin(temp, cmd);
+		free(temp);
+		if (access(joined, F_OK) == 0)
+			return (free(cmd), joined);
+		free(joined);
+		env++;
 	}
-}
-
-void	pids_clear(t_pids *pids)
-{
-	t_pids	*temp;
-
-	temp = pids;
-	while (temp != NULL)
-	{
-		temp = temp->next;
-		free(pids);
-		pids = temp;
-	}
+	return (NULL);
 }
