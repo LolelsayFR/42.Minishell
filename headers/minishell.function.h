@@ -66,7 +66,7 @@ char		**prompt_splitter(t_ms_data *data);
 /*  Exec functions                                                            */
 /* ************************************************************************** */
 
-int			ms_exec(t_list *tokkens, t_ms_context *context, t_ms_data *data);
+int			ms_exec(t_list *tokkens, t_ms_data *data);
 
 /* ************************************************************************** */
 /*  Built-In : Echo functions                                                 */
