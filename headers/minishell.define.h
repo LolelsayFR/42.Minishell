@@ -28,6 +28,16 @@
 # define FALSE 0
 
 /* ************************************************************************** */
+/*  Type bool (t_bool) values                                                 */
+/* ************************************************************************** */
+
+# define INF 0
+# define H_D 1
+# define CMD 2
+# define OUTF_R 3
+# define OUTF_A 4
+
+/* ************************************************************************** */
 /*  Typedef of types                                                          */
 /* ************************************************************************** */
 typedef int	t_bool;
@@ -45,8 +55,8 @@ typedef struct s_ms_tokken
 
 typedef struct s_ms_context
 {
-	int		heredocs;
-	int		nb_cmd;
+	int	heredocs;
+	int	nb_cmd;
 }	t_ms_context;
 
 typedef struct s_ms_data

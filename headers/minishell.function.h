@@ -28,6 +28,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
 # include "../submodules/42.libft/libft.h"
 
 /* ************************************************************************** */
