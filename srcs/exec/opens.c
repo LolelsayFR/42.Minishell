@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:00:40 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 10:37:41 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:42:40 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	file_error(t_files *files)
 
 void	outfile_open(t_ms_tokken *tokken, t_files *files)
 {
-	int	fd;
+	int		fd;
+	char	*buff;
 
+	buff = malloc(5 * sizeof(char));
 	if (access(tokken->content, F_OK) == -1)
 		return (file_error(files));
 	if (access(tokken->content, W_OK) == -1)
@@ -31,9 +33,10 @@ void	outfile_open(t_ms_tokken *tokken, t_files *files)
 	if (tokken->type == OUTF_A)
 	{
 		fd = open(tokken->content, O_CREAT | O_WRONLY, 0644);
-		while (read(fd, NULL, 5) != 0)
+		while (read(fd, buff, 5) != 0)
 			;
 	}
+	free(buff);
 	files->fd = fd;
 }
 
