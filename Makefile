@@ -4,7 +4,7 @@ SRC				=	$(wildcard srcs/*.c)\
 					$(wildcard srcs/*/*.c)\
 					$(wildcard srcs/*/*/*.c)\
 
-CFLAGS			=	-Wall -Werror -Wextra -Iheaders -lreadline
+CFLAGS			=	-Wall -Werror -Wextra -Iheaders -lreadline -g
 
 LIBFT_PATH		=	./submodules/42.libft
 LIBFT			=	$(LIBFT_PATH)/libft.a

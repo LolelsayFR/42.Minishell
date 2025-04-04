@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 16:24:27 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:14:19 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ int			ms_exit(char *exit_status, t_ms_data *data);
 /*  Other/Utils functions                                                     */
 /* ************************************************************************** */
 
-char        **ft_split_spacer(char const *s);
+char		**ft_split_spacer(char const *s);
+void		ft_strncat(char **dst_ptr, const char *src, int n);
 
 #endif
 /* ************************************************************************** */
