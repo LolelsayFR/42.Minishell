@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/04 12:22:16 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:27:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,5 @@ int	ms_exec(t_list *tokkens, t_ms_context *context, t_ms_data *data)
 	}
 	print_files(files);
 	print_pids(pids);
-	(void)context;
-	(void)data;
-	(void)files;
 	return (0);
 }
