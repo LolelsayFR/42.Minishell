@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:00:40 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 13:31:13 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 13:38:08 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	outfile_open(t_ms_tokken *tokken, t_files *files)
 {
 	int		fd;
 	char	*buff;
-	int	j;
+	int		j;
 
 	j = open(tokken->content, O_DIRECTORY);
 	if (j != -1)

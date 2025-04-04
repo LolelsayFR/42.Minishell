@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/04 13:29:08 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 13:38:22 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	cmd_exec(t_ms_tokken *tokken, char **env_var, t_files *files)
 {
 	t_files	*temp;
-	char		**cmd;
+	char	**cmd;
 
 	temp = files;
 	while (temp != NULL && temp->cmd_id != tokken->id)
