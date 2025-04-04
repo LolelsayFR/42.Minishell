@@ -59,6 +59,8 @@ char		*ms_prefix(t_ms_data *data);
 
 int			prompt_handler(t_ms_data *data);
 void		tokken_destructor(void *tokken);
+void		*tokken_init(char *content, t_ms_data *data, int id);
+char		**prompt_splitter(t_ms_data *data, int quote, int d_quote, int i);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
