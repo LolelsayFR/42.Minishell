@@ -6,15 +6,23 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/03/31 17:27:40 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 08:54:49 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	ms_exit(char *exit_status)
+int	ms_exit(char *exit_status, t_ms_data *data)
 {
-	ft_alist_free();
-	exit((unsigned char)ft_atoi(exit_status));
-	return (0);
+	(void)data;
+	if (exit_status == NULL || exit_status[0] == '\0')
+		(ft_alist_free(), exit(EXIT_SUCCESS));
+	// else if ((unsigned char)ft_atoi(exit_status) == 0 && (exit_status[0] != '0'))
+	// {
+	// 	ft_printfd(2, LANG_EXIT_ERROR, ms_prefix(data), exit_status);	
+	// 	return(EXIT_FAILURE);
+	// }
+	else
+		(ft_alist_free(),exit((unsigned char)ft_atoi(exit_status)));
+	return (EXIT_SUCCESS);
 }

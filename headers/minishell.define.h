@@ -6,12 +6,14 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/03 07:51:28 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 08:51:17 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_DEFINE_H
 # define MINISHELL_DEFINE_H
+
+# include "../submodules/42.libft/libft.h"
 
 /* ************************************************************************** */
 /*  Return value                                                              */
@@ -37,23 +39,26 @@ typedef struct s_ms_tokken
 {
 	int		type;
 	char	*content;
+	int		flag;
 	int		id;
 }	t_ms_tokken;
 
 typedef struct s_ms_context
 {
-	t_bool	as_heredoc;
+	int		heredocs;
 }	t_ms_context;
+
 typedef struct s_ms_data
 {
-	t_bool	is_inited;
-	t_bool	is_running;
-	t_bool	easter_rgb;
-	char	**env_var;
-	char	*prefix;
-	char	*prompt;
-	int		last_return;
-
+	t_bool			is_inited;
+	t_bool			is_running;
+	t_bool			easter_rgb;
+	char			**env_var;
+	char			*prefix;
+	char			*prompt;
+	int				last_return;
+	t_ms_context	*context;
+	t_list			*tokkens;
 }	t_ms_data;
 
 #endif
