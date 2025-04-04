@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 16:23:54 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:51:29 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ char	**prompt_splitter(t_ms_data *data, int quote, int d_quote, int i)
 
 	data->context->nb_cmd = tokken_count(data, quote, d_quote, i);
 	result = ft_calloc(data->context->nb_cmd, sizeof(char));
+	printf("\n%d\n\n", data->context->nb_cmd);
 	return (result);
 }
