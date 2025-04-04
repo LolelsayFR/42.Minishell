@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/03 15:38:56 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/04 09:30:11 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,34 @@ static int	parsing_init(t_ms_data *data)
 	return (EXIT_SUCCESS);
 }
 
-// static t_ms_tokken	*tokken_creator(char *content, t_ms_data *data)
-// {
-// 	t_ms_tokken	*new;
+static t_list	*tokken_creator(char *content, t_ms_data *data)
+{
+	t_ms_tokken	*new_tokken;
+	t_list		*new;
 
-// 	ft_alist_add_front(new = ft_calloc(1, sizeof(t_ms_tokken)));
-// 	if (new == NULL)
-// 		return (ft_printfd(2, LANG_MALLOC_ERROR, ms_prefix(data), "Tokken"));
-// 	return (new);
-// }
-
+	new_tokken = ft_calloc(1, sizeof(t_ms_tokken));
+	if (new_tokken == NULL)
+		return (ft_printfd(2, LANG_MALLOC_ERROR, ms_prefix(data), "Tokken"));
+	new = ft_calloc(1, sizeof(t_list));
+	if (new == NULL)
+		return (ft_printfd(2, LANG_MALLOC_ERROR, ms_prefix(data), "Tokken"));
+	return (new);
+}
 
 int	prompt_handler(t_ms_data *data)
 {
 	int		count[4];
-	char	**splited_prompt;
+	char	**split_prompt;
+	int		i;
 
+	i = 0;
 	parsing_init(data);
 	((void)count);
-	splited_prompt = ft_split_spacer(data->prompt);
-	if (splited_prompt == NULL)
+	split_prompt = ft_split_spacer(data->prompt);
+	while (split_prompt[i] != NULL)
+		ft_lstadd_back(&data->tokkens, tokken_creator(split_prompt[i++], data));
+	nufree(split_prompt);
+	if (split_prompt == NULL)
 		return (ft_printfd(2, LANG_MALLOC_ERROR, ms_prefix(data), "Split"));
 	if (!ft_strncmp(data->prompt, "exit", 4))
 		ms_exit(data->prompt + 5, data);
