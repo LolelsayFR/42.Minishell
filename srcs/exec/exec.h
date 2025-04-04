@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 11:22:17 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:22:51 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ void	files_clear(t_files *files);
 
 t_files	*new_files(void);
 t_pids	*new_pids(void);
+
+void	print_files(t_files *files);
+void	print_pids(t_pids *pids);
 
 #endif
