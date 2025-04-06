@@ -112,6 +112,8 @@ int			ms_exit(char *exit_status, t_ms_data *data);
 char		**ft_split_spacer(char const *s);
 void		ft_strncat(char **dst_ptr, const char *src, int n);
 int	        *ft_int_aray(int init_value, int size);
+int			ft_tabstr_len(char **tab);
+int			ft_str_is_num(char *str);
 
 #endif
 /* ************************************************************************** */
