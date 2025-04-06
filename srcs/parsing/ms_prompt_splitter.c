@@ -6,38 +6,73 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 16:23:54 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/06 03:11:44 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static int	tokken_count(t_ms_data *data, int quote, int d_quote, int i)
+int	tokken_count(t_ms_data *data, int quote, int d_quote, int i)
 {
 	int	count;
 
+	count = 1;
 	while (data->prompt[i])
 	{
 		while (data->prompt[i] != '"' && d_quote % 2 == 1)
 			i++;
-		while (data->prompt[i] != *("'") && quote % 2 == 1)
+		while (data->prompt[i] != '\'' && quote % 2 == 1)
 			i++;
 		if (data->prompt[i] == '"' && quote % 2 == 0)
 			d_quote++;
-		else if (data->prompt[i] == *("'") && d_quote % 2 == 0)
+		else if (data->prompt[i] == '\'' && d_quote % 2 == 0)
 			quote++;
-		else if (data->prompt[i] == '|' && (quote + d_quote) % 2 == 1)
+		else if (ft_strchr("|<>", data->prompt[i]) 
+			&& (i == 0 || !ft_strchr("<>", data->prompt[i - 1]))
+			&& (quote + d_quote) % 2 == 0)
 			count++;
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (count);
 }
 
-char	**prompt_splitter(t_ms_data *data, int quote, int d_quote, int i)
+static void	prompt_split_loop(t_ms_data *data, int i[6], char **result)
+{
+	while (data->prompt[i[0]])
+	{
+		if (data->prompt[i[0]] == '"' && i[5] % 2 == 0)
+			i[4]++;
+		else if (data->prompt[i[0]] == '\'' && i[4] % 2 == 0)
+			i[5]++;
+		else if (ft_strchr("|<>", data->prompt[i[0]]) && (i[0] == 0
+				|| !ft_strchr("<>", data->prompt[i[0] - 1]))
+			&& (i[5] + i[4]) % 2 == 0)
+		{
+			ft_strncat(&result[i[2]], data->prompt + i[3], i[1]);
+			i[1] = 0;
+			i[3] = i[0];
+			i[2]++;
+		}
+		i[1]++;
+		i[0]++;
+	}
+	ft_strncat(&result[i[2]], data->prompt + i[3], i[1]);
+}
+
+
+char	**prompt_split(t_ms_data *data, int i[6])
 {
 	char	**result;
 
-	data->context->nb_cmd = tokken_count(data, quote, d_quote, i);
-	result = ft_calloc(data->context->nb_cmd, sizeof(char));
+	data->context->nb_cmd = tokken_count(data, 0, 0, 0);
+	result = ft_calloc(data->context->nb_cmd + 1, sizeof(char *));
+	while (ft_isspace(data->prompt[i[0]]) && (i[5] + i[4]) % 2 == 0)
+		i[0]++;
+	prompt_split_loop(data, i, result);
+	printf("\n%d\n%d\n", data->context->nb_cmd, i[0]);
+	i[0] = 0;
+	while (result[i[0]] != NULL)
+		ft_putendl_fd(result[i[0]++], 1);
 	return (result);
 }
+
