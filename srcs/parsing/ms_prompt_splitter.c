@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 10:56:28 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:00:19 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,22 @@ int	tokken_count(t_ms_data *data, int quote, int d_quote, int i)
 	return (count);
 }
 
-static void	prompt_split_loop(t_ms_data *data, int i[6], char **result)
+static void	prompt_split_loop(t_ms_data *data, int i[4], char **result)
 {
+	int quote;
+	int	d_quote;
+
+	d_quote = 0;
+	quote = 0;
 	while (data->prompt[i[0]])
 	{
-		if (data->prompt[i[0]] == '"' && i[5] % 2 == 0)
-			i[4]++;
-		else if (data->prompt[i[0]] == '\'' && i[4] % 2 == 0)
-			i[5]++;
+		if (data->prompt[i[0]] == '"' && quote % 2 == 0)
+			d_quote++;
+		else if (data->prompt[i[0]] == '\'' && d_quote % 2 == 0)
+			quote++;
 		else if (ft_strchr("|<>", data->prompt[i[0]]) && (i[0] == 0
 				|| !ft_strchr("<>", data->prompt[i[0] - 1]))
-			&& (i[5] + i[4]) % 2 == 0)
+			&& (quote + d_quote) % 2 == 0)
 		{
 			ft_strncat(&result[i[2]], data->prompt + i[3], i[1]);
 			i[1] = 0;
@@ -70,3 +75,4 @@ char	**prompt_split(t_ms_data *data, int i[6])
 	prompt_split_loop(data, i, result);
 	return (result);
 }
+

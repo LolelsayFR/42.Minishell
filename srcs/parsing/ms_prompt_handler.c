@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 10:20:36 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:21:28 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ int	prompt_handler(t_ms_data *data)
 	else if (!ft_strncmp(data->prompt, "echo", 4))
 		ms_echo(data->prompt + 5, FALSE);
 	else if (!ft_strncmp(data->prompt, "cd", 2))
-                ms_cd(data, data->prompt);
-	else
-		return (EXIT_FAILURE);
+		ms_cd(data, data->prompt);
+	print_all_tokken(data->tokkens);
 	return (EXIT_SUCCESS);
 }

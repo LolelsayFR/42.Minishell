@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 10:24:49 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:42:17 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@
 # define INF 0
 # define H_D 1
 # define CMD 2
-# define OUTF_R 3
+# define ARG	3
 # define OUTF_A 4
+# define OUTF_R 5
 
 /* ************************************************************************** */
 /*  Typedef of types                                                          */

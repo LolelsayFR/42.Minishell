@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 11:05:42 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:13:51 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int			ft_tabstr_len(char **tab);
 int			ft_str_is_num(char *str);
 long long	ft_atoll(const char *nptr);
 int			ft_is_ll(char *str);
+void		print_all_tokken(t_list *lst_head);
 
 #endif
 /* ************************************************************************** */
