@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 15:39:29 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:15:44 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ typedef struct s_ms_data
 	t_ms_context	*context;
 	t_list			*tokkens;
 }	t_ms_data;
+
+typedef struct s_pars_args
+{
+	int	i;
+	int	j;
+	int	k;
+	int	id;
+	int	start;
+	int	quote;
+	int	d_quote;
+}	t_pars_args;
 
 #endif
 /* ************************************************************************** */
