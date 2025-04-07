@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 16:26:39 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/06 03:53:35 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,15 @@ static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
 			d_quote++;
 		else if (data->prompt[i] == *("'") && d_quote % 2 == 0)
 			quote++;
-		else if (data->prompt[i] == '|' && data->prompt[i + 1] == '|'
-			&& (quote + d_quote) % 2 == 0)
-			return (EXIT_FAILURE);
-		else if ((data->prompt[i] == '&' || data->prompt[i] == ';'
-				|| data->prompt[i] == '*' || data->prompt[i] == '\\')
-			&& (quote + d_quote) % 2 == 0)
-			return (EXIT_FAILURE);
-		else if (data->prompt[i] == '<' && data->prompt[i + 1] == '<'
-			&& data->prompt[i + 2] == '<' && (quote + d_quote) % 2 == 1)
-			return (EXIT_FAILURE);
-		else if (data->prompt[i] == '>' && data->prompt[i + 1] == '>'
-			&& data->prompt[i + 2] == '>' && (quote + d_quote) % 2 == 1)
+		else if (((data->prompt[i] == '|' && data->prompt[i + 1] == '|')
+				|| ft_strchr("&*;\\", data->prompt[i])
+				|| (data->prompt[i] == '<' && data->prompt[i + 1] == '<'
+					&& data->prompt[i + 2] == '<')
+				|| (data->prompt[i] == '>' && data->prompt[i + 1] == '>'
+					&& data->prompt[i + 2] == '>')
+				|| (data->prompt[i] == '>' && data->prompt[i + 1] == '<')
+				|| (data->prompt[i] == '<' && data->prompt[i + 1] == '>')
+			) && (quote + d_quote) % 2 == 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
@@ -86,13 +83,13 @@ int	prompt_handler(t_ms_data *data)
 	char	**split_prompt;
 	int		i;
 
+	((void)count, (void)i);
 	i = 0;
 	if (prompt_checker(data, 0, 0, 0) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	parsing_init(data);
-	((void)count, (void)i);
-	split_prompt = prompt_splitter(data, 0, 0, 0);
-	nufree(split_prompt);
+	split_prompt = prompt_split(data, ft_int_aray(0, 6));
+	ft_free_strtab(split_prompt);
 	if (!ft_strncmp(data->prompt, "exit", 4))
 		ms_exit(data->prompt + 5, data);
 	else if (!ft_strncmp(data->prompt, "pwd", 3))
