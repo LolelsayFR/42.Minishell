@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 10:46:22 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:05:42 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,13 @@ int			ms_echo(char *str, t_bool option);
 /*  Built-In : Cd functions                                                   */
 /* ************************************************************************** */
 
+int			ms_cd(t_ms_data *data, char *path);
+
 /* ************************************************************************** */
 /*  Built-In : Pwd functions                                                  */
 /* ************************************************************************** */
 
-int			ms_pwd(void);
+int			ms_pwd(t_ms_data *data);
 
 /* ************************************************************************** */
 /*  Built-In : Export functions                                               */
@@ -112,9 +114,11 @@ int			ms_exit(char *exit_status, t_ms_data *data);
 
 char		**ft_split_spacer(char const *s);
 void		ft_strncat(char **dst_ptr, const char *src, int n);
-int	        *ft_int_aray(int init_value, int size);
+int			*ft_int_aray(int init_value, int size);
 int			ft_tabstr_len(char **tab);
 int			ft_str_is_num(char *str);
+long long	ft_atoll(const char *nptr);
+int			ft_is_ll(char *str);
 
 #endif
 /* ************************************************************************** */

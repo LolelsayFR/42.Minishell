@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/04 17:54:49 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:11:44 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static int	ms_exit_returns(char **exit_args, int i, int j, t_ms_data *data)
 		ft_printfd(2, LANG_PREFIX "exit: %s : " NUMERIC_ERROR, exit_args[1]);
 		ms_close(2, data);
 	}
+	if (ft_is_ll(exit_args[1]) == 1)
+	{
+		ft_printfd(2, LANG_PREFIX "exit: %s : " NUMERIC_ERROR, exit_args[1]);
+		ms_close(2, data);
+	}
+	write(1, "ici\n", 4);
 	ms_close((unsigned char)ft_atol(exit_args[1]), data);
 	return (EXIT_FAILURE);
 }
@@ -42,7 +48,7 @@ int	ms_exit(char *exit_status, t_ms_data *data)
 
 	ft_putstr_fd("exit\n", 2);
 	exit_args = ft_split_lst(exit_status, ' ');
-	if (exit_status == NULL || ft_tabstr_len(exit_args) < 1
+	if (exit_status == NULL || ft_tabstr_len(exit_args) == 1
 		|| exit_status[0] == '\0')
 		ms_close((unsigned char)data->last_return, data);
 	i = 0;

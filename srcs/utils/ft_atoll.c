@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_num.c                                    :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 14:57:08 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/07 08:55:34 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/04 18:15:00 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/04 18:29:07 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	ft_str_is_num(char *str)
+long long	ft_atoll(const char *nptr)
 {
-	if (*str == '+' || *str == '-')
-		str++;
-	while (*str)
+	long long	save;
+	int			n;
+
+	n = 1;
+	save = 0;
+	while (*nptr == ' ' || (*nptr >= '\t' && *nptr <= '\r'))
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
 	{
-		if (!ft_isdigit(*str))
-			return (1);
-		str++;
+		if (*nptr == '-')
+			n = -n;
+		nptr++;
 	}
-	return (0);
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		save = (save * 10) + *nptr - '0';
+		nptr++;
+	}
+	return (save * n);
 }

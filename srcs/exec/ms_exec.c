@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/04 13:38:22 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:23:32 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	cmd_exec(t_ms_tokken *tokken, char **env_var, t_files *files)
 		exit(1);
 	}
 	execve(cmd[0], cmd, env_var);
+	ft_putstr_fd("Error execve\n", 2);
 	exit(1);
 }
 
