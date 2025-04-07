@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:01 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 17:33:10 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:01:26 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define LMEPC "Parsing/Context"
 # define COUNT_WRONG " : too many arguments\n"
 # define NUMERIC_ERROR "numeric argument required\n"
+# define DIR_ERROR "No such file or directory\n"
+# define DIR_COUNT "too many arguments\n"
 
 /* ************************************************************************** */
 /*  Other language constant                                                   */
