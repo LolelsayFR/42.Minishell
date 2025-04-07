@@ -90,5 +90,8 @@ int	prompt_handler(t_ms_data *data)
 		ms_env(data->env_var);
 	else if (!ft_strncmp(data->prompt, "echo", 4))
 		ms_echo(data->prompt + 5, FALSE);
+	else if (!ft_strncmp(data->prompt, "cd", 2))
+		ms_cd(data, data->prompt);
+	print_all_tokken(data->tokkens);
 	return (EXIT_SUCCESS);
 }

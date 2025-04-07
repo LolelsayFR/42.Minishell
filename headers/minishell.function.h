@@ -119,6 +119,7 @@ int			ft_tabstr_len(char **tab);
 int			ft_str_is_num(char *str);
 long long	ft_atoll(const char *nptr);
 int			ft_is_ll(char *str);
+void		print_all_tokken(t_list *lst_head);
 
 #endif
 /* ************************************************************************** */
