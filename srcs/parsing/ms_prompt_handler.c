@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 12:07:40 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:09:07 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	prompt_handler(t_ms_data *data)
 	if (!ft_strncmp(data->prompt, "exit", 4))
 		ms_exit(data->prompt, data);
 	else if (!ft_strncmp(data->prompt, "pwd", 3))
-		ms_pwd();
+		ms_pwd(data);
 	else if (!ft_strncmp(data->prompt, "env", 3))
 		ms_env(data->env_var);
 	else if (!ft_strncmp(data->prompt, "echo", 4))
