@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/04 17:54:49 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/07 09:21:33 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ static int	ms_exit_returns(char **exit_args, int i, int j, t_ms_data *data)
 		return (EXIT_FAILURE);
 	}
 	if (j >= 1)
+	{
+		ft_printfd(2, LANG_PREFIX "exit: %s : " NUMERIC_ERROR, exit_args[1]);
+		ms_close(2, data);
+	}
+	if (ft_is_ll(exit_args[1]) == 1)
 	{
 		ft_printfd(2, LANG_PREFIX "exit: %s : " NUMERIC_ERROR, exit_args[1]);
 		ms_close(2, data);

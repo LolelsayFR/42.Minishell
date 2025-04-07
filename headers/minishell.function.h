@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/06 02:38:25 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 09:21:57 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void		ft_strncat(char **dst_ptr, const char *src, int n);
 int	        *ft_int_aray(int init_value, int size);
 int			ft_tabstr_len(char **tab);
 int			ft_str_is_num(char *str);
+long long	ft_atoll(const char *nptr);
+int			ft_is_ll(char *str);
 
 #endif
 /* ************************************************************************** */
