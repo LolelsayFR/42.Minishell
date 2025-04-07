@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 13:14:58 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:53:35 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ typedef struct s_files
 {
 	int				fd;
 	int				file_t;
-	int				cmd_id;
 	struct s_files	*next;
 }	t_files;
 
@@ -27,7 +26,12 @@ typedef struct s_pids
 	struct s_pids	*next;
 }	t_pids;
 
-t_files	*open_all(t_list *tokkens);
+int		outfile_open(int outfile, int type, char *file);
+int		infile_open(int outfile, int type, char *file);
+int		infile_access(char *infile);
+int		outfile_access(char *outfile);
+
+int		files_access(t_list *tokkens);
 void	files_clear(t_files *files);
 
 t_files	*new_files(void);

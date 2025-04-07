@@ -6,89 +6,67 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:00:40 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 13:38:08 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:56:05 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 #include "exec.h"
 
-void	file_error(t_files *files)
+int	outfile_open(int outfile, int type, char *file)
 {
-	files->fd = -1;
-	files->file_t = -1;
-}
-
-void	outfile_open(t_ms_tokken *tokken, t_files *files)
-{
-	int		fd;
 	char	*buff;
-	int		j;
 
-	j = open(tokken->content, O_DIRECTORY);
-	if (j != -1)
-		return (close(j), file_error(files));
-	if (access(tokken->content, F_OK) == -1)
-		return (file_error(files));
-	if (access(tokken->content, W_OK) == -1)
-		return (file_error(files));
-	if (tokken->type == OUTF_R)
-		fd = open(tokken->content, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	else if (tokken->type == OUTF_A)
+	if (type == INF || type == H_D)
+		return (outfile);
+	if (outfile != -1)
+		close(outfile);
+	if (type == OUTF_A)
 	{
-		buff = malloc(5 * sizeof(char));
-		fd = open(tokken->content, O_CREAT | O_WRONLY, 0644);
-		while (read(fd, buff, 5) != 0)
-			;
-		free(buff);
+		outfile = open(file, O_CREAT | O_WRONLY, 0644);
+		while (1)
+		{
+			buff = malloc(5 * sizeof(char));
+			if (read(outfile, buff, 5) != 0)
+			{
+				free(buff);
+				break ;
+			}
+			free(buff);
+		}
 	}
-	files->fd = fd;
-	files->file_t = tokken->type;
-	files->cmd_id = tokken->id;
+	else if (type == OUTF_R)
+		outfile = open(file, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	return (outfile);
 }
 
-void	infile_open(t_ms_tokken *tokken, t_files *files)
+int	infile_open(int infile, int type, char *file)
 {
-	int	fd;
-	int	j;
-
-	j = open(tokken->content, O_DIRECTORY);
-	if (j != -1)
-		return (close(j), file_error(files));
-	if (access(tokken->content, F_OK) == -1)
-		return (file_error(files));
-	if (access(tokken->content, R_OK) == -1)
-		return (file_error(files));
-	fd = open(tokken->content, O_RDONLY);
-	files->fd = fd;
-	files->file_t = tokken->type;
-	files->cmd_id = tokken->id;
+	if (type == OUTF_A || type == OUTF_R)
+		return (infile);
+	if (infile != -1)
+		close(infile);
+	infile = open(file, O_RDONLY);
+	return (infile);
 }
 
-t_files	*open_all(t_list *tokkens)
+int	files_access(t_list *tokkens)
 {
-	t_files		*files;
 	t_list		*temp;
 	t_ms_tokken	*tokken;
 
-	files = new_files();
 	temp = tokkens;
+	tokken = temp->content;
 	while (temp != NULL)
 	{
-		tokken = temp->content;
-		if (tokken->type == OUTF_R || tokken->type == OUTF_A)
-		{
-			outfile_open(tokken, files);
-			files = files->next;
-			files = new_files();
-		}
-		else if (tokken->type == INF || tokken->type == H_D)
-		{
-			infile_open(tokken, files);
-			files = files->next;
-			files = new_files();
-		}
+		if (tokken->type == INF || tokken->type == H_D)
+			if (infile_access(tokken->content) == -1)
+				return (-1);
+		if (tokken->type == OUTF_A || tokken->type == OUTF_R)
+			if (outfile_access(tokken->content) == -1)
+				return (-1);
 		temp = temp->next;
+		tokken = temp->content;
 	}
-	return (files);
+	return (0);
 }
