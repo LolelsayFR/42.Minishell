@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/06 03:53:35 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:53:01 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,21 @@ static int	parsing_init(t_ms_data *data)
 {
 	ft_bzero(data->context, sizeof(t_ms_context));
 	if (data->tokkens != NULL)
-		(ft_lstclear(&data->tokkens, tokken_destructor), data->context = NULL);
-	if (data->context == NULL)
-		return (ft_printfd(2, LANG_MALLOC_ERROR, ms_prefix(data), LMEPC));
+		(ft_lstclear(&data->tokkens, tokken_destructor), data->tokkens = NULL);
 	return (EXIT_SUCCESS);
 }
 
-void	*tokken_init(char *content, t_ms_data *data, int id)
+t_ms_tokken	*tokken_init(char *content, t_ms_data *data, int id, int type)
 {
 	t_ms_tokken	*new_tokken;
-	t_list		*new;
 
 	new_tokken = ft_calloc(1, sizeof(t_ms_tokken));
 	if (new_tokken == NULL)
 		return (ft_printfd(2, LANG_MALLOC_ERROR,
 				ms_prefix(data), "Tokken/Struct"), NULL);
-	new = ft_calloc(1, sizeof(t_list));
-	if (new == NULL)
-		return (ft_printfd(2, LANG_MALLOC_ERROR,
-				ms_prefix(data), "Tokken/Link"), NULL);
-	new->content = new_tokken;
 	new_tokken->content = content;
 	new_tokken->id = id;
-	ft_lstadd_back(&data->tokkens, new);
+	new_tokken->type = type;
 	return (new_tokken);
 }
 
@@ -58,7 +50,7 @@ static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
 	{
 		if (data->prompt[i] == '"' && quote % 2 == 0)
 			d_quote++;
-		else if (data->prompt[i] == *("'") && d_quote % 2 == 0)
+		else if (data->prompt[i] == '\'' && d_quote % 2 == 0)
 			quote++;
 		else if (((data->prompt[i] == '|' && data->prompt[i + 1] == '|')
 				|| ft_strchr("&*;\\", data->prompt[i])
@@ -80,7 +72,7 @@ static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
 int	prompt_handler(t_ms_data *data)
 {
 	int		count[4];
-	char	**split_prompt;
+	char	**tab_prompt;
 	int		i;
 
 	((void)count, (void)i);
@@ -88,10 +80,11 @@ int	prompt_handler(t_ms_data *data)
 	if (prompt_checker(data, 0, 0, 0) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	parsing_init(data);
-	split_prompt = prompt_split(data, ft_int_aray(0, 6));
-	ft_free_strtab(split_prompt);
+	tab_prompt = prompt_split(data, ft_int_aray(0, 6));
+	tab_to_tokken(tab_prompt, data, 0);
+	ft_free_strtab(tab_prompt);
 	if (!ft_strncmp(data->prompt, "exit", 4))
-		ms_exit(data->prompt + 5, data);
+		ms_exit(data->prompt, data);
 	else if (!ft_strncmp(data->prompt, "pwd", 3))
 		ms_pwd();
 	else if (!ft_strncmp(data->prompt, "env", 3))

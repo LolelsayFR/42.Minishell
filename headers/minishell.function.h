@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/06 02:38:25 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:46:22 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ char		*ms_prefix(t_ms_data *data);
 
 int			prompt_handler(t_ms_data *data);
 void		tokken_destructor(void *tokken);
-void		*tokken_init(char *content, t_ms_data *data, int id);
+t_ms_tokken	*tokken_init(char *content, t_ms_data *data, int id, int type);
 char		**prompt_split(t_ms_data *data, int i[6]);
 int			tokken_count(t_ms_data *data, int quote, int d_quote, int i);
+void        tab_to_tokken(char **tab, t_ms_data *data, int i);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
