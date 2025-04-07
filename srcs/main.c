@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 12:24:55 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:40:49 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 		return (EXIT_FAILURE);
 	dumb(0, argc, argv);
 	minishell_data_init(data, envp);
-	if (data->is_inited == TRUE)
+	if (data->is_inited == true)
 		minishell_main_loop(data);
 	ms_exit(EXIT_SUCCESS, data);
 	return (EXIT_SUCCESS);
@@ -31,7 +31,7 @@ t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 {
 	data->env_var = ft_strtabdup_lst(envp);
 	data->prefix = ft_strdup_lst(LANG_PREFIX);
-	data->is_inited = TRUE;
+	data->is_inited = true;
 	ft_alist_add_front(data->context = ft_calloc(1, sizeof(t_ms_context)));
 	data->tokkens = NULL;
 	ms_sig_init(data);
@@ -40,8 +40,8 @@ t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 
 int	minishell_main_loop(t_ms_data *data)
 {
-	data->is_running = TRUE;
-	while (data->is_running == TRUE)
+	data->is_running = true;
+	while (data->is_running == true)
 	{
 		data->prompt = readline(ms_prefix(data));
 		if (data->prompt == NULL)

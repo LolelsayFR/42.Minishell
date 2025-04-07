@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 12:09:52 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:58:45 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include "../submodules/42.libft/libft.h"
 
 /* ************************************************************************** */
@@ -44,7 +45,7 @@ void		ms_close(unsigned char exit_value, t_ms_data *data);
 /*  Minishel signals functions                                                */
 /* ************************************************************************** */
 
-t_bool		ms_sig_init(t_ms_data *data);
+bool		ms_sig_init(t_ms_data *data);
 
 /* ************************************************************************** */
 /*  Minishell Prefix functions                                                */
@@ -60,7 +61,7 @@ char		*ms_prefix(t_ms_data *data);
 int			prompt_handler(t_ms_data *data);
 void		tokken_destructor(void *tokken);
 t_ms_tokken	*tokken_init(char *content, t_ms_data *data, int id, int type);
-char		**prompt_split(t_ms_data *data, int i[6]);
+char		**prompt_split(t_ms_data *data);
 int			tokken_count(t_ms_data *data, int quote, int d_quote, int i);
 void        tab_to_tokken(char **tab, t_ms_data *data, int i);
 
@@ -74,7 +75,7 @@ int			ms_exec(t_list *tokkens, t_ms_data *data);
 /*  Built-In : Echo functions                                                 */
 /* ************************************************************************** */
 
-int			ms_echo(char *str, t_bool option);
+int			ms_echo(char *str, bool option);
 
 /* ************************************************************************** */
 /*  Built-In : Cd functions                                                   */
