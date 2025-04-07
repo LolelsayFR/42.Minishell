@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:26:23 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 13:24:09 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:01:06 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_tokken(t_ms_tokken *tokken)
 {
-	printf("\nTokken id = %d\nType : %d\nContent = %s\n", tokken->id,
+	printf("\nTokken id = %d\nType : %d\nContent = %s\n\n", tokken->id,
 		tokken->type, tokken->content);
 }
 
