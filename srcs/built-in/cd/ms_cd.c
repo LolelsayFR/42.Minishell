@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:20:45 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 11:13:26 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:11:14 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ int	ms_cd_exec(t_ms_data *data, char *pwd, char **split_path)
 	{
 		ft_printfd(2, LANG_PREFIX "cd: %s: " DIR_ERROR, split_path[1]);
 		data->last_return = 1;
+		ft_free_strtab(split_path);
 		free(pwd);
 		return (1);
 	}
 	data->last_return = 0;
+	ft_free_strtab(split_path);
 	free(pwd);
 	return (0);
 }
@@ -38,6 +40,7 @@ int	ms_cd(t_ms_data *data, char *path)
 	if (ft_tabstr_len(split_path) > 2)
 	{
 		data->last_return = 1;
+		ft_free_strtab(split_path);
 		ft_printfd(2, LANG_PREFIX "cd: " DIR_COUNT);
 		return (1);
 	}
