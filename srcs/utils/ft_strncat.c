@@ -6,12 +6,11 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:44:21 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/06 03:14:25 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:56:09 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-
 
 void	ft_strncat(char **dst_ptr, const char *src, int n)
 {
@@ -33,4 +32,3 @@ void	ft_strncat(char **dst_ptr, const char *src, int n)
 	free(*dst_ptr);
 	*dst_ptr = ans;
 }
-
