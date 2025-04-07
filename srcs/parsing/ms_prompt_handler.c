@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 10:53:01 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:02:46 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
 		else if (data->prompt[i] == '\'' && d_quote % 2 == 0)
 			quote++;
 		else if (((data->prompt[i] == '|' && data->prompt[i + 1] == '|')
-				|| ft_strchr("&*;\\", data->prompt[i])
 				|| (data->prompt[i] == '<' && data->prompt[i + 1] == '<'
 					&& data->prompt[i + 2] == '<')
 				|| (data->prompt[i] == '>' && data->prompt[i + 1] == '>'
@@ -89,8 +88,6 @@ int	prompt_handler(t_ms_data *data)
 		ms_pwd();
 	else if (!ft_strncmp(data->prompt, "env", 3))
 		ms_env(data->env_var);
-	else if (!ft_strncmp(data->prompt, "echo -n", 8))
-		ms_echo(data->prompt + 7, TRUE);
 	else if (!ft_strncmp(data->prompt, "echo", 4))
 		ms_echo(data->prompt + 5, FALSE);
 	else
