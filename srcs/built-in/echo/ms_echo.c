@@ -6,13 +6,13 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/03/31 17:27:22 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:41:17 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	ms_echo(char *str, t_bool option)
+int	ms_echo(char *str, bool option)
 {
 	int	i;
 

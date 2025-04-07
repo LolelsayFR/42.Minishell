@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 13:42:17 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:39:29 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 # define MINISHELL_DEFINE_H
 
 # include "../submodules/42.libft/libft.h"
+# include <stdbool.h>
 
 /* ************************************************************************** */
 /*  Return value                                                              */
 /* ************************************************************************** */
 # define EXIT_SUCCESS 0
 # define EXIT_ERROR 1
-
-/* ************************************************************************** */
-/*  Type bool (t_bool) values                                                 */
-/* ************************************************************************** */
-# define TRUE 1
-# define FALSE 0
 
 /* ************************************************************************** */
 /*  Tokken type                                                               */
@@ -41,7 +36,6 @@
 /* ************************************************************************** */
 /*  Typedef of types                                                          */
 /* ************************************************************************** */
-typedef int	t_bool;
 
 /* ************************************************************************** */
 /*  Typedef of struct                                                         */
@@ -63,9 +57,9 @@ typedef struct s_ms_context
 
 typedef struct s_ms_data
 {
-	t_bool			is_inited;
-	t_bool			is_running;
-	t_bool			easter_rgb;
+	bool			is_inited;
+	bool			is_running;
+	bool			easter_rgb;
 	char			**env_var;
 	char			*prefix;
 	char			*prompt;

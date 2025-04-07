@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 01:32:43 by emaillet          #+#    #+#             */
-/*   Updated: 2025/03/25 15:43:14 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:41:03 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ char	*ms_prefix(t_ms_data *data)
 {
 	if (data->prompt == NULL)
 		return (data->prefix);
-	if (data->easter_rgb == FALSE && !strncmp(data->prompt, "rgb\0", 4))
-		data->easter_rgb = TRUE;
-	else if (data->easter_rgb == TRUE && !strncmp(data->prompt, "rgb\0", 4))
-		data->easter_rgb = FALSE;
-	if (data->easter_rgb == TRUE)
+	if (data->easter_rgb == false && !strncmp(data->prompt, "rgb\0", 4))
+		data->easter_rgb = true;
+	else if (data->easter_rgb == true && !strncmp(data->prompt, "rgb\0", 4))
+		data->easter_rgb = false;
+	if (data->easter_rgb == true)
 		return (ms_prefix_rgb_format(data->prompt, data));
 	return (data->prefix);
 }
