@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:26:23 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/08 16:47:10 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:01:23 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@ void	print_all_tokken(t_list *lst_head)
 {
 	t_ms_tokken	*tokken;
 	t_list		*lst;
+	int			i;
 
+	i = 0;
 	lst = lst_head;
 	while (lst)
 	{
+		i++;
 		tokken = lst->content;
 		print_tokken(tokken);
 		lst = lst->next;
 	}
+	printf(RED"Tokken count = %d\n"RES, i);
 }
