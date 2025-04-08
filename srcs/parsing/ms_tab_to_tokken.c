@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_prompt_tabtotokken.c                            :+:      :+:    :+:   */
+/*   ms_tab_to_tokken.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:14:41 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 15:44:03 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:00:06 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static int	tokken_get_type(char *str)
+static int	tokken_get_type(char *str, bool is_first)
 {
 	if (str[0] == '<' && str[1] == '<')
 		return (H_D);
@@ -22,7 +22,7 @@ static int	tokken_get_type(char *str)
 		return (INF);
 	else if (str[0] == '>')
 		return (OUTF_R);
-	else if (str[0] == '|')
+	else if (str[0] == '|' || is_first)
 		return (CMD);
 	return (ARG);
 }
@@ -36,13 +36,22 @@ void	tab_to_tokken(char **tab, t_ms_data *data, int i)
 	id = 0;
 	while (tab[i] != NULL)
 	{
-		type = tokken_get_type(tab[i]);
+		if (i == 0)
+			type = tokken_get_type(tab[i], true);
+		else
+			type = tokken_get_type(tab[i], false);
 		if (type == CMD)
 			id++;
-		content = ft_strtrim(tab[i], "<>| \t");
-		printf("%s\n", content);
+		content = ft_strtrim(tab[i], " \t");
+		if (ft_strlen(content) < 1)
+		{
+			free(content);
+			i++;
+			continue ;
+		}
 		ft_lstadd_back(&data->tokkens,
-			ft_lstnew(tokken_init(content, data, id, type)));
+			ft_lstnew(tokken_init(ft_strtrim(content, "<>|"), data, id, type)));
+		free(content);
 		i++;
 	}
 }
