@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:20:45 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/08 13:33:53 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:37:01 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,20 @@
 
 int	ms_cd_exec(t_ms_data *data, char *pwd, char **split_path, char *path)
 {
-	char	*relat;
-
 	if (split_path[1][0] == '~')
-	{
-		relat = ft_strjoin(get_env(data, "HOME=") + 5, &split_path[1][1]);
-		printf("%s\n", relat);
-		path = relat;
-	}
+		path = ft_strjoin(get_env(data, "HOME=") + 5, &split_path[1][1]);
 	if (chdir(path) == -1)
 	{
 		ft_printfd(2, LANG_PREFIX "cd: %s: " DIR_ERROR, split_path[1]);
 		if (split_path[1][0] == '~')
-			free(relat);
+			free(path);
 		ft_free_strtab(split_path);
 		free(pwd);
 		return (1);
 	}
 	data->last_return = 0;
+	if (split_path[1][0] == '~')
+		free(path);
 	ft_free_strtab(split_path);
 	free(pwd);
 	return (0);
