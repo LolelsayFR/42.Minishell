@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 18:29:33 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:08:06 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		tokken_destructor(void *tokken);
 t_ms_tokken	*tokken_init(char *content, t_ms_data *data, int id, int type);
 char		**prompt_split(t_ms_data *data);
 int			tokken_count(t_ms_data *data, int quote, int d_quote, int i);
-void        tab_to_tokken(char **tab, t_ms_data *data, int i);
+void		tab_to_tokken(char **tab, t_ms_data *data, int i);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
@@ -75,7 +75,7 @@ int			ms_exec(t_list *tokkens, t_ms_data *data);
 /*  Built-In : Echo functions                                                 */
 /* ************************************************************************** */
 
-int			ms_echo(char *str, bool option);
+int			ms_echo(t_ms_data *data, t_list *tokkens);
 
 /* ************************************************************************** */
 /*  Built-In : Cd functions                                                   */
