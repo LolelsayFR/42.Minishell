@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:14:41 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 15:44:03 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:26:04 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	tab_to_tokken(char **tab, t_ms_data *data, int i)
 		type = tokken_get_type(tab[i]);
 		if (type == CMD)
 			id++;
-		content = ft_strtrim(tab[i], "<>| \t");
-		printf("%s\n", content);
+		content = ft_strtrim(tab[i], " \t");
 		ft_lstadd_back(&data->tokkens,
 			ft_lstnew(tokken_init(content, data, id, type)));
 		i++;

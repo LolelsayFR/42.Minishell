@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 15:59:01 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:28:39 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int	prompt_handler(t_ms_data *data)
 	else if (!ft_strncmp(data->prompt, "cd", 2))
 		ms_cd(data, data->prompt);
 	print_all_tokken(data->tokkens);
+	printf(RED"Tokken count = %d\n"RES, data->context->nb_tkn);
 	return (EXIT_SUCCESS);
 }
