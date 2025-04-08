@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/08 14:06:18 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:13:02 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			ms_exec(t_list *tokkens, t_ms_data *data);
 /*  Built-In : Echo functions                                                 */
 /* ************************************************************************** */
 
-int			ms_echo(char *str, bool option);
+int			ms_echo(t_ms_data *data, t_list *tokkens);
 
 /* ************************************************************************** */
 /*  Built-In : Cd functions                                                   */
@@ -100,7 +100,7 @@ int			ms_pwd(t_ms_data *data);
 /*  Built-In : Env functions                                                  */
 /* ************************************************************************** */
 
-int			ms_env(char **envp);
+int			ms_env(t_ms_data *data);
 
 /* ************************************************************************** */
 /*  Built-In : Exit functions                                                 */
@@ -119,6 +119,7 @@ int			ft_tabstr_len(char **tab);
 int			ft_str_is_num(char *str);
 long long	ft_atoll(const char *nptr);
 int			ft_is_ll(char *str);
+char		*get_env(t_ms_data *data, char *var);
 void		print_all_tokken(t_list *lst_head);
 
 #endif

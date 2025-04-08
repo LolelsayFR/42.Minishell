@@ -87,9 +87,9 @@ int	prompt_handler(t_ms_data *data)
 	else if (!ft_strncmp(data->prompt, "pwd", 3))
 		ms_pwd(data);
 	else if (!ft_strncmp(data->prompt, "env", 3))
-		ms_env(data->env_var);
+		ms_env(data);
 	else if (!ft_strncmp(data->prompt, "echo", 4))
-		ms_echo(data->prompt + 5, false);
+		ms_echo(data, data->tokkens);
 	else if (!ft_strncmp(data->prompt, "cd", 2))
 		ms_cd(data, data->prompt);
 	print_all_tokken(data->tokkens);

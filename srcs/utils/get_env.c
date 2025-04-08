@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_env.c                                           :+:      :+:    :+:   */
+/*   go_to_home.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/08 15:13:37 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/07 18:03:54 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/07 18:27:50 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	ms_env(t_ms_data *data)
+char	*get_env(t_ms_data *data, char *var)
 {
-	int	i;
+	char	**env;
 
-	i = 0;
-	while (data->env_var[i] != NULL)
-	{
-		ft_printf("%s\n", data->env_var[i]);
-		i++;
-	}
-	data->last_return = 0;
-	return (0);
+	env = data->env_var;
+	while (*env != NULL && ft_strncmp(*env, var, ft_strlen(var)) != 0)
+		env++;
+	return (*env);
 }
