@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/04 09:52:03 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:15:44 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_DEFINE_H
 
 # include "../submodules/42.libft/libft.h"
+# include <stdbool.h>
 
 /* ************************************************************************** */
 /*  Return value                                                              */
@@ -22,29 +23,24 @@
 # define EXIT_ERROR 1
 
 /* ************************************************************************** */
-/*  Type bool (t_bool) values                                                 */
-/* ************************************************************************** */
-# define TRUE 1
-# define FALSE 0
-
-/* ************************************************************************** */
-/*  Type bool (t_bool) values                                                 */
+/*  Tokken type                                                               */
 /* ************************************************************************** */
 
 # define INF 0
 # define H_D 1
 # define CMD 2
-# define OUTF_R 3
+# define ARG	3
 # define OUTF_A 4
+# define OUTF_R 5
 
 /* ************************************************************************** */
 /*  Typedef of types                                                          */
 /* ************************************************************************** */
-typedef int	t_bool;
 
 /* ************************************************************************** */
 /*  Typedef of struct                                                         */
 /* ************************************************************************** */
+
 typedef struct s_ms_tokken
 {
 	int		type;
@@ -61,9 +57,9 @@ typedef struct s_ms_context
 
 typedef struct s_ms_data
 {
-	t_bool			is_inited;
-	t_bool			is_running;
-	t_bool			easter_rgb;
+	bool			is_inited;
+	bool			is_running;
+	bool			easter_rgb;
 	char			**env_var;
 	char			*prefix;
 	char			*prompt;
@@ -71,6 +67,17 @@ typedef struct s_ms_data
 	t_ms_context	*context;
 	t_list			*tokkens;
 }	t_ms_data;
+
+typedef struct s_pars_args
+{
+	int	i;
+	int	j;
+	int	k;
+	int	id;
+	int	start;
+	int	quote;
+	int	d_quote;
+}	t_pars_args;
 
 #endif
 /* ************************************************************************** */

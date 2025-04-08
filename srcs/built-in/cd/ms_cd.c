@@ -21,6 +21,7 @@ int	ms_cd_exec(t_ms_data *data, char *pwd, char **split_path, char *path)
 		ft_printfd(2, LANG_PREFIX "cd: %s: " DIR_ERROR, split_path[1]);
 		if (split_path[1][0] == '~')
 			free(path);
+		data->last_return = 1;
 		ft_free_strtab(split_path);
 		free(pwd);
 		return (1);
