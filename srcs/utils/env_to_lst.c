@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:29:46 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/09 16:00:19 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:15:44 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ t_env_lst	*env_to_lst(char **env)
 	while (env[i] != NULL)
 	{
 		env_lst->var_name = find_name(env[i]);
+		if (env_lst->var_name == NULL)
+		{
+			i++;
+			continue ;
+		}
 		env_lst->var_cont = find_cont(env[i]);
 		i++;
 		env_lst->next = new_env();
