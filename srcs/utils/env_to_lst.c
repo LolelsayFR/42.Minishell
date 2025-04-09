@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:29:46 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/09 15:16:12 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:00:19 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_env(t_env_lst *env)
 	}
 }
 
-char	*find_cont(char *env_l)
+static char	*find_cont(char *env_l)
 {
 	int	i;
 
@@ -39,17 +39,18 @@ char	*find_cont(char *env_l)
 	return (ft_strdup(&env_l[i]));
 }
 
-char	*find_name(char *env_l)
+static char	*find_name(char *env_l)
 {
 	int	i;
 
 	i = 0;
 	while (env_l[i] != '\0' && env_l[i] != '=')
 		i++;
+	i++;
 	return (ft_substr(env_l, 0, i));
 }
 
-t_env_lst	*new_env()
+static t_env_lst	*new_env(void)
 {
 	t_env_lst	*env;
 

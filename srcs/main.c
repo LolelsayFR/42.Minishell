@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 14:54:33 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:56:28 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	main(int argc, char **argv, char **envp)
 
 t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 {
-	data->env_var = ft_strtabdup_lst(envp);
-	data->env_lst = env_to_lst(data->env_var);
+	data->env_lst = env_to_lst(envp);
+	data->env_var = env_to_tab(data->env_lst);
 	data->prefix = ft_strdup_lst(LANG_PREFIX);
 	data->is_inited = true;
 	ft_alist_add_front(data->context = ft_calloc(1, sizeof(t_ms_context)));
