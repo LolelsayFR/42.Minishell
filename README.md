@@ -1,4 +1,5 @@
-![minishell](https://github.com/user-attachments/assets/d4a311b8-98b2-498d-bc85-105916ebb865)
+
+![minishell](https://github.com/user-attachments/assets/3f9e2f17-465f-4d08-adcb-e28ea32e4d1a)
 
 # Minishell
 
