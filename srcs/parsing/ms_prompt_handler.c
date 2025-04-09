@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 17:52:44 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/09 18:03:15 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,8 @@ static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
 
 int	prompt_handler(t_ms_data *data)
 {
-	int		count[4];
 	char	**tab_prompt;
-	int		i;
 
-	((void)count, (void)i);
-	i = 0;
 	if (prompt_checker(data, 0, 0, 0) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	parsing_init(data);
