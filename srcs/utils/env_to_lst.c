@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:29:46 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/09 15:16:12 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:34:33 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*find_name(char *env_l)
 	return (ft_substr(env_l, 0, i));
 }
 
-t_env_lst	*new_env()
+t_env_lst	*new_env(void)
 {
 	t_env_lst	*env;
 
