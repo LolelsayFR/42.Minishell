@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 12:57:54 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 18:13:10 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
 					&& data->prompt[i + 2] == '<')
 				|| (data->prompt[i] == '>' && data->prompt[i + 1] == '>'
 					&& data->prompt[i + 2] == '>')
-				|| (data->prompt[i] == '>' && data->prompt[i + 1] == '<')
-				|| (data->prompt[i] == '<' && data->prompt[i + 1] == '>')
+				|| (data->prompt[i] == '>'
+					&& ft_strchr("<|\0", data->prompt[i + 1]))
+				|| (data->prompt[i] == '<'
+					&& ft_strchr(">|\0", data->prompt[i + 1]))
 			) && (quote + d_quote) % 2 == 0)
 			return (EXIT_FAILURE);
 		i++;
@@ -70,12 +72,8 @@ static int	prompt_checker(t_ms_data *data, int quote, int d_quote, int i)
 
 int	prompt_handler(t_ms_data *data)
 {
-	int		count[4];
 	char	**tab_prompt;
-	int		i;
 
-	((void)count, (void)i);
-	i = 0;
 	if (prompt_checker(data, 0, 0, 0) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	parsing_init(data);
