@@ -6,12 +6,13 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/09 08:55:14 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 21:34:29 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
+//en vrai pas besoins de fd si tu redirige la sortie standard comme pour nimporte quel autre non built-in ?
 int	ms_echo(t_ms_data *data, char *str, int fd)
 {
 	int			i;
