@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 15:39:18 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/09 15:42:18 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 21:17:27 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	print_tab(char **tab)
 {
-	write(1, "ici\n", 4);
 	while (*tab != NULL)
 	{
 		ft_printf("%s\n", *tab);

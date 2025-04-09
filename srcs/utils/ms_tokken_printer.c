@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:26:23 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/08 17:01:23 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/09 21:16:40 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	print_all_tokken(t_list *lst_head)
 	t_list		*lst;
 	int			i;
 
+	if (MS_DEBUG == false || MS_DE_TOKPRINT == false)
+		return ;
 	i = 0;
 	lst = lst_head;
 	while (lst)

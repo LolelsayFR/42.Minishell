@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 18:13:10 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/09 21:21:20 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	prompt_handler(t_ms_data *data)
 	parsing_init(data);
 	tab_prompt = prompt_split(data);
 	tab_to_tokken(tab_prompt, data, 0);
+	if (MS_DEBUG == true && MS_PARS_TAB == true)
+		print_tab(tab_prompt);
 	ft_free_strtab(tab_prompt);
 	if (!ft_strncmp(data->prompt, "exit", 4))
 		ms_exit(data->prompt, data);
