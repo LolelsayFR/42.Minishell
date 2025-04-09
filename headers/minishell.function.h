@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 12:19:07 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:52:05 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ int			ft_is_ll(char *str);
 char		*get_env(t_ms_data *data, char *var);
 void		print_all_tokken(t_list *lst_head);
 char		*get_env_var(t_ms_data *data, char *var);
+t_env_lst	*env_to_lst(char **env);
+void		free_env(t_env_lst *env);
 
 #endif
 /* ************************************************************************** */

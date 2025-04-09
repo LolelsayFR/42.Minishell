@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 15:40:49 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:54:33 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 {
 	data->env_var = ft_strtabdup_lst(envp);
+	data->env_lst = env_to_lst(data->env_var);
 	data->prefix = ft_strdup_lst(LANG_PREFIX);
 	data->is_inited = true;
 	ft_alist_add_front(data->context = ft_calloc(1, sizeof(t_ms_context)));
@@ -69,6 +70,7 @@ t_ms_data	*ms_get_data(void)
 
 void	ms_close(unsigned char exit_value, t_ms_data *data)
 {
+	free_env(data->env_lst);
 	if (data->tokkens != NULL)
 		(ft_lstclear(&data->tokkens, tokken_destructor), data->context = NULL);
 	ft_alist_free();
