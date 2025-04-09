@@ -6,13 +6,13 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 15:20:18 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/09 15:35:18 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:59:13 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	env_len(t_env_lst *env)
+static int	env_len(t_env_lst *env)
 {
 	int			i;
 	t_env_lst	*temp;
@@ -21,8 +21,8 @@ int	env_len(t_env_lst *env)
 	temp = env;
 	while (temp != NULL)
 	{
-		i++;
 		temp = temp->next;
+		i++;
 	}
 	return (i);
 }
@@ -36,12 +36,14 @@ char	**env_to_tab(t_env_lst *env)
 
 	i = 0;
 	y = env_len(env);
-	tab = malloc(y * sizeof(char *));
+	temp = env;
+	ft_alist_add_front(tab = malloc((y + 1) * sizeof(char *)));
 	while (i < y)
 	{
-		tab[i] = ft_strjoin(temp->var_name, temp->var_cont);
+		tab[i] = ft_strjoin_lst(temp->var_name, temp->var_cont);
 		temp = temp->next;
 		i++;
 	}
+	tab[i] = NULL;
 	return (tab);
 }
