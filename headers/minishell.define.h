@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 13:04:51 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:39:07 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ typedef struct s_ms_context
 }	t_ms_context;
 
 //Env struct
-typedef struct s_env_list
+typedef struct s_env_lst
 {
 	char				*var_name;
 	char				*var_cont;
-	struct s_env_list	*next;
-}	t_env_list;
+	struct s_env_lst	*next;
+}	t_env_lst;
 
 //All data stored in s_ms_data.
 typedef struct s_ms_data
@@ -69,7 +69,7 @@ typedef struct s_ms_data
 	int				last_return;
 	t_ms_context	*context;
 	t_list			*tokkens;
-	t_env_list		*env_list;
+	t_env_lst		*env_lst;
 }	t_ms_data;
 
 //Parsing utils struct
