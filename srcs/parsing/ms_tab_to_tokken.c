@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:14:41 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 17:44:55 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:02:28 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,10 @@ void	tab_to_tokken(char **tab, t_ms_data *data, int i)
 			i++;
 			continue ;
 		}
-		type = tokken_get_type(tab[i], id, &save_id);
+		content = tokken_cleaner(content);
+		type = tokken_get_type(content, id, &save_id);
 		ft_lstadd_back(&data->tokkens, ft_lstnew(tokken_init(
-					tokken_cleaner(content), data, id, type)));
+					content, data, id, type)));
 		i++;
 	}
 }
