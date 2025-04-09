@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 12:58:45 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:04:51 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct s_ms_data
 	t_list			*tokkens;
 	t_env_list		*env_list;
 }	t_ms_data;
-
 
 //Parsing utils struct
 typedef struct s_pars_args
