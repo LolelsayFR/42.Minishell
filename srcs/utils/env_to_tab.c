@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 15:20:18 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/09 15:59:13 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:32:25 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ static int	env_len(t_env_lst *env)
 	temp = env;
 	while (temp != NULL)
 	{
+		if (temp->var_cont == NULL)
+		{
+			temp = temp->next;
+			continue ;
+		}
 		temp = temp->next;
 		i++;
 	}
@@ -41,6 +46,11 @@ char	**env_to_tab(t_env_lst *env)
 	while (i < y)
 	{
 		tab[i] = ft_strjoin_lst(temp->var_name, temp->var_cont);
+		if (tab[i] == NULL)
+		{
+			temp = temp->next;
+			continue ;
+		}
 		temp = temp->next;
 		i++;
 	}
