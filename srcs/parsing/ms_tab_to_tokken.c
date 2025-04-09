@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:14:41 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 17:34:53 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/09 17:44:55 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	*tokken_unquote(char *str)
 		}
 		arg.i++;
 	}
-	return (ft_strdup_lst(str));
+	return (ft_strdup(str));
 }
 
 static char	*tokken_cleaner(char *str)
