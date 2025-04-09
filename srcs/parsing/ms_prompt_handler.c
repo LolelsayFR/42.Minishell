@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 17:18:03 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/09 17:52:44 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	prompt_handler(t_ms_data *data)
 		ms_pwd(data);
 	else if (!ft_strncmp(data->prompt, "env", 3))
 		ms_env(data);
+	else if (!ft_strncmp(data->prompt, "echo", 4))
+		ms_echo(data, data->prompt, 1);
 	else if (!ft_strncmp(data->prompt, "cd", 2))
 		ms_cd(data, data->prompt);
 	print_all_tokken(data->tokkens);
