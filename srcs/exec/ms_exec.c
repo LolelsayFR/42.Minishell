@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/10 11:20:24 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:31:11 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	find_outfile(t_ms_tokken *tokken, t_list *save)
 	while (save != NULL && files->id == tokken->id)
 	{
 		files = save->content;
-		ft_printf("%s\n", tokken->content);
 		if (files->type != CMD && files->type != ARG)
 			outfile = outfile_open(outfile, files->type, files->content);
 		if (outfile == -2)

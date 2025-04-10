@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 11:08:24 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:26:52 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		infile_open(int outfile, int type, char *file);
 int		infile_access(char *infile);
 int		outfile_access(char *outfile);
 
+t_list	*first_in_id(t_list *tokkens, int id);
 int		find_nb_cmd(t_list *data);
 
 void	wait_all_pids(t_ex_data *data);
