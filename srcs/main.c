@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 08:53:15 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:13:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	minishell_data_init(data, envp);
 	if (data->is_inited == true)
 		minishell_main_loop(data);
-	ms_exit(EXIT_SUCCESS, data);
+	ms_close(data->last_return, data);
 	return (EXIT_SUCCESS);
 }
 
