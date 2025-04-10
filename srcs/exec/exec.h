@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 11:46:46 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:57:59 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,8 @@
 
 # include "minishell.function.h"
 
-typedef struct s_files
-{
-	int				fd;
-	int				file_t;
-	struct s_files	*next;
-}	t_files;
-
 typedef struct s_ex_data
 {
-	t_files	*files;
 	int		*pid;
 	int		nb_cmd;
 }	t_ex_data;
@@ -38,15 +30,9 @@ int		find_nb_cmd(t_list *data);
 void	wait_all_pids(t_ex_data *data);
 
 int		files_access(t_list *tokkens);
-void	files_clear(t_files *files);
-
-t_files	*new_files(void);
 
 char	*add_path(t_ms_data *data, char *cmd);
 
 void	free_ex_data(t_ex_data *data);
-
-void	print_files(t_files *files);
-void	print_pids(t_ex_data *data);
 
 #endif

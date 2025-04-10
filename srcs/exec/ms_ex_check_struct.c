@@ -6,21 +6,12 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 11:54:41 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:56:33 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 #include "exec.h"
-
-t_files	*new_files(void)
-{
-	t_files	*files;
-
-	files = malloc(sizeof(t_files));
-	files->next = NULL;
-	return (files);
-}
 
 t_list	*first_in_id(t_list *tokkens, int id)
 {

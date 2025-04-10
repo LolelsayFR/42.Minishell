@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/10 11:50:36 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:55:51 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ms_data *data)
 	execve(cmd[0], cmd, data->env_var);
 	write(1, "Bah non\n", 8);
 	(void)infile;
-	(void)outfile;
 	ms_close(2, data);
 }
 
