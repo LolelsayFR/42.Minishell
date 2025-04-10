@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 11:10:55 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:55:19 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,25 @@
 
 char	*add_path(t_ms_data *data, char *cmd)
 {
+	int		i;
 	char	*joined;
 	char	*temp;
 	char	**env;
 
+	i = 0;
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
 	env = ft_split(get_env(data, "PATH") + 5, ':');
-	while (env != NULL && *env != NULL)
+	while (env != NULL && env[i] != NULL)
 	{
-		temp = ft_strjoin(*env, "/");
+		temp = ft_strjoin(env[i], "/");
 		joined = ft_strjoin(temp, cmd);
 		free(temp);
 		if (access(joined, F_OK) == 0)
-			return (free(cmd), joined);
+			return (ft_free_strtab(env), free(cmd), joined);
 		free(joined);
-		env++;
+		i++;
 	}
+	ft_free_strtab(env);
 	return (NULL);
 }
