@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 18:13:00 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:13:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int	minishell_main_loop(t_ms_data *data)
 		data->prompt = readline(ms_prefix(data));
 		if (data->prompt == NULL)
 			break ;
-		if (data->prompt[0] != '\0')
+		if (data->prompt[0] != '\0' && ft_str_is_space(data->prompt) == false)
 			add_history(data->prompt);
+		else
+			continue ;
 		if (prompt_handler(data) == EXIT_SUCCESS)
 			;
 		else
