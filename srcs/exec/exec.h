@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 10:37:17 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:08:24 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	files_clear(t_files *files);
 
 t_files	*new_files(void);
 
-char	*add_path(char *cmd, char **env);
+char	*add_path(t_ms_data *data, char *cmd);
 
 void	free_ex_data(t_ex_data *data);
 
