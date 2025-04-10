@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 14:16:59 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:43:51 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			files_access(t_list *tokkens);
 
 char		*add_path(t_ms_data *data, char *cmd);
 
-t_ex_data	*exec_init();
+t_ex_data	*exec_init(t_list *tokkens);
 void		exec_end(t_ex_data *data);
 void		free_ex_data(t_ex_data *data);
 
