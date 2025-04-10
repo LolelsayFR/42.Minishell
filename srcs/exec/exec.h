@@ -6,36 +6,37 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 13:14:58 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:16:59 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-typedef struct s_files
+# include "minishell.function.h"
+
+typedef struct s_ex_data
 {
-	int				fd;
-	int				file_t;
-	int				cmd_id;
-	struct s_files	*next;
-}	t_files;
+	int	*pid;
+	int	**pipe;
+	int	nb_cmd;
+}	t_ex_data;
 
-typedef struct s_pids
-{
-	pid_t			pid;
-	struct s_pids	*next;
-}	t_pids;
+int			outfile_open(int outfile, int type, char *file);
+int			infile_open(int outfile, int type, char *file);
 
-t_files	*open_all(t_list *tokkens);
-void	files_clear(t_files *files);
+char		**tokken_id_join(t_list *tokkens, int id);
+t_list		*first_in_id(t_list *tokkens, int id);
+int			find_nb_cmd(t_list *data);
 
-t_files	*new_files(void);
-t_pids	*new_pids(void);
+void		wait_all_pids(t_ex_data *data);
 
-char	*add_path(char *cmd, char **env);
+int			files_access(t_list *tokkens);
 
-void	print_files(t_files *files);
-void	print_pids(t_pids *pids);
+char		*add_path(t_ms_data *data, char *cmd);
+
+t_ex_data	*exec_init();
+void		exec_end(t_ex_data *data);
+void		free_ex_data(t_ex_data *data);
 
 #endif

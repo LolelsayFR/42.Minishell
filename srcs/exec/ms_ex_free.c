@@ -6,36 +6,50 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 12:30:34 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:33:35 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 #include "exec.h"
 
-void	files_clear(t_files *files)
+void	close_all_pipes(t_ex_data *data)
 {
-	t_files	*temp;
+	int	i;
 
-	temp = files;
-	while (temp != NULL)
+	i = 0;
+	while (i < (data->nb_cmd - 1))
 	{
-		close(temp->fd);
-		temp = temp->next;
-		free(files);
-		files = temp;
+		close(data->pipe[i][0]);
+		close(data->pipe[i][1]);
+		i++;
 	}
 }
 
-void	pids_clear(t_pids *pids)
+void	wait_all_pids(t_ex_data *data)
 {
-	t_pids	*temp;
+	int	i;
 
-	temp = pids;
-	while (temp != NULL)
-	{
-		temp = temp->next;
-		free(pids);
-		pids = temp;
-	}
+	i = 0;
+	while (i < data->nb_cmd)
+		waitpid(data->pid[i++], NULL, 0);
+}
+
+void	free_ex_data(t_ex_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_cmd - 1)
+		free(data->pipe[i++]);
+	free(data->pipe);
+	free(data->pid);
+	free(data);
+}
+
+void	exec_end(t_ex_data *data)
+{
+	close_all_pipes(data);
+	wait_all_pids(data);
+	free_ex_data(data);
 }

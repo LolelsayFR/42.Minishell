@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_lst.c                                        :+:      :+:    :+:   */
+/*   finds.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 11:26:58 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 12:20:28 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/10 10:12:55 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 #include "exec.h"
 
-void	print_files(t_files *files)
+int	find_nb_cmd(t_list *tokkens)
 {
-	t_files	*temp;
+	int			i;
+	t_list		*temp;
+	t_ms_tokken	*tokken;
 
-	temp = files;
+	i = 0;
+	temp = tokkens;
 	while (temp != NULL)
 	{
-		printf("%d\t%d\n", temp->fd, temp->file_t);
+		tokken = temp->content;
+		if (tokken->type == CMD)
+			i++;
 		temp = temp->next;
 	}
-}
-
-void	print_pids(t_pids *pids)
-{
-	t_pids	*temp;
-
-	temp = pids;
-	while (temp != NULL)
-	{
-		printf("%d\n", temp->pid);
-		temp = temp->next;
-	}
+	return (i);
 }
