@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:26:23 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 19:00:57 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:05:15 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	print_tokken(t_ms_tokken *tokken)
 		printf("Type : OURFILE REPLACE");
 	if (tokken->type == END)
 		printf("Type : END");
-	if (tokken->flag ==	NONE)
+	if (tokken->flag == NONE)
 		printf("\nFlag : None");
 	if (tokken->type == EMPTY_QUOTE)
 		printf("\nFlag : Only quote");
@@ -66,4 +66,3 @@ void	print_all_tokken(t_list *lst_head)
 		"/*  end                                                   */\n"
 		"/* ****************************************************** */"RES);
 }
-
