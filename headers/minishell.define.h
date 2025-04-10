@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 08:32:03 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:21:51 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,21 @@
 # define MS_DE_UNSET false
 
 /* ************************************************************************** */
-/*  Tokken type                                                               */
+/*  Tokken info                                                               */
 /* ************************************************************************** */
 
-# define INF 0
-# define H_D 1
-# define CMD 2
-# define ARG	3
-# define OUTF_A 4
-# define OUTF_R 5
-# define B_IN	6
+//Tokken types
+# define INF		0
+# define H_D		1
+# define CMD		2
+# define ARG		3
+# define OUTF_A		4
+# define OUTF_R		5
+# define B_IN		6
+# define END		7
+//Tokken flag
+# define NONE			0
+# define EMPTY_QUOTE 	1
 
 /* ************************************************************************** */
 /*  Typedef of struct                                                         */

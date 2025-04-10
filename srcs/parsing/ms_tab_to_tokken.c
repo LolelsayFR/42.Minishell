@@ -12,6 +12,54 @@
 
 #include "minishell.function.h"
 
+static char	*tokken_unquote(char *str)
+{
+	t_pars_args	arg;
+	char		*temp;
+
+	ft_bzero(&arg, sizeof(t_pars_args));
+	while (str[arg.i])
+	{
+		if (str[arg.i] == '"' && arg.quote % 2 == 0)
+		{
+			temp = ft_substr_lst(str, arg.i + 1, ft_strlen(str) - arg.i);
+			str[arg.i] = '\0';
+			str = ft_strjoin_lst(str, temp);
+			arg.d_quote++;
+			continue ;
+		}
+		else if (str[arg.i] == '\'' && arg.d_quote % 2 == 0)
+		{
+			temp = ft_substr_lst(str, arg.i + 1, ft_strlen(str) - arg.i);
+			str[arg.i] = '\0';
+			str = ft_strjoin_lst(str, temp);
+			arg.quote++;
+			continue ;
+		}
+		arg.i++;
+	}
+	return (ft_strdup(str));
+}
+
+static char	*tokken_cleaner(char *str, int *flag)
+{
+	char	*result;
+	char	*trim;
+	char	*var_got;
+
+	trim = ft_strtrim(str, "<> ");
+	nufree(str);
+	var_got = ft_strdup(trim);
+	nufree(trim);
+	if (!ft_strcmp(var_got, "\"\"") || !ft_strcmp(var_got, "''"))
+		*flag = EMPTY_QUOTE;
+	else
+		*flag = NONE;
+	result = tokken_unquote(var_got);
+	nufree(var_got);
+	return (result);
+}
+
 static bool	is_builtin(char *str)
 {
 	if (!ft_strncmp(str, "exit\0", 5))
@@ -51,63 +99,17 @@ static int	tokken_get_type(char *str, int id, int *save_id)
 	return (ARG);
 }
 
-static char	*tokken_unquote(char *str)
+void	tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id)
 {
-	t_pars_args	arg;
-	char		*temp;
+	char		*content;
+	t_ms_tokken	tokken;
 
-	ft_bzero(&arg, sizeof(t_pars_args));
-	while (str[arg.i])
-	{
-		if (str[arg.i] == '"' && arg.quote % 2 == 0)
-		{
-			temp = ft_substr_lst(str, arg.i + 1, ft_strlen(str) - arg.i);
-			str[arg.i] = '\0';
-			str = ft_strjoin_lst(str, temp);
-			arg.d_quote++;
-			continue ;
-		}
-		else if (str[arg.i] == '\'' && arg.d_quote % 2 == 0)
-		{
-			temp = ft_substr_lst(str, arg.i + 1, ft_strlen(str) - arg.i);
-			str[arg.i] = '\0';
-			str = ft_strjoin_lst(str, temp);
-			arg.quote++;
-			continue ;
-		}
-		arg.i++;
-	}
-	return (ft_strdup(str));
-}
-
-static char	*tokken_cleaner(char *str)
-{
-	char	*result;
-	char	*trim;
-	char	*var_got;
-
-	trim = ft_strtrim(str, "<>");
-	nufree(str);
-	var_got = ft_strdup(trim);
-	nufree(trim);
-	result = tokken_unquote(var_got);
-	nufree(var_got);
-	return (result);
-}
-
-void	tab_to_tokken(char **tab, t_ms_data *data, int i)
-{
-	char	*content;
-	int		type;
-	int		id;
-	int		save_id;
-
-	id = 0;
+	ft_bzero(&tokken, sizeof(t_ms_tokken));
 	save_id = -1;
 	while (tab[i] != NULL)
 	{
 		if (tab[i][0] == '|')
-			id++;
+			tokken.id++;
 		content = ft_strtrim(tab[i], "| \t");
 		if (ft_strlen(content) < 1)
 		{
@@ -115,10 +117,12 @@ void	tab_to_tokken(char **tab, t_ms_data *data, int i)
 			i++;
 			continue ;
 		}
-		type = tokken_get_type(content, id, &save_id);
-		content = tokken_cleaner(content);
+		tokken.type = tokken_get_type(content, tokken.id, &save_id);
+		content = tokken_cleaner(content, &tokken.flag);
 		ft_lstadd_back(&data->tokkens, ft_lstnew(tokken_init(
-					content, data, id, type)));
+					content, tokken.id, tokken.type, tokken.flag)));
 		i++;
 	}
+	ft_lstadd_back(&data->tokkens,
+		ft_lstnew(tokken_init("", tokken.id++, 7, 0)));
 }
