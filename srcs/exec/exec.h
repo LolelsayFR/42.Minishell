@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 14:43:51 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:37:47 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 
 # include "minishell.function.h"
 
+typedef struct s_pipe
+{
+	int			pipe[2];
+	struct s_pipe	*next;
+}	t_pipe;
+
 typedef struct s_ex_data
 {
-	int	*pid;
-	int	**pipe;
-	int	nb_cmd;
+	t_pipe	*pipes;
+	int		*pid;
+	int		nb_cmd;
 }	t_ex_data;
 
 int			outfile_open(int outfile, int type, char *file);

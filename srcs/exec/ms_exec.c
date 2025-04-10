@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/10 15:10:34 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:45:17 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	exec_close(t_ex_data *ex_data, char **tab)
 	ms_close(2, data);
 }
 
-int	find_outfile(t_ms_tokken *tokken, t_list *save, t_ex_data *data, int i)
+int	find_outfile(t_ms_tokken *tokken, t_list *save, t_ex_data *data)
 {
 	int			outfile;
 	t_ms_tokken	*files;
@@ -42,12 +42,10 @@ int	find_outfile(t_ms_tokken *tokken, t_list *save, t_ex_data *data, int i)
 	}
 	if (outfile == -1)
 		return (outfile);
-	close(data->pipe[i][1]);
-	data->pipe[i][1] = outfile;
 	return (outfile);
 }
 
-int	find_infile(t_ms_tokken *tokken, t_list *save, t_ex_data *data, int i)
+int	find_infile(t_ms_tokken *tokken, t_list *save, t_ex_data *data)
 {
 	int			infile;
 	t_ms_tokken	*files;
@@ -65,12 +63,10 @@ int	find_infile(t_ms_tokken *tokken, t_list *save, t_ex_data *data, int i)
 	}
 	if (infile == -1)
 		return (infile);
-	close(data->pipe[i][0]);
-	data->pipe[i][0] = infile;
 	return (infile);
 }
 
-void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ex_data *ex_data, int i)
+void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ex_data *ex_data)
 {
 	t_ms_data	*data;
 	char		**cmd;
@@ -78,8 +74,8 @@ void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ex_data *ex_data, int i)
 	int			infile;
 
 	data = ms_get_data();
-	outfile = find_outfile(tokken, save, ex_data, i);
-	infile = find_infile(tokken, save, ex_data, i);
+	outfile = find_outfile(tokken, save, ex_data);
+	infile = find_infile(tokken, save, ex_data);
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL)
@@ -107,12 +103,12 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		if (tokken->type == CMD)
 		{
 			save = first_in_id(data->tokkens, tokken->id);
-			if (i != ex_data->nb_cmd - 1)
-				if (pipe(ex_data->pipe[i]) == -1)
+			if (i < ex_data->nb_cmd - 1)
+				if (pipe(ex_data->pipes->pipe) == -1)
 					break ;
 			ex_data->pid[i] = fork();
 			if (ex_data->pid[i++] == 0)
-				cmd_exec(tokken, save, ex_data, i);
+				cmd_exec(tokken, save, ex_data);
 		}
 		tokkens = tokkens->next;
 	}
