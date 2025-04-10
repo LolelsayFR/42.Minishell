@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:00:40 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/07 15:56:05 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 08:55:55 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	files_access(t_list *tokkens)
 	t_ms_tokken	*tokken;
 
 	temp = tokkens;
-	tokken = temp->content;
 	while (temp != NULL)
 	{
+		tokken = temp->content;
 		if (tokken->type == INF || tokken->type == H_D)
 			if (infile_access(tokken->content) == -1)
 				return (-1);
@@ -66,7 +66,6 @@ int	files_access(t_list *tokkens)
 			if (outfile_access(tokken->content) == -1)
 				return (-1);
 		temp = temp->next;
-		tokken = temp->content;
 	}
 	return (0);
 }

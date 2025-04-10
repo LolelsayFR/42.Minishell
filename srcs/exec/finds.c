@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_ex_check_struct.c                               :+:      :+:    :+:   */
+/*   finds.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 10:13:15 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/10 10:12:55 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 #include "exec.h"
 
-t_files	*new_files(void)
+int	find_nb_cmd(t_list *tokkens)
 {
-	t_files	*files;
-
-	files = malloc(sizeof(t_files));
-	files->next = NULL;
-	return (files);
-}
-
-void	wait_all_pids(t_ex_data *data)
-{
-	int	i;
+	int			i;
+	t_list		*temp;
+	t_ms_tokken	*tokken;
 
 	i = 0;
-	while (i <= data->nb_cmd)
-		waitpid(data->pid[i++], NULL, 0);
+	temp = tokkens;
+	while (temp != NULL)
+	{
+		tokken = temp->content;
+		if (tokken->type == CMD)
+			i++;
+		temp = temp->next;
+	}
+	return (i);
 }

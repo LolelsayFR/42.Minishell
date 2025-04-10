@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/04 12:30:34 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:17:41 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,5 @@ void	files_clear(t_files *files)
 		temp = temp->next;
 		free(files);
 		files = temp;
-	}
-}
-
-void	pids_clear(t_pids *pids)
-{
-	t_pids	*temp;
-
-	temp = pids;
-	while (temp != NULL)
-	{
-		temp = temp->next;
-		free(pids);
-		pids = temp;
 	}
 }

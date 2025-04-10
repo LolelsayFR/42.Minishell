@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 08:27:40 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 09:16:06 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include "../submodules/42.libft/libft.h"
@@ -68,7 +70,7 @@ void		tab_to_tokken(char **tab, t_ms_data *data, int i);
 /*  Exec functions                                                            */
 /* ************************************************************************** */
 
-int			ms_exec(t_list *tokkens, t_ms_data *data);
+int			ms_exec(t_ms_data *data, t_list *tokkens);
 
 /* ************************************************************************** */
 /*  Built-In                                                                  */

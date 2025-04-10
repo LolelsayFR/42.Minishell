@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/07 15:55:58 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:19:01 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,19 @@ int	find_infile(t_ms_tokken *tokken, t_list *save)
 	t_ms_tokken	*files;
 
 	infile = -1;
-	files = save->content;
 	while (files->id == tokken->id)
 	{
+		files = save->content;
 		if (files->type != CMD && files->type != ARG)
 			infile = infile_open(infile, files->type, files->content);
 		if (infile == -2)
 			exit (1);
 		save = save->next;
-		files = save->content;
 	}
 	return (infile);
 }
 
-void	cmd_exec(t_ms_tokken *tokken, char **env_var, t_list *save)
+void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ms_data *data)
 {
 	char	**cmd;
 	int		outfile;
@@ -60,45 +59,45 @@ void	cmd_exec(t_ms_tokken *tokken, char **env_var, t_list *save)
 	infile = find_infile(tokken, save);
 	outfile = find_outfile(tokken, save);
 	cmd = ft_split(tokken->content, ' ');
-	cmd[0] = add_path(cmd[0], env_var);
+	cmd[0] = add_path(cmd[0], data->env_var);
 	if (cmd[0] == NULL)
 	{
 		ft_free_strtab(cmd);
-		exit(1);
+		ms_close(2, data);
 	}
-	execve(cmd[0], cmd, env_var);
-	ft_putstr_fd("Error execve🖕\n", 2);
+	execve(cmd[0], cmd, data->env_var);
 	(void)infile;
 	(void)outfile;
-	exit(1);
+	ms_close(2, data);
 }
 
-int	ms_exec(t_list *tokkens, t_ms_data *data)
+int	ms_exec(t_ms_data *data, t_list *tokkens)
 {
-	t_list		*temp;
+	t_ex_data	*ex_data;
 	t_list		*save;
 	t_ms_tokken	*tokken;
-	t_pids		*pids;
+	int		i;
 
-	temp = tokkens;
-	save = temp;
+	i = 0;
+	save = tokkens;
 	if (files_access(tokkens) == -1)
 		return (0);
-	pids = new_pids();
-	while (temp != NULL)
+	ex_data = malloc(sizeof(t_ex_data));
+	ex_data->nb_cmd = find_nb_cmd(tokkens);
+	ex_data->pid = malloc(ex_data->nb_cmd * sizeof(int));
+	while (tokkens != NULL)
 	{
-		tokken = temp->content;
+		tokken = tokkens->content;
 		if (tokken->type == CMD)
 		{
-			pids->pid = fork();
-			if (pids->pid == 0)
-				cmd_exec(tokken, data->env_var, save);
-			pids = pids->next;
-			pids = new_pids();
-			save = temp->next;
+			ex_data->pid[i] = fork();
+			if (ex_data->pid[i] == 0)
+				cmd_exec(tokken, save, data);
+			i++;
+			save = tokkens->next;
 		}
-		temp = temp->next;
+		tokkens = tokkens->next;
 	}
-	print_pids(pids);
-	return (0);
+	wait_all_pids(ex_data);
+	return (data->last_return = 0, 0);
 }
