@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 10:16:55 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:37:17 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_files
 typedef struct s_ex_data
 {
 	t_files	*files;
-	int	*pid;
-	int	nb_cmd;
+	int		*pid;
+	int		nb_cmd;
 }	t_ex_data;
 
 int		outfile_open(int outfile, int type, char *file);
@@ -44,6 +44,8 @@ void	files_clear(t_files *files);
 t_files	*new_files(void);
 
 char	*add_path(char *cmd, char **env);
+
+void	free_ex_data(t_ex_data *data);
 
 void	print_files(t_files *files);
 void	print_pids(t_ex_data *data);

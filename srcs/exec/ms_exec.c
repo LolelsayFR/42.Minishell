@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/10 10:19:01 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:35:52 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 int	find_outfile(t_ms_tokken *tokken, t_list *save)
 {
 	int			outfile;
-	t_ms_tokken     *files;
+	t_ms_tokken	*files;
 
 	outfile = -1;
 	files = save->content;
-	while (files->id == tokken->id)
+	while (save != NULL && files->id == tokken->id)
 	{
+		files = save->content;
 		if (files->type != CMD && files->type != ARG)
 			outfile = outfile_open(outfile, files->type, files->content);
 		if (outfile == -2)
 			exit(1);
 		save = save->next;
-		files = save->content;
 	}
 	return (outfile);
 }
@@ -38,7 +38,8 @@ int	find_infile(t_ms_tokken *tokken, t_list *save)
 	t_ms_tokken	*files;
 
 	infile = -1;
-	while (files->id == tokken->id)
+	files = save->content;
+	while (save != NULL && files->id == tokken->id)
 	{
 		files = save->content;
 		if (files->type != CMD && files->type != ARG)
@@ -66,6 +67,7 @@ void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ms_data *data)
 		ms_close(2, data);
 	}
 	execve(cmd[0], cmd, data->env_var);
+	write(1, "Bah non\n", 8);
 	(void)infile;
 	(void)outfile;
 	ms_close(2, data);
@@ -76,12 +78,10 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 	t_ex_data	*ex_data;
 	t_list		*save;
 	t_ms_tokken	*tokken;
-	int		i;
+	int			i;
 
 	i = 0;
 	save = tokkens;
-	if (files_access(tokkens) == -1)
-		return (0);
 	ex_data = malloc(sizeof(t_ex_data));
 	ex_data->nb_cmd = find_nb_cmd(tokkens);
 	ex_data->pid = malloc(ex_data->nb_cmd * sizeof(int));
@@ -91,13 +91,13 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		if (tokken->type == CMD)
 		{
 			ex_data->pid[i] = fork();
-			if (ex_data->pid[i] == 0)
+			if (ex_data->pid[i++] == 0)
 				cmd_exec(tokken, save, data);
-			i++;
 			save = tokkens->next;
 		}
 		tokkens = tokkens->next;
 	}
 	wait_all_pids(ex_data);
+	free_ex_data(ex_data);
 	return (data->last_return = 0, 0);
 }

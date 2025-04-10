@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 10:17:41 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:36:38 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,10 @@ void	files_clear(t_files *files)
 		free(files);
 		files = temp;
 	}
+}
+
+void	free_ex_data(t_ex_data *data)
+{
+	free(data->pid);
+	free(data);
 }
