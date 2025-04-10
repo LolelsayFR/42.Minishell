@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 13:18:58 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:16:59 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,26 @@
 
 typedef struct s_ex_data
 {
-	int		*pid;
-	int		nb_cmd;
+	int	*pid;
+	int	**pipe;
+	int	nb_cmd;
 }	t_ex_data;
 
-int		outfile_open(int outfile, int type, char *file);
-int		infile_open(int outfile, int type, char *file);
+int			outfile_open(int outfile, int type, char *file);
+int			infile_open(int outfile, int type, char *file);
 
-char	**tokken_id_join(t_list *tokkens, int id);
-t_list	*first_in_id(t_list *tokkens, int id);
-int		find_nb_cmd(t_list *data);
+char		**tokken_id_join(t_list *tokkens, int id);
+t_list		*first_in_id(t_list *tokkens, int id);
+int			find_nb_cmd(t_list *data);
 
-void	wait_all_pids(t_ex_data *data);
+void		wait_all_pids(t_ex_data *data);
 
-int		files_access(t_list *tokkens);
+int			files_access(t_list *tokkens);
 
-char	*add_path(t_ms_data *data, char *cmd);
+char		*add_path(t_ms_data *data, char *cmd);
 
-void	free_ex_data(t_ex_data *data);
+t_ex_data	*exec_init();
+void		exec_end(t_ex_data *data);
+void		free_ex_data(t_ex_data *data);
 
 #endif

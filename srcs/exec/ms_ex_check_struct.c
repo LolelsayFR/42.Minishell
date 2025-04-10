@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 13:33:43 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:30:12 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,17 @@ t_list	*first_in_id(t_list *tokkens, int id)
 	return (NULL);
 }
 
-void	wait_all_pids(t_ex_data *data)
+t_ex_data	*exec_init(t_list *tokkens)
 {
-	int	i;
+	int			i;
+	t_ex_data	*ex_data;
 
 	i = 0;
-	while (i < data->nb_cmd)
-		waitpid(data->pid[i++], NULL, 0);
+	ex_data = malloc(sizeof(t_ex_data));
+	ex_data->nb_cmd = find_nb_cmd(tokkens);
+	ex_data->pid = malloc(ex_data->nb_cmd * sizeof(int));
+	ex_data->pipe = malloc((ex_data->nb_cmd - 1) * sizeof(int *));
+	while (i < ex_data->nb_cmd - 1)
+		ex_data->pipe[i++] = malloc(2 * sizeof(int));
+	return (ex_data);
 }

@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/10 13:52:09 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:31:39 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,22 +94,21 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 
 	i = 0;
 	save = tokkens;
-	ex_data = malloc(sizeof(t_ex_data));
-	ex_data->nb_cmd = find_nb_cmd(tokkens);
-	ex_data->pid = malloc(ex_data->nb_cmd * sizeof(int));
+	ex_data = exec_init(tokkens);
 	while (tokkens != NULL)
 	{
 		tokken = tokkens->content;
 		if (tokken->type == CMD)
 		{
 			save = first_in_id(data->tokkens, tokken->id);
+			if (i != ex_data->nb_cmd - 1)
+				if (pipe(ex_data->pipe[i]) == -1)
+					break ;
 			ex_data->pid[i] = fork();
 			if (ex_data->pid[i++] == 0)
 				cmd_exec(tokken, save, ex_data);
 		}
 		tokkens = tokkens->next;
 	}
-	wait_all_pids(ex_data);
-	free_ex_data(ex_data);
-	return (data->last_return = 0, 0);
+	return (exec_end(ex_data), data->last_return = 0, 0);
 }
