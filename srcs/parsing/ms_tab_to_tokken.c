@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:14:41 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 11:33:48 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:46:19 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static char	*tokken_cleaner(char *str, int *flag)
 	else
 		*flag = NONE;
 	result = tokken_unquote(var_got);
+	if (result[0] == '\0')
+		nufree(result);
 	nufree(var_got);
 	return (result);
 }
