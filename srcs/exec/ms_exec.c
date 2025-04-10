@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/10 11:55:51 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:23:57 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ms_data *data)
 
 	outfile = find_outfile(tokken, save, data);
 	infile = find_infile(tokken, save, data, outfile);
-	cmd = ft_split(tokken->content, ' ');
+	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL)
 		exec_close(data, cmd);
