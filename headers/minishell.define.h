@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 23:03:06 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/10 08:32:03 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../submodules/42.libft/libft.h"
 # include <stdbool.h>
-
 
 /* ************************************************************************** */
 /*  Global debug config                                                       */
@@ -26,9 +25,10 @@
 //Tokken printer
 # define MS_DE_TOKPRINT true
 //Split_tab parsing printer
-# define MS_DE_PARS_TAB true
+# define MS_DE_PARS_TAB false
 //Unset debug print
 # define MS_DE_UNSET false
+
 /* ************************************************************************** */
 /*  Tokken type                                                               */
 /* ************************************************************************** */
