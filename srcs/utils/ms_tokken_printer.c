@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:26:23 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/09 21:16:40 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:48:30 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ static void	print_tokken(t_ms_tokken *tokken)
 		printf("Type : OUTFILE APPEND");
 	if (tokken->type == OUTF_R)
 		printf("Type : OURFILE REPLACE");
+	if (tokken->type == END)
+		printf("Type : END");
+	if (tokken->flag ==	NONE)
+		printf("\nFlag : None");
+	if (tokken->type == EMPTY_QUOTE)
+		printf("\nFlag : Only quote");
 	printf(YEL"\nContent = %s\n"RES, tokken->content);
 }
 
@@ -39,6 +45,10 @@ void	print_all_tokken(t_list *lst_head)
 	t_list		*lst;
 	int			i;
 
+	printf(RED"\n"
+		"/* ****************************************************** */\n"
+		"/*  List of tokkens was send to exec                      */\n"
+		"/* ****************************************************** */"RES);
 	if (MS_DEBUG == false || MS_DE_TOKPRINT == false)
 		return ;
 	i = 0;
@@ -50,5 +60,10 @@ void	print_all_tokken(t_list *lst_head)
 		print_tokken(tokken);
 		lst = lst->next;
 	}
-	printf(RED"Tokken count = %d\n"RES, i);
+	printf(RED"Tokken count = %d"RES, i);
+	printf(GRN"\n"
+		"/* ****************************************************** */\n"
+		"/*  end                                                   */\n"
+		"/* ****************************************************** */"RES);
 }
+
