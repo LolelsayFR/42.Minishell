@@ -6,14 +6,21 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/10 11:31:11 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:50:36 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 #include "exec.h"
 
-int	find_outfile(t_ms_tokken *tokken, t_list *save)
+void	exec_close(t_ms_data *data, char **tab)
+{
+	ft_putstr_fd("Command Error\n", 2);
+	ft_free_strtab(tab);
+	ms_close(2, data);
+}
+
+int	find_outfile(t_ms_tokken *tokken, t_list *save, t_ms_data *data)
 {
 	int			outfile;
 	t_ms_tokken	*files;
@@ -26,13 +33,13 @@ int	find_outfile(t_ms_tokken *tokken, t_list *save)
 		if (files->type != CMD && files->type != ARG)
 			outfile = outfile_open(outfile, files->type, files->content);
 		if (outfile == -2)
-			exit(1);
+			exec_close(data, NULL);
 		save = save->next;
 	}
 	return (outfile);
 }
 
-int	find_infile(t_ms_tokken *tokken, t_list *save)
+int	find_infile(t_ms_tokken *tokken, t_list *save, t_ms_data *data, int o)
 {
 	int			infile;
 	t_ms_tokken	*files;
@@ -45,7 +52,10 @@ int	find_infile(t_ms_tokken *tokken, t_list *save)
 		if (files->type != CMD && files->type != ARG)
 			infile = infile_open(infile, files->type, files->content);
 		if (infile == -2)
-			exit (1);
+		{
+			close(o);
+			exec_close(data, NULL);
+		}
 		save = save->next;
 	}
 	return (infile);
@@ -57,15 +67,12 @@ void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ms_data *data)
 	int		outfile;
 	int		infile;
 
-	infile = find_infile(tokken, save);
-	outfile = find_outfile(tokken, save);
+	outfile = find_outfile(tokken, save, data);
+	infile = find_infile(tokken, save, data, outfile);
 	cmd = ft_split(tokken->content, ' ');
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL)
-	{
-		ft_free_strtab(cmd);
-		ms_close(2, data);
-	}
+		exec_close(data, cmd);
 	execve(cmd[0], cmd, data->env_var);
 	write(1, "Bah non\n", 8);
 	(void)infile;

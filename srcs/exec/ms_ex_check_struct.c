@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 11:27:19 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:54:41 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	wait_all_pids(t_ex_data *data)
 	int	i;
 
 	i = 0;
-	while (i <= data->nb_cmd)
+	while (i < data->nb_cmd)
 		waitpid(data->pid[i++], NULL, 0);
 }
