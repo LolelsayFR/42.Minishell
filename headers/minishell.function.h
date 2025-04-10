@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 08:27:40 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:19:56 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ char		*ms_prefix(t_ms_data *data);
 
 int			prompt_handler(t_ms_data *data);
 void		tokken_destructor(void *tokken);
-t_ms_tokken	*tokken_init(char *content, t_ms_data *data, int id, int type);
+t_ms_tokken	*tokken_init(char *content, int id, int type, int f);
 char		**prompt_split(t_ms_data *data);
-void		tab_to_tokken(char **tab, t_ms_data *data, int i);
+void		tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id);
+bool		tokkens_checker(t_list *lst, t_ms_data *data);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
@@ -98,6 +99,7 @@ t_env_lst	*env_to_lst(char **env);
 void		free_env(t_env_lst *env);
 char		**env_to_tab(t_env_lst *env);
 void		print_tab(char **tab);
+bool		ft_str_is_space(char *str);
 
 #endif
 /* ************************************************************************** */
