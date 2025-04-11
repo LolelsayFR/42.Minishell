@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 08:53:15 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:13:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	minishell_data_init(data, envp);
 	if (data->is_inited == true)
 		minishell_main_loop(data);
-	ms_exit(EXIT_SUCCESS, data);
+	ms_close(data->last_return, data);
 	return (EXIT_SUCCESS);
 }
 
@@ -47,8 +47,10 @@ int	minishell_main_loop(t_ms_data *data)
 		data->prompt = readline(ms_prefix(data));
 		if (data->prompt == NULL)
 			break ;
-		if (data->prompt[0] != '\0')
+		if (data->prompt[0] != '\0' && ft_str_is_space(data->prompt) == false)
 			add_history(data->prompt);
+		else
+			continue ;
 		if (prompt_handler(data) == EXIT_SUCCESS)
 			ms_exec(data, data->tokkens);
 		else

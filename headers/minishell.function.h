@@ -62,9 +62,10 @@ char		*ms_prefix(t_ms_data *data);
 
 int			prompt_handler(t_ms_data *data);
 void		tokken_destructor(void *tokken);
-t_ms_tokken	*tokken_init(char *content, t_ms_data *data, int id, int type);
+t_ms_tokken	*tokken_init(char *content, int id, int type, int f);
 char		**prompt_split(t_ms_data *data);
-void		tab_to_tokken(char **tab, t_ms_data *data, int i);
+void		tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id);
+bool		tokkens_checker(t_list *lst, t_ms_data *data);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
@@ -81,7 +82,7 @@ int			ms_cd(t_ms_data *data, char *path);
 int			ms_pwd(t_ms_data *data);
 int			ms_unset(t_ms_data *data, char *arg);
 int			ms_env(t_ms_data *data);
-int			ms_exit(char *exit_status, t_ms_data *data);
+int			ms_exit(t_ms_data *datachar, char *exit_status);
 
 /* ************************************************************************** */
 /*  Other/Utils functions                                                     */
@@ -101,6 +102,8 @@ void		free_env(t_env_lst *env);
 char		**env_to_tab(t_env_lst *env);
 void		print_tab(char **tab);
 void		double_close(int fd1, int fd2);
+bool		ft_str_is_space(char *str);
+bool	    is_builtin(char *str);
 
 #endif
 /* ************************************************************************** */

@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prefix.c                                           :+:      :+:    :+:   */
+/*   ft_str_is_space.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/23 01:32:43 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 19:04:31 by emaillet         ###   ########.fr       */
+/*   Created: 2025/04/10 14:00:48 by emaillet          #+#    #+#             */
+/*   Updated: 2025/04/10 14:10:08 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-char	*ms_prefix(t_ms_data *data)
+bool	ft_str_is_space(char *str)
 {
-	if (data->prompt == NULL)
-		return (data->prefix);
-	if (data->easter_rgb == false
-		&& !strncmp(data->prompt, "\\super rgb like jeb_", 20))
-		data->easter_rgb = true;
-	else if (data->easter_rgb == true
-		&& !strncmp(data->prompt, "\\super rgb like jeb_", 20))
-		data->easter_rgb = false;
-	if (data->easter_rgb == true)
-		return (ms_prefix_rgb_format(data->prompt, data));
-	return (data->prefix);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isspace(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }

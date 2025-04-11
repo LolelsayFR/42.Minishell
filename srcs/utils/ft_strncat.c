@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:44:21 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/07 10:56:09 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:35:22 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_strncat(char **dst_ptr, const char *src, int n)
 	src_len = ft_strlen(src);
 	if (src_len > (size_t)n)
 		src_len = n;
-	ans = malloc(dst_len + src_len + 1);
+	ans = ft_calloc(dst_len + src_len + 1, sizeof(char));
 	if (ans)
 	{
 		ft_memcpy(ans, *dst_ptr, dst_len);
