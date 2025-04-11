@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 09:56:36 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:14:25 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_ms_tokken	*tokken_init(char *content, int id, int type, int f);
 char		**prompt_split(t_ms_data *data);
 void		tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id);
 bool		tokkens_checker(t_list *lst, t_ms_data *data);
+char	    *tokken_cleaner(char *str, int *flag);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */

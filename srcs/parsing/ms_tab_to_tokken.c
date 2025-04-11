@@ -6,61 +6,11 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:14:41 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 09:44:23 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:12:25 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-
-static char	*tokken_unquote(char *str)
-{
-	t_pars_args	arg;
-	char		*temp;
-
-	ft_bzero(&arg, sizeof(t_pars_args));
-	while (str[arg.i])
-	{
-		if (str[arg.i] == '"' && arg.quote % 2 == 0)
-		{
-			temp = ft_substr_lst(str, arg.i + 1, ft_strlen(str) - arg.i);
-			str[arg.i] = '\0';
-			str = ft_strjoin_lst(str, temp);
-			arg.d_quote++;
-			continue ;
-		}
-		else if (str[arg.i] == '\'' && arg.d_quote % 2 == 0)
-		{
-			temp = ft_substr_lst(str, arg.i + 1, ft_strlen(str) - arg.i);
-			str[arg.i] = '\0';
-			str = ft_strjoin_lst(str, temp);
-			arg.quote++;
-			continue ;
-		}
-		arg.i++;
-	}
-	return (str[arg.i] = '\0', ft_strdup(str));
-}
-
-static char	*tokken_cleaner(char *str, int *flag)
-{
-	char	*result;
-	char	*trim;
-	char	*var_got;
-
-	trim = ft_strtrim(str, "<> ");
-	nufree(str);
-	var_got = ft_strdup(trim);
-	nufree(trim);
-	if (!ft_strcmp(var_got, "\"\"") || !ft_strcmp(var_got, "''"))
-		*flag = EMPTY_QUOTE;
-	else
-		*flag = NONE;
-	result = tokken_unquote(var_got);
-	if (result[0] == '\0')
-		nufree(result);
-	nufree(var_got);
-	return (result);
-}
 
 static int	tokken_get_type(char *str, int id, int *save_id)
 {
