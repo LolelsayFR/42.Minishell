@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 10:18:11 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 20:00:23 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_pipe
 typedef struct s_ex_data
 {
 	t_pipe	*pipes;
+	t_list	*save;
 	int		*pid;
 	int		nb_cmd;
 }	t_ex_data;
@@ -31,6 +32,7 @@ typedef struct s_ex_data
 int			outfile_open(int outfile, int type, char *file);
 int			infile_open(int outfile, int type, char *file);
 
+char		*tokken_join_id(t_list *tokkens, int id);
 char		**tokken_id_join(t_list *tokkens, int id);
 t_list		*first_in_id(t_list *tokkens, int id);
 
@@ -45,8 +47,15 @@ char		*add_path(t_ms_data *data, char *cmd);
 
 t_pipe		*pipe_init(void);
 
+int			arg_nb(t_list *tokkens, int id);
+
+void    do_echo(t_ms_data *data, t_ms_tokken *tokken);
+void    do_unset(t_ms_data *data, t_ms_tokken *tokken);
+void    do_export(t_ms_data *data, t_ms_tokken *tokken);
+
 t_ex_data	*exec_init(t_list *tokkens);
 void		exec_end(t_ex_data *data);
 void		free_ex_data(t_ex_data *data);
+void		exec_close(t_ex_data *ex_data, char **tab, int exit_status);
 
 #endif

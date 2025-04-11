@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 16:38:09 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 19:07:05 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,15 @@ void	exec_end(t_ex_data *data)
 	close_all_pipes(data);
 	wait_all_pids(data);
 	free_ex_data(data);
+}
+
+void	exec_close(t_ex_data *ex_data, char **tab, int exit_status)
+{
+	t_ms_data	*data;
+
+	data = ms_get_data();
+	ft_putstr_fd("Command Error\n", 2);
+	free_ex_data(ex_data);
+	ft_free_strtab(tab);
+	ms_close(exit_status, data);
 }
