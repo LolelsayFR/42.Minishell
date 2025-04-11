@@ -6,13 +6,13 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 09:53:06 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 10:00:59 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:21:17 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-t_ms_data	*get_env_lst(t_ms_data *data, char *name)
+t_env_lst	*get_env_lst(t_ms_data *data, char *name)
 {
 	t_env_lst	*tmp;
 

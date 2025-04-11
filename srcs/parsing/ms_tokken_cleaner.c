@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 10:17:55 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:21:33 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ static char	*tokken_unquote(char *str)
 
 static char	*tokken_var_placer(char *str, t_ms_data *data)
 {
-	char	*result;
+	char		*result;
+	t_env_lst	*var_link;
 
+	var_link = get_env_lst(data, str);
+	(void)var_link;
 	result = ft_strdup(str);
 	return (result);
 }
