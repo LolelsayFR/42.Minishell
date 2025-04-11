@@ -17,14 +17,14 @@ static bool	parsing_init(t_ms_data *data)
 	int	i;
 
 	i = 0;
-	while (ft_isspace(data->prompt[i]))
+	while (ft_isspace(data->prompt[i]) || ft_strrchr("<>", data->prompt[i]))
 		i++;
 	if (data->prompt[i] == '|')
 		return (false);
 	while (data->prompt[i])
 		i++;
 	i--;
-	while (ft_isspace(data->prompt[i]))
+	while (ft_isspace(data->prompt[i]) || ft_strrchr("<>", data->prompt[i]))
 		i--;
 	if (data->prompt[i] == '|')
 		return (false);

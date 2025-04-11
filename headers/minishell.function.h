@@ -102,6 +102,7 @@ void		free_env(t_env_lst *env);
 char		**env_to_tab(t_env_lst *env);
 void		print_tab(char **tab);
 bool		ft_str_is_space(char *str);
+bool	    is_builtin(char *str);
 
 #endif
 /* ************************************************************************** */

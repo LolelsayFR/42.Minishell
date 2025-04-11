@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 17:44:21 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 09:35:22 by emaillet         ###   ########.fr       */
+/*   Created: 2025/04/11 09:40:21 by emaillet          #+#    #+#             */
+/*   Updated: 2025/04/11 09:40:37 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-void	ft_strncat(char **dst_ptr, const char *src, int n)
+bool	is_builtin(char *str)
 {
-	size_t	dst_len;
-	size_t	src_len;
-	char	*ans;
-
-	dst_len = ft_strlen(*dst_ptr);
-	src_len = ft_strlen(src);
-	if (src_len > (size_t)n)
-		src_len = n;
-	ans = ft_calloc(dst_len + src_len + 1, sizeof(char));
-	if (ans)
-	{
-		ft_memcpy(ans, *dst_ptr, dst_len);
-		ft_memcpy(ans + dst_len, src, src_len);
-		ans[dst_len + src_len] = '\0';
-	}
-	free(*dst_ptr);
-	*dst_ptr = ans;
+	if (!ft_strncmp(str, "exit\0", 5))
+		return (true);
+	if (!ft_strncmp(str, "pwd\0", 4))
+		return (true);
+	if (!ft_strncmp(str, "env\0", 4))
+		return (true);
+	if (!ft_strncmp(str, "echo\0", 5))
+		return (true);
+	if (!ft_strncmp(str, "unset\0", 6))
+		return (true);
+	if (!ft_strncmp(str, "export\0", 7))
+		return (true);
+	if (!ft_strncmp(str, "cd\0", 3))
+		return (true);
+	return (false);
 }
