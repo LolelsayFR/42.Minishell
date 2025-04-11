@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 23:14:39 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 23:23:59 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ t_ms_tokken	*tokken_init(char *content, int id, int type, int f)
 {
 	t_ms_tokken	*new_tokken;
 
-	if (content[0] == '\0')
-		content = NULL;
 	new_tokken = ft_calloc(1, sizeof(t_ms_tokken));
 	if (new_tokken == NULL)
 		return (ft_printfd(2, LANG_MALLOC_ERROR,
@@ -56,7 +54,7 @@ void	tokken_destructor(void *tokken)
 	t_ms_tokken	*this;
 
 	this = tokken;
-	if (this->content != NULL)
+	if (this->content != NULL && this->flag != END)
 		nufree(this->content);
 	nufree(tokken);
 }

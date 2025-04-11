@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 23:12:00 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 23:34:26 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*tokken_unquote(char *str)
 	return (ft_strdup(str));
 }
 
-static char	*tokken_var_placer(char *str, t_ms_data *data)
+char	*tokken_var_placer(char *str, t_ms_data *data)
 {
 	char		*result;
 	t_env_lst	*var_link;
@@ -56,20 +56,14 @@ char	*tokken_cleaner(char *str, int *flag)
 {
 	char	*result;
 	char	*trim;
-	char	*var_placed;
 
 	trim = ft_strtrim(str, "<> ");
 	nufree(str);
-	var_placed = tokken_var_placer(trim, ms_get_data());
-	nufree(trim);
-	if (ft_is_only_quote_sp(var_placed))
+	if (ft_is_only_quote_sp(trim))
 		*flag = EMPTY_QUOTE;
 	else
 		*flag = NONE;
-	result = tokken_unquote(var_placed);
-	printf(RED"%s"RES, result);
-	if (result[0] == '\0')
-		nufree(result);
-	nufree(var_placed);
+	result = tokken_unquote(trim);
+	nufree(trim);
 	return (result);
 }
