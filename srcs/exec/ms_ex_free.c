@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 13:39:33 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:38:09 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	close_all_pipes(t_ex_data *data)
 	pipes = data->pipes;
 	while (pipes != NULL)
 	{
-		close(pipes->pipe[0]);
-		close(pipes->pipe[1]);
+		if (pipes->pipe[0] != 0 && pipes->pipe[0] != 1)
+			close(pipes->pipe[0]);
+		if (pipes->pipe[1] != 0 && pipes->pipe[1] != 1)
+			close(pipes->pipe[1]);
 		pipes = pipes->next;
 	}
 }
@@ -47,15 +49,13 @@ void	free_ex_data(t_ex_data *data)
 		free(pipes);
 		pipes = temp;
 	}
-	//free(data->pipes);
 	free(data->pid);
 	free(data);
 }
 
 void	exec_end(t_ex_data *data)
 {
-	//close_all_pipes(data);
+	close_all_pipes(data);
 	wait_all_pids(data);
-	//close_all_pipes(data);
 	free_ex_data(data);
 }
