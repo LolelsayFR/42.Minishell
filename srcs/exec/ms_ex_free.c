@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 15:49:38 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:22:48 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	exec_end(t_ex_data *data)
 {
 	//close_all_pipes(data);
 	wait_all_pids(data);
-	//close_all_pipes(data);
+	close_all_pipes(data);
 	free_ex_data(data);
 }

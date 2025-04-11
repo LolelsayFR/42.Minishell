@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/11 09:59:28 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:11:13 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	exec_close(t_ex_data *ex_data, char **tab)
 	ms_close(2, data);
 }
 
-int	find_outfile(t_ms_tokken *tokken, t_list *save, t_ex_data *data)
+int	find_outfile(t_ms_tokken *tokken, t_list *save, t_ex_data *data, int *pipe)
 {
 	int			outfile;
 	t_ms_tokken	*files;
@@ -40,15 +40,13 @@ int	find_outfile(t_ms_tokken *tokken, t_list *save, t_ex_data *data)
 			exec_close(data, NULL);
 		save = save->next;
 	}
-	if (save == NULL && outfile == -1)
-		return (1);
 	if (outfile == -1)
-		return (data->pipes->pipe[1]);
-	close(data->pipes->pipe[1]);
+		return (pipe[1]);
+	close(pipe[1]);
 	return (outfile);
 }
 
-int	find_infile(t_ms_tokken *tokken, t_list *save, t_ex_data *data)
+int	find_infile(t_ms_tokken *tokken, t_list *save, t_ex_data *data, int *pipe)
 {
 	int			infile;
 	t_ms_tokken	*files;
@@ -65,8 +63,8 @@ int	find_infile(t_ms_tokken *tokken, t_list *save, t_ex_data *data)
 		save = save->next;
 	}
 	if (infile == -1)
-		return (data->pipes->pipe[0]);
-	close(data->pipes->pipe[0]);
+		return (pipe[0]);
+	close(pipe[0]);
 	return (infile);
 }
 
@@ -76,10 +74,10 @@ void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ex_data *ex_data, int *pi)
 	char		**cmd;
 	int			*prev_pi;
 
-	printf("%d\t%d\n", pi[0], pi[1]);
+	//printf("%d\t%d\n", pi[0], pi[1]);
 	data = ms_get_data();
-	pi[1] = find_outfile(tokken, save, ex_data);
-	pi[0] = find_infile(tokken, save, ex_data);
+	pi[1] = find_outfile(tokken, save, ex_data, pi);
+	pi[0] = find_infile(tokken, save, ex_data, pi);
 	prev_pi = find_previous_pipe(ex_data, pi);
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
@@ -87,10 +85,10 @@ void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ex_data *ex_data, int *pi)
 		exec_close(ex_data, cmd);
 	if (prev_pi != NULL)
 	{
-			close(pi[0]);
-			pi[0] = prev_pi[1];
+		close(pi[0]);
+		pi[0] = prev_pi[1];
 	}
-	printf("%d\t%d\n", pi[0], pi[1]);
+	printf("%d\t%d -> PIPEFILE\n", pi[0], pi[1]);
 	dup2(pi[0], STDIN_FILENO);
 	dup2(pi[1], STDOUT_FILENO);
 	execve(cmd[0], cmd, data->env_var);

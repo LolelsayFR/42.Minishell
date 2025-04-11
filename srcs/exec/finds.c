@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 09:50:46 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:03:46 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ int	*find_previous_pipe(t_ex_data *data, int *pipe)
 	while (temp != NULL && temp->next != NULL)
 	{
 		if (temp->next->pipe[0] == pipe[0] && temp->next->pipe[1] == pipe[1])
-			return (write(1, "la\n", 3), temp->pipe);
+			return (temp->pipe);
 		temp = temp->next;
 	}
-	write(1, "ici\n", 4);
 	return (NULL);
 }
 

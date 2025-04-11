@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 09:19:20 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:24:12 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	**tokken_id_join(t_list *tokkens, int id)
 		temp = temp->next;
 	}
 	cmd[i] = NULL;
-	print_tab(cmd);
 	return (cmd);
 }
 

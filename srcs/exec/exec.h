@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 09:42:24 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:18:11 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_pipe
 {
-	int			pipe[2];
+	int				pipe[2];
 	struct s_pipe	*next;
 }	t_pipe;
 
