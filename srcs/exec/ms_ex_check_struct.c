@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 15:43:16 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:19:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ t_pipe	*pipe_init(void)
 	t_pipe	*pipe;
 
 	pipe = malloc(sizeof(t_pipe));
+	pipe->pipe[0] = 0;
+	pipe->pipe[1] = 1;
 	pipe->next = NULL;
 	return (pipe);
 }
