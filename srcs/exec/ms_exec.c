@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/11 13:11:13 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:37:25 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,12 @@ void	cmd_exec(t_ms_tokken *tokken, t_list *save, t_ex_data *ex_data, int *pi)
 	if (prev_pi != NULL)
 	{
 		close(pi[0]);
-		pi[0] = prev_pi[1];
+		pi[0] = prev_pi[0];
 	}
 	printf("%d\t%d -> PIPEFILE\n", pi[0], pi[1]);
 	dup2(pi[0], STDIN_FILENO);
 	dup2(pi[1], STDOUT_FILENO);
 	execve(cmd[0], cmd, data->env_var);
-	free_ex_data(ex_data);
 	exec_close(ex_data, cmd);
 }
 
