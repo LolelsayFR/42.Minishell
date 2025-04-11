@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 16:32:22 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:38:09 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,13 @@ void	free_ex_data(t_ex_data *data)
 		free(pipes);
 		pipes = temp;
 	}
-	//free(data->pipes);
 	free(data->pid);
 	free(data);
 }
 
 void	exec_end(t_ex_data *data)
 {
-	write(1, "ici\n", 4);
 	close_all_pipes(data);
 	wait_all_pids(data);
-	write(1, "la\n", 3);
-	//close_all_pipes(data);
 	free_ex_data(data);
 }

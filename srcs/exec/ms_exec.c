@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/11 16:35:31 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:38:15 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	cmd_exec(int id, t_list *save, t_ex_data **ex_data, int *pi)
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL)
 		exec_close((*ex_data), cmd);
-	printf("%d\t%d -> PIPEFILE\n", new_pipe[0], new_pipe[1]);
 	dup2(new_pipe[0], STDIN_FILENO);
 	dup2(new_pipe[1], STDOUT_FILENO);
 	close(new_pipe[0]);
