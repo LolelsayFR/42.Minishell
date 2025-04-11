@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 14:54:15 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 18:32:43 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char		**env_to_tab(t_env_lst *env);
 void		print_tab(char **tab);
 void		double_close(int fd1, int fd2);
 bool		ft_str_is_space(char *str);
-bool	    is_builtin(char *str);
+bool		is_builtin(char *str);
 
 #endif
 /* ************************************************************************** */
