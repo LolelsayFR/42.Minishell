@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 14:33:35 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:22:48 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 void	close_all_pipes(t_ex_data *data)
 {
-	int	i;
+	t_pipe	*pipes;
 
-	i = 0;
-	while (i < (data->nb_cmd - 1))
+	pipes = data->pipes;
+	while (pipes != NULL)
 	{
-		close(data->pipe[i][0]);
-		close(data->pipe[i][1]);
-		i++;
+		close(pipes->pipe[0]);
+		close(pipes->pipe[1]);
+		pipes = pipes->next;
 	}
 }
 
@@ -37,19 +37,25 @@ void	wait_all_pids(t_ex_data *data)
 
 void	free_ex_data(t_ex_data *data)
 {
-	int	i;
+	t_pipe	*pipes;
+	t_pipe	*temp;
 
-	i = 0;
-	while (i < data->nb_cmd - 1)
-		free(data->pipe[i++]);
-	free(data->pipe);
+	pipes = data->pipes;
+	while (pipes != NULL)
+	{
+		temp = pipes->next;
+		free(pipes);
+		pipes = temp;
+	}
+	//free(data->pipes);
 	free(data->pid);
 	free(data);
 }
 
 void	exec_end(t_ex_data *data)
 {
-	close_all_pipes(data);
+	//close_all_pipes(data);
 	wait_all_pids(data);
+	close_all_pipes(data);
 	free_ex_data(data);
 }
