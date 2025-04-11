@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 19:17:48 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:50:10 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ms_sig_handler(int sig)
 
 bool	ms_sig_init(t_ms_data *data)
 {
-	dumb(0, data);
+	(void)data;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, ms_sig_handler);
 	signal(SIGSEGV, ms_sig_handler);
