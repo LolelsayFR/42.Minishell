@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 18:29:30 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:32:39 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static bool	parsing_init(t_ms_data *data)
 	int	i;
 
 	i = 0;
-	while (ft_isspace(data->prompt[i]))
+	while (ft_isspace(data->prompt[i]) || ft_strrchr("<>", data->prompt[i]))
 		i++;
 	if (data->prompt[i] == '|')
 		return (false);
 	while (data->prompt[i])
 		i++;
 	i--;
-	while (ft_isspace(data->prompt[i]))
+	while (ft_isspace(data->prompt[i]) || ft_strrchr("<>", data->prompt[i]))
 		i--;
 	if (data->prompt[i] == '|')
 		return (false);

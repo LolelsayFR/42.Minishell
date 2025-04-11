@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:14:41 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 15:46:19 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:44:23 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*tokken_unquote(char *str)
 		}
 		arg.i++;
 	}
-	return (ft_strdup(str));
+	return (str[arg.i] = '\0', ft_strdup(str));
 }
 
 static char	*tokken_cleaner(char *str, int *flag)
@@ -60,25 +60,6 @@ static char	*tokken_cleaner(char *str, int *flag)
 		nufree(result);
 	nufree(var_got);
 	return (result);
-}
-
-static bool	is_builtin(char *str)
-{
-	if (!ft_strncmp(str, "exit\0", 5))
-		return (true);
-	if (!ft_strncmp(str, "pwd\0", 4))
-		return (true);
-	if (!ft_strncmp(str, "env\0", 4))
-		return (true);
-	if (!ft_strncmp(str, "echo\0", 5))
-		return (true);
-	if (!ft_strncmp(str, "unset\0", 6))
-		return (true);
-	if (!ft_strncmp(str, "export\0", 7))
-		return (true);
-	if (!ft_strncmp(str, "cd\0", 3))
-		return (true);
-	return (false);
 }
 
 static int	tokken_get_type(char *str, int id, int *save_id)
