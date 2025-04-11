@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 22:42:22 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 22:53:15 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 22:54:25 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ bool	ft_is_only_quote_sp(char *str)
 			quote++;
 		else
 			return (false);
+		i++;
 	}
 	return (true);
 }
