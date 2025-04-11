@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 10:21:23 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 23:07:58 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void		print_tab(char **tab);
 bool		ft_str_is_space(char *str);
 bool	    is_builtin(char *str);
 t_env_lst	*get_env_lst(t_ms_data *data, char *name);
+bool    	ft_is_only_quote_sp(char *str);
 
 #endif
 /* ************************************************************************** */
