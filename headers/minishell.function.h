@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 23:07:58 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/11 18:32:43 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ t_env_lst	*env_to_lst(char **env);
 void		free_env(t_env_lst *env);
 char		**env_to_tab(t_env_lst *env);
 void		print_tab(char **tab);
+void		double_close(int fd1, int fd2);
 bool		ft_str_is_space(char *str);
 bool	    is_builtin(char *str);
 t_env_lst	*get_env_lst(t_ms_data *data, char *name);

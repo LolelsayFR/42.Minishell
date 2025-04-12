@@ -1,70 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_ex_check_struct.c                               :+:      :+:    :+:   */
+/*   join.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 20:01:33 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/11 19:23:31 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/11 19:34:03 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 #include "exec.h"
 
-int	arg_nb(t_list *tokkens, int id)
+char	*tokken_join_id(t_list *tokkens, int id)
+{
+	char		*str;
+	t_ms_tokken	*tokken;
+	t_list		*temp;
+
+	temp = tokkens;
+	tokken = temp->content;
+	while (temp != NULL && tokken->id != id)
+	{
+		temp = temp->next;
+		tokken = temp->content;
+	}
+	str = NULL;
+	while (temp != NULL && tokken->id == id)
+	{
+		if (tokken->type == ARG)
+			ft_strcat(&str, tokken->content);
+		temp = temp->next;
+		tokken = temp->content;
+	}
+	return (str);
+}
+
+char	**tokken_id_join(t_list *tokkens, int id)
 {
 	int			i;
+	char		**cmd;
 	t_list		*temp;
 	t_ms_tokken	*tokken;
 
 	i = 0;
-	temp = tokkens;
+	temp = first_in_id(tokkens, id);
+	cmd = malloc((arg_nb(temp, id) + 3) * sizeof(char *));
 	while (temp != NULL)
 	{
 		tokken = temp->content;
 		if (tokken->id != id)
-			return (i);
+			break ;
+		if (tokken->type == CMD || tokken->type == ARG)
+			cmd[i++] = tokken->content;
 		temp = temp->next;
 	}
-	return (i);
-}
-
-t_list	*first_in_id(t_list *tokkens, int id)
-{
-	t_list		*temp;
-	t_ms_tokken	*tokken;
-
-	temp = tokkens;
-	while (temp != NULL)
-	{
-		tokken = temp->content;
-		if (tokken->id == id)
-			return (temp);
-		temp = temp->next;
-	}
-	return (NULL);
-}
-
-t_pipe	*pipe_init(void)
-{
-	t_pipe	*pipe;
-
-	pipe = malloc(sizeof(t_pipe));
-	pipe->pipe[0] = 0;
-	pipe->pipe[1] = 1;
-	pipe->next = NULL;
-	return (pipe);
-}
-
-t_ex_data	*exec_init(t_list *tokkens)
-{
-	t_ex_data	*ex_data;
-
-	ex_data = malloc(sizeof(t_ex_data));
-	ex_data->nb_cmd = find_nb_cmd(tokkens);
-	ex_data->pid = malloc(ex_data->nb_cmd * sizeof(int));
-	ex_data->pipes = pipe_init();
-	return (ex_data);
+	cmd[i] = NULL;
+	return (cmd);
 }
