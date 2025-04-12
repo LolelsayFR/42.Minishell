@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/12 04:03:45 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/12 04:13:32 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,11 @@ static char	*tokken_unquote(char *str, char *temp, t_pars_args arg)
 			arg.quote++;
 		}
 		else
-		{
 			if (str[++arg.i - 1] == '$' && (str[arg.i] == '?'
+					|| str[arg.i] == '_'
 					|| str[arg.i] == '$' || ft_isalnum(str[arg.i])))
 				if (tokken_var_placer(&str, &arg))
 					arg.i++;
-		}
 	}
 	return (ft_strdup(str));
 }
