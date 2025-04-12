@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   get_env_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 14:50:10 by emaillet         ###   ########.fr       */
+/*   Created: 2025/04/11 09:53:06 by emaillet          #+#    #+#             */
+/*   Updated: 2025/04/11 10:21:17 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static void	ms_sig_handler(int sig)
+t_env_lst	*get_env_lst(t_ms_data *data, char *name)
 {
-	if (sig == SIGINT)
-	{
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		printf("\n");
-		rl_redisplay();
-	}
-}
+	t_env_lst	*tmp;
 
-bool	ms_sig_init(t_ms_data *data)
-{
-	(void)data;
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ms_sig_handler);
-	signal(SIGSEGV, ms_sig_handler);
-	return (true);
+	if (name == NULL)
+		return (NULL);
+	tmp = data->env_lst;
+	while (tmp != NULL)
+	{
+		if (!ft_strncmp(tmp->var_name, name, ft_strlen(tmp->var_name) - 1)
+			&& (ft_strlen(name) == ft_strlen(tmp->var_name) - 1))
+			break ;
+		tmp = tmp->next;
+	}
+	return (tmp);
 }

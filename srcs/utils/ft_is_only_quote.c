@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_is_only_quote.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 14:50:10 by emaillet         ###   ########.fr       */
+/*   Created: 2025/04/11 22:42:22 by emaillet          #+#    #+#             */
+/*   Updated: 2025/04/11 23:19:50 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static void	ms_sig_handler(int sig)
+bool	ft_is_only_quote_sp(char *str)
 {
-	if (sig == SIGINT)
-	{
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		printf("\n");
-		rl_redisplay();
-	}
-}
+	int	i;
+	int	quote;
+	int	d_quote;
 
-bool	ms_sig_init(t_ms_data *data)
-{
-	(void)data;
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ms_sig_handler);
-	signal(SIGSEGV, ms_sig_handler);
+	i = 0;
+	quote = 0;
+	d_quote = 0;
+	while (str[i])
+	{
+		if (str[i] == '"' && quote % 2 == 0)
+			d_quote++;
+		else if (str[i] == '\'' && d_quote % 2 == 0)
+			quote++;
+		else
+			return (false);
+		i++;
+	}
 	return (true);
 }

@@ -66,6 +66,7 @@ t_ms_tokken	*tokken_init(char *content, int id, int type, int f);
 char		**prompt_split(t_ms_data *data);
 void		tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id);
 bool		tokkens_checker(t_list *lst, t_ms_data *data);
+char		*tokken_cleaner(char *str, int *flag);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
@@ -103,7 +104,9 @@ char		**env_to_tab(t_env_lst *env);
 void		print_tab(char **tab);
 void		double_close(int fd1, int fd2);
 bool		ft_str_is_space(char *str);
-bool		is_builtin(char *str);
+bool	    is_builtin(char *str);
+t_env_lst	*get_env_lst(t_ms_data *data, char *name);
+bool    	ft_is_only_quote_sp(char *str);
 
 #endif
 /* ************************************************************************** */
