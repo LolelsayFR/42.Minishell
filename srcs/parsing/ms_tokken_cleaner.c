@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/12 03:18:36 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/12 04:03:45 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	env_var_count(char *str, t_pars_args *arg)
 		arg->count = 1;
 	else
 	{
-		while (ft_isalnum(str[arg->i + arg->count]))
+		while (ft_isalnum(str[arg->i + arg->count])
+			|| str[arg->i + arg->count] == '_')
 			arg->count++;
 	}
 }
