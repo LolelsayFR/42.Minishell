@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/12 03:50:31 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:51:14 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_ms_data	*ms_get_data(void)
 
 void	ms_close(unsigned char exit_value, t_ms_data *data)
 {
+	ft_free_strtab(data->env_var);
 	free_env(data->env_lst);
 	if (data->tokkens != NULL)
 		(ft_lstclear(&data->tokkens, tokken_destructor), data->context = NULL);
