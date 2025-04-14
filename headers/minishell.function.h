@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/11 18:32:43 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:07:56 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int			ms_cd(t_ms_data *data, char *path);
 int			ms_pwd(t_ms_data *data);
 int			ms_unset(t_ms_data *data, char *arg);
 int			ms_env(t_ms_data *data);
-int			ms_exit(t_ms_data *datachar, char *exit_status);
+int			ms_exit(t_ms_data *data, char *exit_status);
+int			ms_export(t_ms_data *data, char *args);
 
 /* ************************************************************************** */
 /*  Other/Utils functions                                                     */
@@ -104,9 +105,10 @@ char		**env_to_tab(t_env_lst *env);
 void		print_tab(char **tab);
 void		double_close(int fd1, int fd2);
 bool		ft_str_is_space(char *str);
-bool	    is_builtin(char *str);
+bool		is_builtin(char *str);
 t_env_lst	*get_env_lst(t_ms_data *data, char *name);
-bool    	ft_is_only_quote_sp(char *str);
+bool		ft_is_only_quote_sp(char *str);
+char		**args_split(int i, char *str);
 
 #endif
 /* ************************************************************************** */
