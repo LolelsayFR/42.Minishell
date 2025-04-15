@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/14 15:40:53 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 08:36:23 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ static void	print_export(t_env_lst *head)
 	}
 }
 
-int	ms_export(t_ms_data *data, char *args)
+int	ms_export(t_ms_data *data, char **av)
 {
 	char		**av;
 	t_pars_args	a;
 
 	ft_bzero(&a, sizeof(t_pars_args));
-	av = args_split(0, args);
-	if (ft_strlen(args) <= 0)
+	if (ft_tabstr_len(av) <= 0)
 		return (print_export(data->env_lst), data->last_return = 1);
 	while (av[a.i] != NULL)
 	{
