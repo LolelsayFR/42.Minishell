@@ -6,52 +6,52 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:20:45 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 14:00:59 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:46:47 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	ms_cd_exec(t_ms_data *data, char *pwd, char **path)
+int	ms_cd_exec(t_ms_data *data, char **path, char *temp, char *home)
 {
 	if (path[0][0] == '~')
-		path[0] = ft_strjoin(get_env(data, "HOME=") + 5, &path[0][1]);
+		path[0] = home;
 	if (chdir(path[0]) == -1)
 	{
+		path[0] = temp;
 		ft_printfd(2, DIR_ERROR, ms_prefix(data), path[0]);
 		data->last_return = 1;
+		free(home);
 		ft_free_strtab(path);
-		free(pwd);
 		return (1);
 	}
+	path[0] = temp;
 	data->last_return = 0;
+	free(home);
 	ft_free_strtab(path);
-	free(pwd);
 	return (0);
 }
 
 int	ms_cd(t_ms_data *data, char **path)
 {
-	char	*pwd;
+	char	*temp;
 	char	*home;
 
-	pwd = getcwd(NULL, 0);
+	temp = path[0];
 	data->last_return = 1;
+	home = get_env(data, "HOME=");
+	if (home == NULL)
+		return (ft_free_strtab(path), 1);
+	home = ft_strdup(home + 5);
 	if (ft_tabstr_len(path) == 0)
 	{
-		home = get_env(data, "HOME=");
-		if (home == NULL)
-			return (free(pwd), ft_free_strtab(path), 1);
 		free(path[0]);
-		path[0] = ft_strdup(home + 5);
+		path[0] = home;
 	}
 	else if (ft_tabstr_len(path) > 1)
-		return (free(pwd), ft_free_strtab(path),
+		return (ft_free_strtab(path),
 			ft_printfd(2, DIR_COUNT, ms_prefix(data)), 1);
-	else if (path[0][0] != '~')
-	{
-		ft_strcat(&pwd, "/");
-		ft_strcat(&pwd, path[0]);
-	}
-	return (ms_cd_exec(data, pwd, path));
+	else if (path[0][0] == '~')
+		ft_strcat(&home, &path[0][1]);
+	return (ms_cd_exec(data, path, temp, home));
 }
