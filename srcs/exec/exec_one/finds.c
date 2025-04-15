@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:49:29 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 13:42:20 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:25:03 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	find_one_infile(t_list *tokkens)
 		{
 			if (infile != 0)
 				close(infile);
-			infile = open(tokken->content, O_RDONLY);
-			if (infile == -1)
+			infile = infile_open(infile, tokken->type, tokken->content);
+			if (infile == -2)
 				return (-1);
 		}
 		tokkens = tokkens->next;
@@ -47,8 +47,8 @@ int	find_one_outfile(t_list *tokkens)
 		{
 			if (outfile != 1)
 				close(outfile);
-			outfile = open(tokken->content, O_CREAT | O_WRONLY, 0644);
-			if (outfile == -1)
+			outfile = outfile_open(outfile, tokken->type, tokken->content);
+			if (outfile == -2)
 				return (-1);
 		}
 		tokkens = tokkens->next;

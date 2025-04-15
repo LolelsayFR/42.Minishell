@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/15 10:38:40 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:34:45 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data, int *pi)
 		exec_close((*ex_data), cmd, 2);
 	dup2(new_pipe[0], STDIN_FILENO);
 	dup2(new_pipe[1], STDOUT_FILENO);
-	close(new_pipe[0]);
+	if (new_pipe[0] != 0)
+		close(new_pipe[0]);
 	if (new_pipe[1] != 1)
 		close(new_pipe[1]);
 	if (tokken->type == B_IN)
