@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:53:41 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 19:26:12 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 19:26:36 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ void	do_echo(t_ms_data *data, t_ms_tokken *tokken)
 	if (ft_strncmp(tab[0], "-n\0", 3) == 0)
 	{
 		str = ft_strjointab(&tab[1]);
-		ms_echo(data, str, 0);
+		ms_echo(data, str, 1);
 	}
 	else
 	{
 		str = ft_strjointab(tab);
-		ms_echo(data, str, 1);
+		ms_echo(data, str, 0);
 	}
+	free(str);
 	ft_free_strtab(tab);
 }
 
