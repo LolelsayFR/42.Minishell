@@ -6,6 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
+/*   Updated: 2025/04/15 15:28:26 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +35,10 @@ static void	new_env_export(char *name, char *content, t_env_lst **head)
 	}
 	else
 		tails->var_cont = content;
-
 }
 
 static void	print_export(t_env_lst *head)
 {
-
 	while (head != NULL && head->var_name != NULL)
 	{
 		ft_putstr_fd("export ", 1);
