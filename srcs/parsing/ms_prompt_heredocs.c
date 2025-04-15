@@ -6,22 +6,23 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 12:12:32 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:40:37 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static void	heredoc_loop(t_ms_data *data, t_ms_tokken **tok, int fd)
+static void	heredoc_loop(t_ms_data *data, t_ms_tokken **tok, t_list **lst)
 {
 	char	*hdp;
 
 	hdp = NULL;
-	printf("HEREDOC %d was created\nNeed [%s] for close [%d] fd\n", data->context->heredocs, (*tok)->content, fd);
 	while (true)
 	{
 		hdp = readline(">");
-		ft_putendl_fd(hdp, fd);
+		ft_lstadd_back(lst, ft_lstnew(ft_strdup(hdp)));
+		ft_strcat(&(data->prompt), "\n");
+		ft_strcat(&(data->prompt), hdp);
 		if (!ft_strcmp(hdp, (*tok)->content) && hdp != NULL)
 			break ;
 		if (hdp == NULL)
@@ -32,11 +33,16 @@ static void	heredoc_loop(t_ms_data *data, t_ms_tokken **tok, int fd)
 	}
 }
 
+static void	ms_putherdoc(char *str)
+{
+	ft_putendl_fd(str, ms_get_data()->context->last_fd);
+}
+
 static void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 {
-	int		fd;
 	char	*name;
 	char	*tmp;
+	t_list	*lst;
 
 	data->context->heredocs++;
 	name = ft_strdup("/tmp/ms_hd_");
@@ -44,14 +50,17 @@ static void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 	ft_strcat(&name, tmp);
 	free(tmp);
 	tmp = ft_strjoin(data->init_pwd, name);
-	fd = open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	heredoc_loop(data, tokken, fd);
+	lst = NULL;
+	heredoc_loop(data, tokken, &lst);
+	data->context->last_fd = open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	ft_lstiter(lst, (void *)ms_putherdoc);
+	ft_lstprintfd(lst, 2);
 	if ((*tokken)->flag == CTRL_D_HD)
 		ft_printfd(2, HDW, ms_prefix(ms_get_data()),
 			8, HDWT, (*tokken)->content);
 	free((*tokken)->content);
 	(*tokken)->content = tmp;
-	close(fd);
+	close(data->context->last_fd);
 	free(name);
 }
 

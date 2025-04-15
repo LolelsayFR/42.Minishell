@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 12:22:51 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:00:30 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define NONE			1
 # define EMPTY_QUOTE 	2
 # define CTRL_D_HD		3
+# define CTRL_C_HD		4
 
 /* ************************************************************************** */
 /*  Typedef of struct                                                         */
@@ -66,6 +67,7 @@ typedef struct s_ms_context
 	int	heredocs;
 	int	nb_cmd;
 	int	nb_tkn;
+	int	last_fd;
 }	t_ms_context;
 
 //Env struct
