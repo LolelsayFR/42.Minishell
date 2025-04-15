@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-#include "exec.h"
 
 void	close_all_pipes(t_ex_data *data)
 {
