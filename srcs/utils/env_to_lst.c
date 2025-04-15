@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:29:46 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/09 16:15:44 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:49:47 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ t_env_lst	*env_to_lst(char **env)
 		}
 		env_lst->var_cont = find_cont(env[i]);
 		i++;
+		if (env[i] == NULL)
+			break ;
 		env_lst->next = new_env();
 		env_lst = env_lst->next;
 	}
