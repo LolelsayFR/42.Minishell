@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 09:56:45 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:20:51 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_ms_data	*data;
 
+	dumb(0, argc, argv);
 	data = ms_get_data();
 	if (data == NULL)
 		return (EXIT_FAILURE);
-	dumb(0, argc, argv);
 	minishell_data_init(data, envp);
 	if (data->is_inited == true)
 		minishell_main_loop(data);
@@ -29,6 +29,8 @@ int	main(int argc, char **argv, char **envp)
 
 t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 {
+	data->init_pwd = getcwd(NULL, 0);
+	data->old_pwd = getcwd(NULL, 0);
 	data->env_lst = env_to_lst(envp);
 	data->env_var = env_to_tab(data->env_lst);
 	data->prefix = ft_strdup_lst(LANG_PREFIX);
@@ -77,6 +79,8 @@ t_ms_data	*ms_get_data(void)
 
 void	ms_close(unsigned char exit_value, t_ms_data *data)
 {
+	free(data->old_pwd);
+	free(data->init_pwd);
 	ft_free_strtab(data->env_var);
 	free_env(data->env_lst);
 	if (data->tokkens != NULL)

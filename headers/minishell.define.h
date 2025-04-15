@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 10:17:49 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:20:32 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,18 @@ typedef struct s_env_lst
 //All data stored in s_ms_data.
 typedef struct s_ms_data
 {
+	int				last_return;
 	bool			is_inited;
 	bool			is_running;
 	bool			easter_rgb;
 	char			**env_var;
 	char			*prefix;
 	char			*prompt;
-	int				last_return;
-	t_ms_context	*context;
+	char			*init_pwd;
+	char			*old_pwd;
 	t_list			*tokkens;
 	t_env_lst		*env_lst;
+	t_ms_context	*context;
 }	t_ms_data;
 
 //Parsing utils struct
