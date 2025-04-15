@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 11:26:03 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:35:02 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	prompt_handler(t_ms_data *data)
 		ms_cd(data, data->prompt);
 	else if (!ft_strncmp(data->prompt, "unset", 5))
 		ms_unset(data, "str");
+	else if (!ft_strncmp(data->prompt, "export", 6))
+		ms_export(data, data->prompt + 7);
 	print_all_tokken(data->tokkens);
 	return (EXIT_SUCCESS);
 }
