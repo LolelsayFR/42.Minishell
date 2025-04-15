@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:49:29 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 17:25:03 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:06:07 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,10 @@ t_list	*find_cmd(t_list *tokkens)
 		tokkens = tokkens->next;
 	}
 	return (NULL);
+}
+
+void	choose_files(int infile, int outfile)
+{
+	dup2(infile, STDIN_FILENO);
+	dup2(outfile, STDOUT_FILENO);
 }

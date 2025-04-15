@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 19:25:29 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 19:26:53 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ int	prompt_handler(t_ms_data *data)
 		ms_exit(data, data->prompt);
 	else if (!ft_strncmp(data->prompt, "env", 3))
 		ms_env(data);
-	else if (!ft_strncmp(data->prompt, "cd", 2))
-		ms_cd(data, data->prompt);
 	else if (!ft_strncmp(data->prompt, "unset", 5))
 		ms_unset(data, "str");
 	else if (!ft_strncmp(data->prompt, "export", 6))
