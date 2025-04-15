@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 08:37:34 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:54:53 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include "../submodules/42.libft/libft.h"
+# include "../srcs/exec/exec.h"
 
 /* ************************************************************************** */
 /*  Minishell main functions                                                  */
@@ -73,12 +74,13 @@ char		*tokken_cleaner(char *str, int *flag);
 /* ************************************************************************** */
 
 int			ms_exec(t_ms_data *data, t_list *tokkens);
+int			exec_one(t_ms_data *data, t_list *tokkens);
 
 /* ************************************************************************** */
 /*  Built-In                                                                  */
 /* ************************************************************************** */
 
-int			ms_echo(t_ms_data *data, char *str);
+int			ms_echo(t_ms_data *data, char *str, int arg);
 int			ms_cd(t_ms_data *data, char *path);
 int			ms_pwd(t_ms_data *data);
 int			ms_unset(t_ms_data *data, char *arg);

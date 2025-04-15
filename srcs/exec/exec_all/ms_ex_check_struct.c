@@ -6,12 +6,11 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 20:01:33 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:25:28 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-#include "exec.h"
 
 int	arg_nb(t_list *tokkens, int id)
 {
@@ -26,6 +25,7 @@ int	arg_nb(t_list *tokkens, int id)
 		tokken = temp->content;
 		if (tokken->id != id)
 			return (i);
+		i++;
 		temp = temp->next;
 	}
 	return (i);

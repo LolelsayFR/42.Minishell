@@ -6,12 +6,11 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 16:04:56 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:00:05 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-#include "exec.h"
 
 int	*find_previous_pipe(t_ex_data *data, int *pipe)
 {
@@ -39,7 +38,7 @@ int	find_nb_cmd(t_list *tokkens)
 	while (temp != NULL)
 	{
 		tokken = temp->content;
-		if (tokken->type == CMD)
+		if (tokken->type == CMD || tokken->type == B_IN)
 			i++;
 		temp = temp->next;
 	}

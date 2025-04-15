@@ -6,12 +6,11 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 19:23:31 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 19:34:03 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:05:21 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-#include "exec.h"
 
 char	*tokken_join_id(t_list *tokkens, int id)
 {
@@ -31,7 +30,11 @@ char	*tokken_join_id(t_list *tokkens, int id)
 	{
 		if (tokken->type == ARG)
 			ft_strcat(&str, tokken->content);
+		if (tokken->type == ARG)
+			ft_strcat(&str, " ");
 		temp = temp->next;
+		if (temp == NULL)
+			break ;
 		tokken = temp->content;
 	}
 	return (str);
@@ -46,7 +49,7 @@ char	**tokken_id_join(t_list *tokkens, int id)
 
 	i = 0;
 	temp = first_in_id(tokkens, id);
-	cmd = malloc((arg_nb(temp, id) + 3) * sizeof(char *));
+	cmd = malloc((arg_nb(temp, id) + 1) * sizeof(char *));
 	while (temp != NULL)
 	{
 		tokken = temp->content;
