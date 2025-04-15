@@ -15,26 +15,30 @@
 static void	new_env_export(char *name, char *content, t_env_lst **head)
 {
 	t_env_lst	*new;
-	t_env_lst	*tails;
+	t_env_lst	*tmp;
 
-	ft_strcat(&name, "=");
+	if (ft_strlen(content) == 0)
+		content = NULL;
 	new = NULL;
+	tmp = *head;
 	printf(RED"New\nname = [%s] cont = [%s]"RES, name, content);
-	tails = *head;
-	printf(GRN"Head\nname = [%s] cont = [%s]"RES, tails->var_name, tails->var_cont);
-	while (tails->next->var_name != NULL
-		&& ft_strncmp(tails->var_name, name, ft_strlen(tails->var_name)))
-		tails = tails->next;
-	printf(YEL"Before new\nname = [%s] cont = [%s]"RES, tails->var_name, tails->var_cont);
-	if (ft_strncmp(tails->var_name, name, ft_strlen(tails->var_name)))
+	printf(GRN"Head\nname = [%s] cont = [%s]"RES, tmp->var_name, tmp->var_cont);
+	while (tmp->next != NULL && ft_strcmp(tmp->var_name, name))
+		tmp = tmp->next;
+	printf(YEL"Before new\nname = [%s] cont = [%s]"RES, tmp->var_name, tmp->var_cont);
+	if (ft_strcmp(tmp->var_name, name))
 	{
 		new = ft_calloc(1, sizeof(t_env_lst));
-		tails->next = new;
+		tmp->next = new;
+		new->next = NULL;
 		new->var_name = name;
-		new->var_cont = content;
+		if (content == NULL)
+			new->var_cont = NULL;
+		else
+			new->var_cont = ft_strdup(content);
 	}
-	else
-		tails->var_cont = content;
+	else if (content != NULL)
+		(tmp->var_cont = ft_strdup(content));
 }
 
 static void	print_export(t_env_lst *head)
@@ -52,24 +56,29 @@ static void	print_export(t_env_lst *head)
 int	ms_export(t_ms_data *data, char **av)
 {
 	t_pars_args	a;
+	int			i;
+	char		*here;
 
 	ft_bzero(&a, sizeof(t_pars_args));
 	if (ft_tabstr_len(av) <= 0)
 		return (print_export(data->env_lst), data->last_return = 1);
-	while (av[a.i] != NULL)
+	i = 0;
+	while (av[i] != NULL)
 	{
-		a.len = 0;
-		a.count = 0;
-		while (av[a.i][a.len] && av[a.i][a.len] != '=')
+		ft_bzero(&a, sizeof(t_pars_args));
+		while (av[i][a.len] && av[i][a.len] != '=')
 			a.len++;
-		while (av[a.i][a.len + a.count])
-			a.count++;
-		if (a.count > 0)
-			new_env_export(ft_substr(av[a.i], 0, a.len),
-				ft_substr(av[a.i], a.len + 1, a.count), &data->env_lst);
+		if (a.len == (int)ft_strlen(av[i]))
+			here = ft_strjoin(av[i], "=");
 		else
-			new_env_export(ft_substr(av[a.i], 0, a.len), NULL, &data->env_lst);
-		a.i++;
+			here = ft_strdup(av[i]);
+		while (av[i][a.len + a.count])
+			a.count++;
+		ft_printf(RED"%d\n", a.count);
+		new_env_export(ft_substr(here, 0, a.len + 1),
+			ft_substr(av[i], a.len + 1, a.count), &data->env_lst);
+		free(here);
+		i++;
 	}
 	ft_free_strtab(data->env_var);
 	data->env_var = env_to_tab(data->env_lst);

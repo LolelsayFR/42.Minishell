@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 15:20:18 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/14 14:41:51 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:42:40 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ char	**env_to_tab(t_env_lst *env)
 	y = env_len(env);
 	temp = env;
 	tab = malloc((y + 1) * sizeof(char *));
-	while (i < y)
+	while (temp != NULL)
 	{
-		tab[i] = ft_strjoin(temp->var_name, temp->var_cont);
-		if (tab[i] == NULL)
+		if (temp->var_cont == NULL)
 		{
 			temp = temp->next;
 			continue ;
 		}
+		tab[i] = ft_strjoin(temp->var_name, temp->var_cont);
 		temp = temp->next;
 		i++;
 	}

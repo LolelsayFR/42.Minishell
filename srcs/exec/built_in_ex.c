@@ -49,8 +49,9 @@ void	do_export(t_ms_data *data, t_ms_tokken *tokken)
 	char	**tab;
 
 	tab = tokken_id_join(data->tokkens, tokken->id);
+	(void)tab;
 	//ms_export(data, tab);
-	ft_free_strtab(tab);
+	// ft_free_strtab(tab);
 }
 
 //To Do
