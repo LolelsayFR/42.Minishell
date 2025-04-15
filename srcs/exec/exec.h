@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 12:59:20 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:20:10 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ int			find_one_infile(t_list *tokkens);
 int			find_one_outfile(t_list *tokkens);
 t_list		*find_cmd(t_list *tokkens);
 void		free_tab_err(char **tab);
+
+char		*ft_strjointab(char **tab);
 
 #endif
