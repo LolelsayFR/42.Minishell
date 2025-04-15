@@ -86,7 +86,7 @@ int			ms_pwd(t_ms_data *data);
 int			ms_unset(t_ms_data *data, char *arg);
 int			ms_env(t_ms_data *data);
 int			ms_exit(t_ms_data *data, char *exit_status);
-int			ms_export(t_ms_data *data, char *args);
+int			ms_export(t_ms_data *data, char **av);
 
 /* ************************************************************************** */
 /*  Other/Utils functions                                                     */
