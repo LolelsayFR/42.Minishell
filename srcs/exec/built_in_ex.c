@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:53:41 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 13:54:50 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:13:23 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,20 @@
 void	do_echo(t_ms_data *data, t_ms_tokken *tokken)
 {
 	char	*str;
+	char	**tab;
 
-	str = tokken_join_id(data->tokkens, tokken->id);
-	ms_echo(data, str, 0);
-	free(str);
+	tab = tokken_id_join(data->tokkens, tokken->id);
+	if (ft_strncmp(tab[0], "-n\0", 3) == 0)
+	{
+		str = ft_strjointab(&tab[1]);
+		ms_echo(data, str, 0);
+	}
+	else
+	{
+		str = ft_strjointab(tab);
+		ms_echo(data, str, 1);
+	}
+	ft_free_strtab(tab);
 }
 
 //To Do
