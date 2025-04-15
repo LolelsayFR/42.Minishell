@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 15:11:24 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:12:20 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # include "minishell.define.h"
 # include "minishell.lang.h"
+# include <errno.h>
+# include <string.h>
 # include <stdint.h>
 # include <signal.h>
 # include <unistd.h>
@@ -68,6 +70,7 @@ char		**prompt_split(t_ms_data *data);
 void		tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id);
 bool		tokkens_checker(t_list *lst, t_ms_data *data);
 char		*tokken_cleaner(char *str, int *flag);
+void		heredoc_finder(t_list *lst, t_ms_data *data);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
