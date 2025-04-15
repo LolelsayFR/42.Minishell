@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 11:16:40 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:27:52 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ char	*add_path(t_ms_data *data, char *cmd)
 		joined = ft_strjoin(temp, cmd);
 		free(temp);
 		if (access(joined, F_OK) == 0)
-			return (ft_free_strtab(env), joined);
+			return (ft_free_strtab(env), free(cmd), joined);
 		free(joined);
 		i++;
 	}
+	free(cmd);
 	ft_free_strtab(env);
 	return (NULL);
 }

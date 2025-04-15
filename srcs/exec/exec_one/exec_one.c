@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 11:26:25 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:21:57 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@ void	exec_one_built_in(t_ms_data *data, t_ms_tokken *tokken)
 		do_cd(data, tokken);
 }
 
-void	choose_files(int infile, int outfile)
-{
-	dup2(infile, STDIN_FILENO);
-	dup2(outfile, STDOUT_FILENO);
-	if (infile != 0)
-		close(infile);
-	if (outfile != 1)
-		close(outfile);
-}
-
 void	exec_cmd(char **cmd, char **env)
 {
 	int	pid;
@@ -50,6 +40,22 @@ void	exec_cmd(char **cmd, char **env)
 	waitpid(pid, NULL, 0);
 }
 
+void	check_standard(int i)
+{
+	static int	standard[2];
+
+	if (i == 0)
+	{
+		standard[0] = dup(STDIN_FILENO);
+		standard[1] = dup(STDOUT_FILENO);
+	}
+	else if (i == 1)
+	{
+		dup2(standard[0], STDIN_FILENO);
+		dup2(standard[1], STDOUT_FILENO);
+	}
+}
+
 int	exec_one(t_ms_data *data, t_list *tokkens)
 {
 	t_ms_tokken	*tokken;
@@ -58,21 +64,29 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 	int			outfile;
 
 	tokken = tokkens->content;
-	infile = find_one_infile(tokkens);
 	outfile = find_one_outfile(tokkens);
-	if (infile == -1 || outfile == -1)
+	if (outfile == -1)
+		return (-1);
+	infile = find_one_infile(tokkens);
+	if (infile == -1 && outfile != 1)
+		close(outfile);
+	if (infile == -1)
 		return (-1);
 	tokkens = find_cmd(tokkens);
 	if (tokkens == NULL)
 		return (-1);
 	cmd = tokken_id_join(data->tokkens, tokken->id);
-	cmd[0] = add_path(data, cmd[0]);
+	if (tokken->type != B_IN)
+		cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
-		return (-1);
+		return (free_tab_err(cmd), data->last_return = 1, -1);
+	check_standard(0);
 	choose_files(infile, outfile);
 	if (tokken->type == B_IN)
 		exec_one_built_in(data, tokken);
 	else
 		exec_cmd(cmd, data->env_var);
+	check_standard(1);
 	return (ft_free_strtab(cmd), data->last_return = 0, 0);
 }
+

@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_echo.c                                          :+:      :+:    :+:   */
+/*   ex_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/15 16:26:28 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/15 12:57:02 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/15 13:00:16 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	ms_echo(t_ms_data *data, char *str, int arg)
+void	free_tab_err(char **tab)
 {
-	int			i;
+	int	i;
 
 	i = 0;
-	if (str == NULL)
+	while (tab[i] != NULL)
 	{
-		if (arg == 0)
-			write(1, "\n", 1);
-		return (data->last_return = 0, 0);
+		free(tab[i]);
+		i++;
 	}
-	while (str[i] != '\0')
-		write(1, &str[i++], 1);
-	if (arg == 0)
-		write(1, "\n", 1);
-	return (data->last_return = 0, 0);
+	free(tab);
 }

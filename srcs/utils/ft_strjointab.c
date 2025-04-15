@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_echo.c                                          :+:      :+:    :+:   */
+/*   ft_strjointab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/15 16:26:28 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/15 16:16:44 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/15 16:23:33 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	ms_echo(t_ms_data *data, char *str, int arg)
+char	*ft_strjointab(char **tab)
 {
-	int			i;
+	char	*str;
+	int		i;
 
 	i = 0;
-	if (str == NULL)
+	str = NULL;
+	while (tab[i] != NULL)
 	{
-		if (arg == 0)
-			write(1, "\n", 1);
-		return (data->last_return = 0, 0);
+		ft_strcat(&str, tab[i]);
+		if (tab[i + 1] == NULL)
+			return (str);
+		ft_strcat(&str, " ");
+		i++;
 	}
-	while (str[i] != '\0')
-		write(1, &str[i++], 1);
-	if (arg == 0)
-		write(1, "\n", 1);
-	return (data->last_return = 0, 0);
+	return (str);
 }
