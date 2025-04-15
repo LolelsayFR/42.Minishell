@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   ex_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 13:27:52 by artgirar         ###   ########.fr       */
+/*   Created: 2025/04/15 12:57:02 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/15 13:00:16 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-char	*add_path(t_ms_data *data, char *cmd)
+void	free_tab_err(char **tab)
 {
-	int		i;
-	char	*joined;
-	char	*temp;
-	char	**env;
+	int	i;
 
 	i = 0;
-	if (access(cmd, X_OK) == 0)
-		return (cmd);
-	env = ft_split(get_env(data, "PATH") + 5, ':');
-	while (env != NULL && env[i] != NULL)
+	while (tab[i] != NULL)
 	{
-		temp = ft_strjoin(env[i], "/");
-		joined = ft_strjoin(temp, cmd);
-		free(temp);
-		if (access(joined, F_OK) == 0)
-			return (ft_free_strtab(env), free(cmd), joined);
-		free(joined);
+		free(tab[i]);
 		i++;
 	}
-	free(cmd);
-	ft_free_strtab(env);
-	return (NULL);
+	free(tab);
 }
