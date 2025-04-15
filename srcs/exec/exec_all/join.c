@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 19:23:31 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 11:25:36 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:05:21 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*tokken_join_id(t_list *tokkens, int id)
 	{
 		if (tokken->type == ARG)
 			ft_strcat(&str, tokken->content);
+		if (tokken->type == ARG)
+			ft_strcat(&str, " ");
 		temp = temp->next;
 		if (temp == NULL)
 			break ;
