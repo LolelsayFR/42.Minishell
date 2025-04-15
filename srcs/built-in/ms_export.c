@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/15 17:28:06 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 19:36:53 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ static void	new_env_export(char *name, char *content, t_env_lst **head)
 		content = NULL;
 	new = NULL;
 	tmp = *head;
-	printf(RED"New\nname = [%s] cont = [%s]"RES, name, content);
-	printf(GRN"Head\nname = [%s] cont = [%s]"RES, tmp->var_name, tmp->var_cont);
 	while (tmp->next != NULL && ft_strcmp(tmp->var_name, name))
 		tmp = tmp->next;
-	printf(YEL"Before new\nname = [%s] cont = [%s]"RES, tmp->var_name, tmp->var_cont);
 	if (ft_strcmp(tmp->var_name, name))
 	{
 		new = ft_calloc(1, sizeof(t_env_lst));
@@ -53,6 +50,14 @@ static void	print_export(t_env_lst *head)
 	}
 }
 
+static char	*name_convertor(int len, char **av, int i)
+{
+	if (len == (int)ft_strlen(av[i]))
+		return (ft_strjoin(av[i], "="));
+	else
+		return (ft_strdup(av[i]));
+}
+
 int	ms_export(t_ms_data *data, char **av)
 {
 	t_pars_args	a;
@@ -68,13 +73,9 @@ int	ms_export(t_ms_data *data, char **av)
 		ft_bzero(&a, sizeof(t_pars_args));
 		while (av[i][a.len] && av[i][a.len] != '=')
 			a.len++;
-		if (a.len == (int)ft_strlen(av[i]))
-			here = ft_strjoin(av[i], "=");
-		else
-			here = ft_strdup(av[i]);
+		here = name_convertor(a.len, av, i);
 		while (av[i][a.len + a.count])
 			a.count++;
-		ft_printf(RED"%d\n", a.count);
 		new_env_export(ft_substr(here, 0, a.len + 1),
 			ft_substr(av[i], a.len + 1, a.count), &data->env_lst);
 		free(here);
