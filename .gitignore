@@ -5,3 +5,4 @@ minishell
 *.o
 .vscode
 en.subject.pdf
+*/ms_hd*
