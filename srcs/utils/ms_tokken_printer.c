@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:26:23 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/10 19:05:15 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:40:17 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,26 @@ static void	print_tokken(t_ms_tokken *tokken)
 	printf(YEL"\nType id : %d"RES, tokken->type);
 	if (tokken->type == INF)
 		printf("Type : INFILE");
-	if (tokken->type == H_D)
+	else if (tokken->type == H_D)
 		printf("Type : HEREDOC");
-	if (tokken->type == CMD)
+	else if (tokken->type == CMD)
 		printf("Type : COMMAND");
-	if (tokken->type == ARG)
+	else if (tokken->type == ARG)
 		printf("Type : ARGUMENT");
-	if (tokken->type == B_IN)
+	else if (tokken->type == B_IN)
 		printf("Type : BUILT-IN");
-	if (tokken->type == OUTF_A)
+	else if (tokken->type == OUTF_A)
 		printf("Type : OUTFILE APPEND");
-	if (tokken->type == OUTF_R)
+	else if (tokken->type == OUTF_R)
 		printf("Type : OURFILE REPLACE");
-	if (tokken->type == END)
+	else if (tokken->type == END)
 		printf("Type : END");
 	if (tokken->flag == NONE)
 		printf("\nFlag : None");
-	if (tokken->type == EMPTY_QUOTE)
+	else if (tokken->flag == EMPTY_QUOTE)
 		printf("\nFlag : Only quote");
+	else if (tokken->flag == CTRL_D_HD)
+		printf("\nFlag : Ctrl-D Heredoc");
 	printf(YEL"\nContent = %s\n"RES, tokken->content);
 }
 

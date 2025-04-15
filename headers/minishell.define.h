@@ -34,17 +34,19 @@
 /* ************************************************************************** */
 
 //Tokken types
-# define INF		0
-# define H_D		1
-# define CMD		2
-# define ARG		3
-# define OUTF_A		4
-# define OUTF_R		5
-# define B_IN		6
-# define END		7
+# define INF		1
+# define H_D		2
+# define CMD		3
+# define ARG		4
+# define OUTF_A		5
+# define OUTF_R		6
+# define B_IN		7
+# define END		8
 //Tokken flag
-# define NONE			0
-# define EMPTY_QUOTE 	1
+# define NONE			1
+# define EMPTY_QUOTE 	2
+# define CTRL_D_HD		3
+# define CTRL_C_HD		4
 
 /* ************************************************************************** */
 /*  Typedef of struct                                                         */
@@ -65,6 +67,7 @@ typedef struct s_ms_context
 	int	heredocs;
 	int	nb_cmd;
 	int	nb_tkn;
+	int	last_fd;
 }	t_ms_context;
 
 //Env struct
@@ -78,16 +81,18 @@ typedef struct s_env_lst
 //All data stored in s_ms_data.
 typedef struct s_ms_data
 {
+	int				last_return;
 	bool			is_inited;
 	bool			is_running;
 	bool			easter_rgb;
 	char			**env_var;
 	char			*prefix;
 	char			*prompt;
-	int				last_return;
-	t_ms_context	*context;
+	char			*init_pwd;
+	char			*old_pwd;
 	t_list			*tokkens;
 	t_env_lst		*env_lst;
+	t_ms_context	*context;
 }	t_ms_data;
 
 //Parsing utils struct

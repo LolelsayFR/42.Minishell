@@ -6,7 +6,6 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/15 08:36:23 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +52,6 @@ static void	print_export(t_env_lst *head)
 
 int	ms_export(t_ms_data *data, char **av)
 {
-	char		**av;
 	t_pars_args	a;
 
 	ft_bzero(&a, sizeof(t_pars_args));
