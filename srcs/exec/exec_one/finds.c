@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:49:29 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 10:58:27 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:42:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	find_one_outfile(t_list *tokkens)
 	int			outfile;
 
 	outfile = 1;
-	while(tokkens != NULL)
+	while (tokkens != NULL)
 	{
 		tokken = tokkens->content;
 		if (tokken->type == OUTF_R || tokken->type == OUTF_A)

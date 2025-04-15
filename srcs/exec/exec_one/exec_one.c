@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 11:26:25 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:58:17 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 	if (tokkens == NULL)
 		return (-1);
 	cmd = tokken_id_join(data->tokkens, tokken->id);
-	cmd[0] = add_path(data, cmd[0]);
+	if (tokken->type != B_IN)
+		cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
-		return (-1);
+		return (free_tab_err(cmd), data->last_return = 1, -1);
 	choose_files(infile, outfile);
 	if (tokken->type == B_IN)
 		exec_one_built_in(data, tokken);

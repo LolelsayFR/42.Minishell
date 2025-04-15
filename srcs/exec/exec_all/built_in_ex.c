@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:53:41 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 17:55:03 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/15 19:25:56 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ void	do_export(t_ms_data *data, t_ms_tokken *tokken)
 //To Do
 void	do_cd(t_ms_data *data, t_ms_tokken *tokken)
 {
-	char	*str;
+	char	**tab;
 
-	str = tokken_join_id(data->tokkens, tokken->id);
-	printf("%s\n", str);
-	ms_cd(data, str);
-	free(str);
+	tab = tokken_id_join(data->tokkens, tokken->id);
+	ms_cd(data, tab);
 }
 
 void	do_exit(t_ms_data *data, t_ms_tokken *tokken)
