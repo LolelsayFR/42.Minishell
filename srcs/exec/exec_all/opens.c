@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-#include "exec.h"
 
 int	outfile_open(int outfile, int type, char *file)
 {

@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/11 20:00:23 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:52:12 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,21 @@ t_pipe		*pipe_init(void);
 
 int			arg_nb(t_list *tokkens, int id);
 
-void    do_echo(t_ms_data *data, t_ms_tokken *tokken);
-void    do_unset(t_ms_data *data, t_ms_tokken *tokken);
-void    do_export(t_ms_data *data, t_ms_tokken *tokken);
+void		do_echo(t_ms_data *data, t_ms_tokken *tokken);
+void		do_unset(t_ms_data *data, t_ms_tokken *tokken);
+void		do_export(t_ms_data *data, t_ms_tokken *tokken);
+void		do_cd(t_ms_data *data, t_ms_tokken *tokken);
+void		do_exit(t_ms_data *data, t_ms_tokken *tokken);
 
 t_ex_data	*exec_init(t_list *tokkens);
 void		exec_end(t_ex_data *data);
 void		free_ex_data(t_ex_data *data);
 void		exec_close(t_ex_data *ex_data, char **tab, int exit_status);
+
+//Part of exec_one
+
+int			find_one_infile(t_list *tokkens);
+int			find_one_outfile(t_list *tokkens);
+t_list		*find_cmd(t_list *tokkens);
 
 #endif

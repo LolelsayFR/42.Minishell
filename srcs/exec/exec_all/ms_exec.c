@@ -6,12 +6,11 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/11 19:57:46 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:38:40 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-#include "exec.h"
 
 void	exec_built_in(t_ms_tokken *tokken, t_ms_data *data,
 		t_ex_data **ex_data, char **cmd)
@@ -20,8 +19,6 @@ void	exec_built_in(t_ms_tokken *tokken, t_ms_data *data,
 		do_echo(data, tokken);
 	else if (ft_strncmp(tokken->content, "pwd\0", 4) == 0)
 		ms_pwd(data);
-	else if (ft_strncmp(tokken->content, "export\0", 7) == 0)
-		;//do_export();
 	else if (ft_strncmp(tokken->content, "unset\0", 6) == 0)
 		do_unset(data, tokken);
 	else if (ft_strncmp(tokken->content, "env\0", 4) == 0)

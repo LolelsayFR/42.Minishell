@@ -6,12 +6,11 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/10 13:55:19 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:16:40 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-#include "exec.h"
 
 char	*add_path(t_ms_data *data, char *cmd)
 {
@@ -30,7 +29,7 @@ char	*add_path(t_ms_data *data, char *cmd)
 		joined = ft_strjoin(temp, cmd);
 		free(temp);
 		if (access(joined, F_OK) == 0)
-			return (ft_free_strtab(env), free(cmd), joined);
+			return (ft_free_strtab(env), joined);
 		free(joined);
 		i++;
 	}
