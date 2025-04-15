@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 10:54:53 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:11:24 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int			ms_pwd(t_ms_data *data);
 int			ms_unset(t_ms_data *data, char *arg);
 int			ms_env(t_ms_data *data);
 int			ms_exit(t_ms_data *data, char *exit_status);
-int			ms_export(t_ms_data *data, char *args);
+int			ms_export(t_ms_data *data, char **av);
 
 /* ************************************************************************** */
 /*  Other/Utils functions                                                     */
