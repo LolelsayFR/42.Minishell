@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 09:59:25 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:11:15 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ t_ms_tokken	*tokken_init(char *content, int id, int type, int f);
 char		**prompt_split(t_ms_data *data);
 void		tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id);
 bool		tokkens_checker(t_list *lst, t_ms_data *data);
-char		*tokken_cleaner(char *str, int *flag);
-void		heredoc_finder(t_list *lst, t_ms_data *data);
+char		*tokken_cleaner(char *str, int *flag, int type);
+void		heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
@@ -115,6 +115,7 @@ t_env_lst	*get_env_lst(t_ms_data *data, char *name);
 bool		ft_is_only_quote_sp(char *str);
 char		**args_split(int i, char *str);
 int			ms_ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*str_unquote(char *str);
 
 #endif
 /* ************************************************************************** */

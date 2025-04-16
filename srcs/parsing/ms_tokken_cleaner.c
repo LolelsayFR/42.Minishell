@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/12 04:13:32 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:52:48 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static char	*tokken_unquote(char *str, char *temp, t_pars_args arg)
 	return (ft_strdup(str));
 }
 
-char	*tokken_cleaner(char *str, int *flag)
+char	*tokken_cleaner(char *str, int *flag, int type)
 {
 	char		*result;
 	char		*trim;
@@ -119,6 +119,8 @@ char	*tokken_cleaner(char *str, int *flag)
 		*flag = EMPTY_QUOTE;
 	else
 		*flag = NONE;
+	if (type == H_D)
+		return (trim);
 	result = tokken_unquote(trim, NULL, arg);
 	free(trim);
 	return (result);

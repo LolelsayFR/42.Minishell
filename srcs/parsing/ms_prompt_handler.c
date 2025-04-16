@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 09:56:12 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:11:36 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_ms_tokken	*tokken_init(char *content, int id, int type, int f)
 	new_tokken->id = id;
 	new_tokken->type = type;
 	new_tokken->flag = f;
+	if (new_tokken->type == H_D)
+		heredoc_initer(ms_get_data(), &new_tokken);
 	return (new_tokken);
 }
 
