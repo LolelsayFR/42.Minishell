@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 13:07:14 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:24:02 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char		*add_path(t_ms_data *data, char *cmd);
 t_pipe		*pipe_init(void);
 
 int			arg_nb(t_list *tokkens, int id);
+int			numb_of_no_nl(char **tab);
 
 void		do_echo(t_ms_data *data, t_ms_tokken *tokken);
 void		do_unset(t_ms_data *data, t_ms_tokken *tokken);
