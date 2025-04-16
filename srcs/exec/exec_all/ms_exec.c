@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/16 16:38:05 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:47:47 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	find_infile(int id, t_list *save, t_ex_data **data, int *pipe)
 	if (infile != -1)
 	{
 		if (pipe != NULL)
-			double_close(pipe[0], pipe[1]);
+			close(pipe[0]);
 		return (infile);
 	}
 	if (pipe == NULL)
