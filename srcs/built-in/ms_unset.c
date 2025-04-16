@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/10 09:04:49 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:21:49 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_envremoveone(t_env_lst **head, t_env_lst *lst)
 	nufree(lst);
 }
 
-int	ms_unset(t_ms_data *data, char *arg)
+int	ms_unset_ex(t_ms_data *data, char *arg)
 {
 	t_env_lst	*tmp;
 
@@ -54,4 +54,17 @@ int	ms_unset(t_ms_data *data, char *arg)
 		ft_envremoveone(&data->env_lst, tmp);
 	data->env_var = env_to_tab(data->env_lst);
 	return (data->last_return = 0, 0);
+}
+
+int	ms_unset(t_ms_data *data, char **arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i] != NULL)
+	{
+		ms_unset_ex(data, arg[i]);
+		i++;
+	}
+	return (0);
 }
