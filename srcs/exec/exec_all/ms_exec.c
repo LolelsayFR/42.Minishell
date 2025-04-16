@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/15 16:34:45 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:19:02 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	find_outfile(int id, t_list *save, t_ex_data **data, int *pipe)
 		if (files->type != CMD && files->type != ARG)
 			outfile = outfile_open(outfile, files->type, files->content);
 		if (outfile == -2)
-			exec_close((*data), NULL, 2);
+			exec_close((*data), NULL, 2, 0, NULL);
 		save = save->next;
 	}
 	close(pipe[0]);
@@ -63,7 +63,7 @@ int	find_infile(int id, t_list *save, t_ex_data **data, int *pipe)
 		if (files->type != CMD && files->type != ARG)
 			infile = infile_open(infile, files->type, files->content);
 		if (infile == -2)
-			exec_close((*data), NULL, 2);
+			exec_close((*data), NULL, 2, 0, NULL);
 		save = save->next;
 	}
 	if (infile != -1)
@@ -92,7 +92,7 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data, int *pi)
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
-		exec_close((*ex_data), cmd, 2);
+		exec_close((*ex_data), cmd, 2, 1, new_pipe);
 	dup2(new_pipe[0], STDIN_FILENO);
 	dup2(new_pipe[1], STDOUT_FILENO);
 	if (new_pipe[0] != 0)
@@ -103,7 +103,7 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data, int *pi)
 		exec_built_in(tokken, data, ex_data, cmd);
 	else
 		execve(cmd[0], cmd, data->env_var);
-	exec_close((*ex_data), cmd, 2);
+	exec_close((*ex_data), cmd, 2, 0, new_pipe);
 }
 
 int	ms_exec(t_ms_data *data, t_list *tokkens)
@@ -120,7 +120,7 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 	while (tokkens != NULL)
 	{
 		tokken = tokkens->content;
-		if (tokken->type == CMD)
+		if (tokken->type == CMD || tokken->type == B_IN)
 		{
 			ex_data->save = first_in_id(data->tokkens, tokken->id);
 			if (i < ex_data->nb_cmd - 1)

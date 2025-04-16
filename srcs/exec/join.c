@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 19:23:31 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 15:09:52 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 08:30:54 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ char	**tokken_id_join(t_list *tokkens, int id)
 		tokken = temp->content;
 		if (tokken->id != id)
 			break ;
-		if (tokken->type == CMD || tokken->type == ARG)
+		if (tokken->type == CMD || tokken->type == ARG
+			|| tokken->type == B_IN)
 			cmd[i++] = ft_strdup(tokken->content);
 		temp = temp->next;
 	}

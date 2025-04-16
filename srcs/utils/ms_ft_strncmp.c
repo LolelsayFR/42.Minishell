@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjointab.c                                    :+:      :+:    :+:   */
+/*   ms_ft_strncmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:16:44 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 08:38:28 by artgirar         ###   ########.fr       */
+/*   Created: 2024/10/15 11:25:44 by artgirar          #+#    #+#             */
+/*   Updated: 2025/04/16 08:45:49 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-char	*ft_strjointab(char **tab)
+int	ms_ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*str;
-	int		i;
+	size_t				i;
+	const unsigned char	*str1;
+	const unsigned char	*str2;
 
+	if (!s1 && !s2)
+		return (0);
+	if (!s1)
+		return (s2[0]);
+	if (!s2)
+		return (s1[0]);
 	i = 0;
-	str = NULL;
-	if (tab == NULL)
-		return (NULL);
-	while (tab[i] != NULL)
-	{
-		ft_strcat(&str, tab[i]);
-		if (tab[i + 1] == NULL)
-			return (str);
-		ft_strcat(&str, " ");
+	str1 = (const unsigned char *)s1;
+	str2 = (const unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (str1[i] && str1[i] == str2[i] && i < n - 1)
 		i++;
-	}
-	return (str);
+	return (str1[i] - str2[i]);
 }
