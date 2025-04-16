@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 14:11:15 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:22:33 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int			exec_one(t_ms_data *data, t_list *tokkens);
 int			ms_echo(char *str, int arg);
 int			ms_cd(t_ms_data *data, char **path);
 int			ms_pwd(t_ms_data *data);
-int			ms_unset(t_ms_data *data, char *arg);
+int			ms_unset(t_ms_data *data, char **arg);
 int			ms_env(t_ms_data *data);
 int			ms_exit(t_ms_data *data, char **exit_args);
 int			ms_export(t_ms_data *data, char **av);
