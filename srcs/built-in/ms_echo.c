@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/16 15:15:54 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:29:50 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	ms_echo(char *str, int arg)
 			k = write(1, "\n", 1);
 	}
 	if (k == -1)
-		ft_printfd(2, ECHO_NO_SPACE, ms_prefix());
+		ft_printfd(2, ECHO_NO_SPACE, ms_prefix(ms_get_data()));
 	return (0);
 }
