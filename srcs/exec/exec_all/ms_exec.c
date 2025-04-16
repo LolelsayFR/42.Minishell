@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/16 15:38:58 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:38:05 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,9 @@ int	find_outfile(int id, t_list *save, t_ex_data **data, int *pipe)
 			exec_close((*data), NULL, 2, 0);
 		save = save->next;
 	}
-	close(pipe[0]);
 	if (outfile != -1)
 		return (close(pipe[1]), outfile);
-	return (pipe[1]);
+	return (close(pipe[0]), pipe[1]);
 }
 
 int	find_infile(int id, t_list *save, t_ex_data **data, int *pipe)
@@ -85,20 +84,20 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data, int *pi)
 
 	data = ms_get_data();
 	prev_pi = find_previous_pipe((*ex_data), pi);
-	(*ex_data)->pipe[1] = find_outfile(tokken->id,
+	(*ex_data)->file[1] = find_outfile(tokken->id,
 			(*ex_data)->save, ex_data, pi);
-	(*ex_data)->pipe[0] = find_infile(tokken->id,
+	(*ex_data)->file[0] = find_infile(tokken->id,
 			(*ex_data)->save, ex_data, prev_pi);
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
 		exec_close((*ex_data), cmd, 2, 1);
-	dup2((*ex_data)->pipe[0], STDIN_FILENO);
-	dup2((*ex_data)->pipe[1], STDOUT_FILENO);
-	if ((*ex_data)->pipe[0] != 0)
-		close((*ex_data)->pipe[0]);
-	if ((*ex_data)->pipe[1] != 1)
-		close((*ex_data)->pipe[1]);
+	dup2((*ex_data)->file[0], STDIN_FILENO);
+	dup2((*ex_data)->file[1], STDOUT_FILENO);
+	if ((*ex_data)->file[0] != 0)
+		close((*ex_data)->file[0]);
+	if ((*ex_data)->file[1] != 1)
+		close((*ex_data)->file[1]);
 	if (tokken->type == B_IN)
 		exec_built_in(tokken, data, ex_data, cmd);
 	else
