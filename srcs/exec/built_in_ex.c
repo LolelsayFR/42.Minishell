@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:53:41 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 08:46:04 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 08:52:59 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ void	do_export(t_ms_data *data, t_ms_tokken *tokken)
 	char	**tab;
 
 	tab = tokken_id_join(data->tokkens, tokken->id);
-	(void)tab;
-	//ms_export(data, tab);
-	// ft_free_strtab(tab);
+	ms_export(data, tab);
+	ft_free_strtab(tab);
 }
 
 //To Do
