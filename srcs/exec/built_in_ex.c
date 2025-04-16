@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:53:41 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 08:52:59 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:04:14 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,19 @@ void	do_echo(t_ms_data *data, t_ms_tokken *tokken)
 //To Do
 void	do_unset(t_ms_data *data, t_ms_tokken *tokken)
 {
-	char	*str;
+	int		i;
+	char	**tab;
 
-	str = tokken_join_id(data->tokkens, tokken->id);
-	ms_unset(data, str);
-	free(str);
+	i = 0;
+	tab = tokken_id_join(data->tokkens, tokken->id);
+	free(tab[i++]);
+	while (tab[i] != NULL)
+	{
+		//ms_unset(data, tab);
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
 
 //To Do
@@ -49,7 +57,7 @@ void	do_export(t_ms_data *data, t_ms_tokken *tokken)
 	char	**tab;
 
 	tab = tokken_id_join(data->tokkens, tokken->id);
-	ms_export(data, tab);
+	ms_export(data, &tab[1]);
 	ft_free_strtab(tab);
 }
 
@@ -59,7 +67,7 @@ void	do_cd(t_ms_data *data, t_ms_tokken *tokken)
 	char	**tab;
 
 	tab = tokken_id_join(data->tokkens, tokken->id);
-	ms_cd(data, tab);
+	ms_cd(data, &tab[1]);
 }
 
 void	do_exit(t_ms_data *data, t_ms_tokken *tokken)
