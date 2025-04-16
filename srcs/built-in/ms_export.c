@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/15 19:36:53 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:36:41 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	new_env_export(char *name, char *content, t_env_lst **head)
 	t_env_lst	*tmp;
 
 	if (ft_strlen(content) == 0)
-		content = NULL;
+		(free(content), content = NULL);
 	new = NULL;
 	tmp = *head;
 	while (tmp->next != NULL && ft_strcmp(tmp->var_name, name))
