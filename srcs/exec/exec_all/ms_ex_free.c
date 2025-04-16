@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 13:09:50 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:23:54 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	free_ex_data(t_ex_data *data)
 		free(pipes);
 		pipes = temp;
 	}
-	if (data->pipe[0] != 0)
-		close(data->pipe[0]);
-	if (data->pipe[1] != 1)
-		close(data->pipe[1]);
-	free(data->pipe);
+	if (data->file[0] != 0)
+		close(data->file[0]);
+	if (data->file[1] != 1)
+		close(data->file[1]);
+	free(data->file);
 	free(data->pid);
 	free(data);
 }
