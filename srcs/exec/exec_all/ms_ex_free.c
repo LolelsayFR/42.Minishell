@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 16:23:54 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:57:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	exec_close(t_ex_data *ex_data, char **tab, int status, int err)
 	t_ms_data	*data;
 
 	data = ms_get_data();
-	ft_putstr_fd("Command Error\n", 2);
+	ft_printfd(2, "%s: command not found\n", ex_data->tokken->content);
 	free_ex_data(ex_data);
 	if (err == 0)
 		ft_free_strtab(tab);

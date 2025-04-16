@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 16:09:41 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:52:44 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ typedef struct s_pipe
 
 typedef struct s_ex_data
 {
-	t_pipe	*pipes;
-	t_list	*save;
-	int		*pid;
-	int		*file;
-	int		nb_cmd;
-	int		i;
+	t_ms_tokken	*tokken;
+	t_pipe		*pipes;
+	t_list		*save;
+	int			*pid;
+	int			*file;
+	int			nb_cmd;
+	int			i;
 }	t_ex_data;
 
 int			outfile_open(int outfile, int type, char *file);
