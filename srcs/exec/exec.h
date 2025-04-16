@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 13:24:02 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:56:12 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_ex_data
 	int		*pid;
 	int		*pipe;
 	int		nb_cmd;
+	int		i;
 }	t_ex_data;
 
 int			outfile_open(int outfile, int type, char *file);

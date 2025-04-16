@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 10:22:26 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:51:22 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,3 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 	check_standard(1);
 	return (0);
 }
-

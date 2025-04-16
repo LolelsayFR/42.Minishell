@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/16 13:08:43 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:55:47 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,10 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data, int *pi)
 
 	data = ms_get_data();
 	prev_pi = find_previous_pipe((*ex_data), pi);
-	(*ex_data)->pipe[1] = find_outfile(tokken->id, (*ex_data)->save, ex_data, pi);
-	(*ex_data)->pipe[0] = find_infile(tokken->id, (*ex_data)->save, ex_data, prev_pi);
+	(*ex_data)->pipe[1] = find_outfile(tokken->id,
+			(*ex_data)->save, ex_data, pi);
+	(*ex_data)->pipe[0] = find_infile(tokken->id,
+			(*ex_data)->save, ex_data, prev_pi);
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
@@ -109,9 +111,7 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 	t_ex_data	*ex_data;
 	t_pipe		*pipes;
 	t_ms_tokken	*tokken;
-	int			i;
 
-	i = 0;
 	ex_data = exec_init(tokkens);
 	ex_data->save = tokkens;
 	pipes = ex_data->pipes;
@@ -121,11 +121,11 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		if (tokken->type == CMD || tokken->type == B_IN)
 		{
 			ex_data->save = first_in_id(data->tokkens, tokken->id);
-			if (i < ex_data->nb_cmd - 1)
+			if (ex_data->i < ex_data->nb_cmd - 1)
 				if (pipe(pipes->pipe) == -1)
 					break ;
-			ex_data->pid[i] = fork();
-			if (ex_data->pid[i++] == 0)
+			ex_data->pid[ex_data->i] = fork();
+			if (ex_data->pid[ex_data->i++] == 0)
 				cmd_exec(tokken, &ex_data, pipes->pipe);
 			pipes->next = pipe_init();
 			pipes = pipes->next;
