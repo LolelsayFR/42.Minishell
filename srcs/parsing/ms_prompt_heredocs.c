@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 14:04:45 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:21:13 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ static void	heredoc_loop(t_ms_tokken **tok, t_list **lst, char *eof)
 			break ;
 		}
 		else if (ms_get_data()->context->hd_ctrl_c)
-		{
-			ft_printfd(2, HDW, ms_prefix(ms_get_data()), eof);
 			break ;
-		}
 		ft_lstadd_back(lst, ft_lstnew(ft_strdup(hdp)));
 	}
 	free(eof);

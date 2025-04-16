@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 14:11:36 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:20:10 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	prompt_handler(t_ms_data *data)
 	if (!tokkens_checker(data->tokkens, data))
 		return (EXIT_FAILURE);
 	ft_free_strtab(tab_prompt);
-	heredoc_finder(data->tokkens, data);
 	print_all_tokken(data->tokkens);
 	return (EXIT_SUCCESS);
 }
