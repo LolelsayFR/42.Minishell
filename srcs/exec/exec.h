@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 18:05:46 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:17:49 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		do_exit(t_ms_data *data, t_ms_tokken *tokken);
 t_ex_data	*exec_init(t_list *tokkens);
 void		exec_end(t_ex_data *data);
 void		free_ex_data(t_ex_data *data);
-void		exec_close(t_ex_data *ex_data, char **tab, int exit_status);
+void		exec_close(t_ex_data *ex_data, char **tab, int status, int err, int *pi);
 
 //Part of exec_one
 

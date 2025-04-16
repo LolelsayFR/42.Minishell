@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 08:53:48 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:56:12 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,6 @@ int	prompt_handler(t_ms_data *data)
 		return (EXIT_FAILURE);
 	ft_free_strtab(tab_prompt);
 	heredoc_finder(data->tokkens, data);
-	if (!ft_strncmp(data->prompt, "exit", 4))
-		ms_exit(data, data->prompt);
-	else if (!ft_strncmp(data->prompt, "unset", 5))
-		ms_unset(data, "str");
 	print_all_tokken(data->tokkens);
 	return (EXIT_SUCCESS);
 }

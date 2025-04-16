@@ -6,14 +6,15 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 18:21:57 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:22:26 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-void	exec_one_built_in(t_ms_data *data, t_ms_tokken *tokken)
+void	exec_one_built_in(t_ms_data *data, t_ms_tokken *tokken, char **cmd)
 {
+	ft_free_strtab(cmd);
 	if (ft_strncmp(tokken->content, "echo\0", 5) == 0)
 		do_echo(data, tokken);
 	else if (ft_strncmp(tokken->content, "pwd\0", 4) == 0)
@@ -38,6 +39,7 @@ void	exec_cmd(char **cmd, char **env)
 	if (pid == 0)
 		execve(cmd[0], cmd, env);
 	waitpid(pid, NULL, 0);
+	ft_free_strtab(cmd);
 }
 
 void	check_standard(int i)
@@ -83,10 +85,10 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 	check_standard(0);
 	choose_files(infile, outfile);
 	if (tokken->type == B_IN)
-		exec_one_built_in(data, tokken);
+		exec_one_built_in(data, tokken, cmd);
 	else
 		exec_cmd(cmd, data->env_var);
 	check_standard(1);
-	return (ft_free_strtab(cmd), data->last_return = 0, 0);
+	return (0);
 }
 

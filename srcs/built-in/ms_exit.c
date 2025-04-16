@@ -6,11 +6,17 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/10 18:52:48 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:08:23 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
+
+static void	ms_exit_exit(int exit_status, t_ms_data *data, char **tab_free)
+{
+	ft_free_strtab(tab_free);
+	ms_close(exit_status, data);
+}
 
 static int	ms_exit_msg(char **exit_args, int i, int j, t_ms_data *data)
 {
@@ -23,24 +29,22 @@ static int	ms_exit_msg(char **exit_args, int i, int j, t_ms_data *data)
 	if ((j >= 1) || (ft_is_ll(exit_args[1]) == 1))
 	{
 		ft_printfd(2, EXIT_NUM_ERROR, ms_prefix(data), exit_args[1]);
-		ms_close(2, data);
+		ms_exit_exit(2, data, exit_args);
 	}
-	ms_close((unsigned char)ft_atol(exit_args[1]), data);
+	ms_exit_exit((unsigned char)ft_atol(exit_args[1]), data, exit_args);
 	return (EXIT_FAILURE);
 }
 
-int	ms_exit(t_ms_data *data, char *exit_status)
+int	ms_exit(t_ms_data *data, char **exit_args)
 {
-	char	**exit_args;
 	int		i;
 	int		j;
 	int		k;
 
 	ft_putstr_fd("exit\n", 2);
-	exit_args = ft_split_lst(exit_status, ' ');
-	if (exit_status == NULL || ft_tabstr_len(exit_args) == 1
-		|| exit_status[0] == '\0')
-		ms_close((unsigned char)data->last_return, data);
+	if (exit_args == NULL || ft_tabstr_len(exit_args) == 1
+		|| exit_args[0][0] == '\0')
+		ms_exit_exit((unsigned char)data->last_return, data, exit_args);
 	i = 0;
 	j = 0;
 	k = 1;
