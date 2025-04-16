@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:00:40 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 15:34:16 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:04:27 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ int	outfile_open(int outfile, int type, char *file)
 	if (outfile != -1 && outfile != 1)
 		close(outfile);
 	if (type == OUTF_A)
-	{
 		outfile = open(file, O_CREAT | O_APPEND | O_WRONLY, 0644);
-		if (outfile == -1)
-			return (-2);
-	}
 	else if (type == OUTF_R)
 		outfile = open(file, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (outfile == -1)

@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 13:56:01 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:09:32 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ t_ex_data	*exec_init(t_list *tokkens)
 	ex_data->nb_cmd = find_nb_cmd(tokkens);
 	ex_data->pid = malloc(ex_data->nb_cmd * sizeof(int));
 	ex_data->pipes = pipe_init();
-	ex_data->pipe = malloc(2 * sizeof(int));
-	ex_data->pipe[0] = 0;
-	ex_data->pipe[1] = 1;
+	ex_data->file = malloc(2 * sizeof(int));
+	ex_data->file[0] = 0;
+	ex_data->file[1] = 1;
 	ex_data->i = 0;
 	return (ex_data);
 }
