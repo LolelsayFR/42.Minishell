@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/16 16:38:05 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:58:57 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	find_infile(int id, t_list *save, t_ex_data **data, int *pipe)
 	if (infile != -1)
 	{
 		if (pipe != NULL)
-			double_close(pipe[0], pipe[1]);
+			close(pipe[0]);
 		return (infile);
 	}
 	if (pipe == NULL)
@@ -109,23 +109,22 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 {
 	t_ex_data	*ex_data;
 	t_pipe		*pipes;
-	t_ms_tokken	*tokken;
 
 	ex_data = exec_init(tokkens);
 	ex_data->save = tokkens;
 	pipes = ex_data->pipes;
 	while (tokkens != NULL)
 	{
-		tokken = tokkens->content;
-		if (tokken->type == CMD || tokken->type == B_IN)
+		ex_data->tokken = tokkens->content;
+		if (ex_data->tokken->type == CMD || ex_data->tokken->type == B_IN)
 		{
-			ex_data->save = first_in_id(data->tokkens, tokken->id);
+			ex_data->save = first_in_id(data->tokkens, ex_data->tokken->id);
 			if (ex_data->i < ex_data->nb_cmd - 1)
 				if (pipe(pipes->pipe) == -1)
 					break ;
 			ex_data->pid[ex_data->i] = fork();
 			if (ex_data->pid[ex_data->i++] == 0)
-				cmd_exec(tokken, &ex_data, pipes->pipe);
+				cmd_exec(ex_data->tokken, &ex_data, pipes->pipe);
 			pipes->next = pipe_init();
 			pipes = pipes->next;
 		}
