@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 12:18:17 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:09:50 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	free_ex_data(t_ex_data *data)
 		free(pipes);
 		pipes = temp;
 	}
+	if (data->pipe[0] != 0)
+		close(data->pipe[0]);
+	if (data->pipe[1] != 1)
+		close(data->pipe[1]);
+	free(data->pipe);
 	free(data->pid);
 	free(data);
 }
@@ -59,7 +64,7 @@ void	exec_end(t_ex_data *data)
 	free_ex_data(data);
 }
 
-void	exec_close(t_ex_data *ex_data, char **tab, int status, int err, int *pi)
+void	exec_close(t_ex_data *ex_data, char **tab, int status, int err)
 {
 	t_ms_data	*data;
 
@@ -70,13 +75,5 @@ void	exec_close(t_ex_data *ex_data, char **tab, int status, int err, int *pi)
 		ft_free_strtab(tab);
 	else
 		free_tab_err(tab);
-	if (pi != NULL)
-	{
-		if (pi[0] != 0)
-			close(pi[0]);
-		if (pi[1] != 1)
-			close(pi[1]);
-	}
-	free(pi);
 	ms_close(status, data);
 }

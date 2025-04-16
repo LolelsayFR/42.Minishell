@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/16 12:19:02 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:08:43 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	find_outfile(int id, t_list *save, t_ex_data **data, int *pipe)
 	while (save != NULL && files->id == id)
 	{
 		files = save->content;
-		if (files->type != CMD && files->type != ARG)
+		if (files->type != CMD && files->type != ARG && files->type != B_IN)
 			outfile = outfile_open(outfile, files->type, files->content);
 		if (outfile == -2)
-			exec_close((*data), NULL, 2, 0, NULL);
+			exec_close((*data), NULL, 2, 0);
 		save = save->next;
 	}
 	close(pipe[0]);
@@ -60,10 +60,10 @@ int	find_infile(int id, t_list *save, t_ex_data **data, int *pipe)
 	while (save != NULL && files->id == id)
 	{
 		files = save->content;
-		if (files->type != CMD && files->type != ARG)
+		if (files->type != CMD && files->type != ARG && files->type != B_IN)
 			infile = infile_open(infile, files->type, files->content);
 		if (infile == -2)
-			exec_close((*data), NULL, 2, 0, NULL);
+			exec_close((*data), NULL, 2, 0);
 		save = save->next;
 	}
 	if (infile != -1)
@@ -82,28 +82,26 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data, int *pi)
 	t_ms_data	*data;
 	char		**cmd;
 	int			*prev_pi;
-	int			*new_pipe;
 
-	new_pipe = malloc(2 * sizeof(int));
 	data = ms_get_data();
 	prev_pi = find_previous_pipe((*ex_data), pi);
-	new_pipe[1] = find_outfile(tokken->id, (*ex_data)->save, ex_data, pi);
-	new_pipe[0] = find_infile(tokken->id, (*ex_data)->save, ex_data, prev_pi);
+	(*ex_data)->pipe[1] = find_outfile(tokken->id, (*ex_data)->save, ex_data, pi);
+	(*ex_data)->pipe[0] = find_infile(tokken->id, (*ex_data)->save, ex_data, prev_pi);
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
-		exec_close((*ex_data), cmd, 2, 1, new_pipe);
-	dup2(new_pipe[0], STDIN_FILENO);
-	dup2(new_pipe[1], STDOUT_FILENO);
-	if (new_pipe[0] != 0)
-		close(new_pipe[0]);
-	if (new_pipe[1] != 1)
-		close(new_pipe[1]);
+		exec_close((*ex_data), cmd, 2, 1);
+	dup2((*ex_data)->pipe[0], STDIN_FILENO);
+	dup2((*ex_data)->pipe[1], STDOUT_FILENO);
+	if ((*ex_data)->pipe[0] != 0)
+		close((*ex_data)->pipe[0]);
+	if ((*ex_data)->pipe[1] != 1)
+		close((*ex_data)->pipe[1]);
 	if (tokken->type == B_IN)
 		exec_built_in(tokken, data, ex_data, cmd);
 	else
 		execve(cmd[0], cmd, data->env_var);
-	exec_close((*ex_data), cmd, 2, 0, new_pipe);
+	exec_close((*ex_data), cmd, 2, 0);
 }
 
 int	ms_exec(t_ms_data *data, t_list *tokkens)
