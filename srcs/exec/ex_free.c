@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:57:02 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 13:00:16 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:11:29 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	free_tab_err(char **tab)
 	int	i;
 
 	i = 0;
+	free(tab[i++]);
 	while (tab[i] != NULL)
 	{
 		free(tab[i]);
