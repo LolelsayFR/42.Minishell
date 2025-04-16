@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_ex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:53:41 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 13:25:06 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:45:22 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	do_unset(t_ms_data *data, t_ms_tokken *tokken)
 	free(tab[i++]);
 	while (tab[i] != NULL)
 	{
-		//ms_unset(data, tab);
+		ms_unset(data, tab);
 		free(tab[i]);
 		i++;
 	}

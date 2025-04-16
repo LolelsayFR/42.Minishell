@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 14:21:13 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:32:22 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 	data->context->last_fd = open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	ft_lstiter(lst, (void *)ms_putherdoc);
 	(*tokken)->content = tmp;
-
 	ft_lstclear(&lst, free);
 	rl_redisplay();
 	ms_sig_init(ms_get_data());
