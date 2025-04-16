@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 17:12:20 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:22:25 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,5 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 		exec_one_built_in(data, tokken, cmd);
 	else
 		exec_cmd(cmd, data->env_var);
-	return (check_standard(1), 0);
+	return (unlink_all(), check_standard(1), 0);
 }
