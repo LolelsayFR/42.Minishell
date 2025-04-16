@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 15:32:22 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:36:14 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	heredoc_sig(int sig)
 {
 	(void)sig;
 	ms_get_data()->context->hd_ctrl_c = true;
-	ms_get_data()->context->last_fd = dup(STDIN_FILENO);
 	close(STDIN_FILENO);
 	ms_get_data()->last_return = 130;
 }
@@ -26,10 +25,10 @@ static void	heredoc_loop(t_ms_tokken **tok, t_list **lst, char *eof)
 	char	*hdp;
 
 	hdp = NULL;
+	ms_get_data()->context->last_fd = dup(STDIN_FILENO);
 	while (true)
 	{
 		hdp = readline(">");
-		dup2(ms_get_data()->context->last_fd, STDIN_FILENO);
 		if (!ft_strcmp(hdp, eof) && hdp != NULL)
 			break ;
 		if (hdp == NULL && !ms_get_data()->context->hd_ctrl_c)
@@ -42,6 +41,7 @@ static void	heredoc_loop(t_ms_tokken **tok, t_list **lst, char *eof)
 			break ;
 		ft_lstadd_back(lst, ft_lstnew(ft_strdup(hdp)));
 	}
+	dup2(ms_get_data()->context->last_fd, STDIN_FILENO);
 	free(eof);
 }
 
