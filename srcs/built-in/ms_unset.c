@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/16 15:21:49 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:00:02 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ms_unset_ex(t_ms_data *data, char *arg)
 		ft_putendl_fd(arg, 1);
 	while (tmp != NULL)
 	{
-		if (!ft_strncmp(tmp->var_name, arg, ft_strlen(tmp->var_name) - 1)
+		if (!ms_ft_strncmp(tmp->var_name, arg, ft_strlen(tmp->var_name) - 1)
 			&& (ft_strlen(arg) == ft_strlen(tmp->var_name) - 1))
 			break ;
 		if (MS_DEBUG == true && MS_DE_UNSET == true)
