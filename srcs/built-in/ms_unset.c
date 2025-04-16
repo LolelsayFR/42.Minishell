@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/16 16:00:02 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:06:10 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ms_unset_ex(t_ms_data *data, char *arg)
 	}
 	if (tmp != NULL)
 		ft_envremoveone(&data->env_lst, tmp);
+	ft_free_strtab(data->env_var);
 	data->env_var = env_to_tab(data->env_lst);
 	return (data->last_return = 0, 0);
 }
