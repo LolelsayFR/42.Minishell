@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 09:52:48 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:50:02 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	replace_middle(char **middle)
 	*middle = result;
 }
 
-static int	tokken_var_placer(char **str, t_pars_args *arg)
+int	var_placer(char **str, t_pars_args *arg)
 {
 	char		*begin;
 	char		*middle;
@@ -70,45 +70,35 @@ static int	tokken_var_placer(char **str, t_pars_args *arg)
 	(ft_strcat(&begin, ending), free(ending));
 	ft_alist_add_back(begin);
 	*str = begin;
-	arg->i += ft_strlen(middle) - 1;
-	if ((*str)[arg->i] == '$')
-		arg->i++;
-	if (!(*str)[0])
-		return (free(middle), 1);
-	return (free(middle), 0);
+	printf(RED"%s = %ld"RES, middle, ft_strlen(middle));
+	arg->len = (int)ft_strlen(middle);
+	return (free(middle), arg->len - 1);
 }
 
-static char	*tokken_unquote(char *str, char *temp, t_pars_args arg)
+static void	tokken_unquote(char **str, t_pars_args arg)
 {
-	while (str[0] && str[arg.i])
+	while (*str != NULL && (*str)[arg.i])
 	{
-		if (str[arg.i] == '"' && arg.quote % 2 == 0)
+		if ((*str)[arg.i] == '"' && arg.quote % 2 == 0)
 		{
-			temp = ft_substr_lst(str, arg.i + 1, ft_strlen(str) - arg.i);
-			str[arg.i] = '\0';
-			str = ft_strjoin_lst(str, temp);
+			(*str) = pars_injector((*str), NULL, &arg);
 			arg.d_quote++;
 		}
-		else if (str[arg.i] == '\'' && arg.d_quote % 2 == 0)
+		else if ((*str)[arg.i] == '\'' && arg.d_quote % 2 == 0)
 		{
-			temp = ft_substr_lst(str, arg.i + 1, ft_strlen(str) - arg.i);
-			str[arg.i] = '\0';
-			str = ft_strjoin_lst(str, temp);
+			(*str) = pars_injector((*str), NULL, &arg);
 			arg.quote++;
 		}
-		else
-			if (str[++arg.i - 1] == '$' && (str[arg.i] == '?'
-					|| str[arg.i] == '_'
-					|| str[arg.i] == '$' || ft_isalnum(str[arg.i])))
-				if (tokken_var_placer(&str, &arg))
-					arg.i++;
+		else if ((*str)[++arg.i - 1] == '$' && ((*str)[arg.i] == '?'
+				|| (*str)[arg.i] == '_' || (*str)[arg.i] == '$'
+				|| ft_isalnum((*str)[arg.i])))
+			arg.i += var_placer(str, &arg);
+		arg.i++;
 	}
-	return (ft_strdup(str));
 }
 
 char	*tokken_cleaner(char *str, int *flag, int type)
 {
-	char		*result;
 	char		*trim;
 	t_pars_args	arg;
 
@@ -116,12 +106,16 @@ char	*tokken_cleaner(char *str, int *flag, int type)
 	trim = ft_strtrim(str, "<> ");
 	free(str);
 	if (ft_is_only_quote_sp(trim))
+	{
+		free(trim);
+		trim = NULL;
 		*flag = EMPTY_QUOTE;
+	}
 	else
 		*flag = NONE;
-	if (type == H_D)
-		return (trim);
-	result = tokken_unquote(trim, NULL, arg);
-	free(trim);
-	return (result);
+	if (type != H_D)
+		tokken_unquote(&trim, arg);
+	if (trim == NULL)
+		trim = ft_strdup("");
+	return (trim);
 }
