@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:20:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 12:21:55 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 12:29:15 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	env_export(char *name, char *content, t_env_lst **head)
 {
-	t_env_lst       *new;
-	t_env_lst       *tmp;
+	t_env_lst	*new;
+	t_env_lst	*tmp;
 
 	if (ft_strlen(content) == 0)
 		(free(content), content = NULL);
