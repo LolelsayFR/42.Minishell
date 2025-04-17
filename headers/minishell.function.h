@@ -6,9 +6,10 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/17 18:40:23 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:41:12 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_FUNCTION_H
 # define MINISHELL_FUNCTION_H
@@ -121,6 +122,7 @@ char		*str_unquote(char *str);
 void		env_export(char *name, char *content, t_env_lst **head);
 char		*pars_injector(char *str, char *temp, t_pars_args *arg);
 void		env_export(char *name, char *content, t_env_lst **head);
+char		*pars_injector(char *str, char *temp, t_pars_args *arg);
 
 #endif
 /* ************************************************************************** */
