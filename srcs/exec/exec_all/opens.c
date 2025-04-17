@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:00:40 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 16:04:27 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:17:19 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int	infile_open(int infile, int type, char *file)
 	infile = open(file, O_RDONLY);
 	if (infile == -1)
 		return (-2);
+	if (type == H_D)
+		unlink(file);
 	return (infile);
 }

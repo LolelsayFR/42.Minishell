@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 10:28:43 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:17:48 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,7 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 
 	o_data = data_init();
 	o_data->tokken = tokkens->content;
-	o_data->outf = find_one_outfile(tokkens);
-	if (o_data->outf == -1)
-		return (free_data(o_data), -1);
-	o_data->inf = find_one_infile(tokkens);
-	if (o_data->inf == -1)
+	if (find_files(o_data, tokkens))
 		return (free_data(o_data), -1);
 	tokkens = find_cmd(tokkens);
 	if (tokkens == NULL)
@@ -86,5 +82,5 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 		exec_one_built_in(data, o_data, cmd);
 	else
 		exec_cmd(cmd, data->env_var);
-	return (unlink_all(), check_standard(1), free_data(o_data), 0);
+	return (check_standard(1), free_data(o_data), 0);
 }

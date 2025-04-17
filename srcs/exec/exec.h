@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 10:29:20 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:12:06 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ void		exec_close(t_ex_data *ex_data, char **tab, int status, int err);
 
 //Part of exec_one
 
-int			find_one_infile(t_list *tokkens);
-int			find_one_outfile(t_list *tokkens);
+void		find_one_infile(t_one_data *o_data, t_ms_tokken *tokken);
+void		find_one_outfile(t_one_data *o_data, t_ms_tokken *tokken);
 t_list		*find_cmd(t_list *tokkens);
 void		free_tab_err(char **tab);
+int			find_files(t_one_data *o_data, t_list *tokkens);
 
 void		choose_files(int infile, int outfile);
 
