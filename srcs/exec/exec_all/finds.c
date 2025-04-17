@@ -6,28 +6,22 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 13:18:49 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:28:44 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	find_outfile(int *pipe)
+int	find_outfile(int outfile, int *pipe)
 {
-	int	outfile;
-
-	outfile = -1;
-	if (outfile != -1)
+	if (outfile != 1)
 		return (close(pipe[1]), outfile);
 	return (close(pipe[0]), pipe[1]);
 }
 
-int	find_infile(int *pipe)
+int	find_infile(int infile, int *pipe)
 {
-	int	infile;
-
-	infile = -1;
-	if (infile != -1)
+	if (infile != 0)
 	{
 		if (pipe != NULL)
 			close(pipe[0]);

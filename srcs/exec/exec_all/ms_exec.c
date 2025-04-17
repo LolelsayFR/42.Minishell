@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/17 18:39:58 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:41:56 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,27 @@ void	exec_built_in(t_ms_tokken *tokken, t_ms_data *data,
 	ms_close(data->last_return, data);
 }
 
-int     finds_files(t_ex_data *ex_data, t_list *tokkens, int *pi, int id)
+int	finds_files(t_ex_data *ex_data, t_list *tokkens, int *pi, int id)
 {
-	t_ms_tokken     *tokken;
+	t_ms_tokken	*tokken;
 
-	while (tokkens != NULL)
+	tokken = tokkens->content;
+	while (tokkens != NULL && tokken->id == id)
 	{
 		tokken = tokkens->content;
-		if (tokken->id != id)
-			break ;
 		if (tokken->type == INF || tokken->type == H_D)
-			ex_data->file[0] = find_infile(ex_data->prev_pi);
+			ex_data->file[0] = infile_open(ex_data->file[0],
+					tokken->type, tokken->content);
 		else if (tokken->type == OUTF_R || tokken->type == OUTF_A)
-			ex_data->file[1] = find_outfile(pi);
-		if (ex_data->file[0] == -1 || ex_data->file[1] == -1)
- 			return (ft_printfd(2, "%s: No such file or directory\n",
+			ex_data->file[1] = outfile_open(ex_data->file[1],
+					tokken->type, tokken->content);
+		if (ex_data->file[0] == -2 || ex_data->file[1] == -2)
+			return (ft_printfd(2, "%s: No such file or directory\n",
 					tokken->content), -1);
 		tokkens = tokkens->next;
 	}
+	ex_data->file[1] = find_outfile(ex_data->file[1], pi);
+	ex_data->file[0] = find_infile(ex_data->file[0], ex_data->prev_pi);
 	return (0);
 }
 
@@ -60,7 +63,8 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data, int *pi)
 
 	data = ms_get_data();
 	(*ex_data)->prev_pi = find_previous_pipe((*ex_data), pi);
-	finds_files((*ex_data), (*ex_data)->save, pi, tokken->id);
+	if (finds_files((*ex_data), (*ex_data)->save, pi, tokken->id) == -1)
+		exec_close((*ex_data), NULL, 2, 0);
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)

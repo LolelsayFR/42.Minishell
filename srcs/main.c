@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/17 14:51:30 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:36:48 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	minishell_main_loop(t_ms_data *data)
 		{
 			if (find_nb_cmd(data->tokkens) == 1)
 				exec_one(data, data->tokkens);
-			else
+			else if (find_nb_cmd(data->tokkens) > 1)
 				ms_exec(data, data->tokkens);
 		}
 		else
