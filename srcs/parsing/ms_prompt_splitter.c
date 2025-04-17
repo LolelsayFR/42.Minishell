@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 09:24:11 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:36:46 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,33 @@ char	**prompt_split(t_ms_data *data)
 	ft_strncat(&result[a.tok], data->prompt + a.start, a.len);
 	result[data->context->nb_tkn + 1] = NULL;
 	return (result);
+}
+
+bool	tokkens_checker(t_list *lst, t_ms_data *data)
+{
+	t_ms_tokken	*tokken;
+	t_ms_tokken	*tokken_next;
+
+	tokken = (t_ms_tokken *)lst->content;
+	if (tokken->id != 0 || (tokken->content == NULL
+			&& tokken->flag != EMPTY_QUOTE))
+		return (false);
+	while (lst && lst->next)
+	{
+		tokken = (t_ms_tokken *)lst->content;
+		tokken_next = (t_ms_tokken *)lst->next->content;
+		if (tokken_next->id - tokken->id > 1 || (tokken->content == NULL
+				&& tokken->flag != EMPTY_QUOTE))
+			return (false);
+		lst = lst->next;
+	}
+	if (ft_lstsize(data->tokkens) > 1)
+		ft_lstremoveone(&data->tokkens,
+			ft_lstlast(data->tokkens), tokken_destructor);
+	else
+	{
+		ft_lstclear(&data->tokkens, tokken_destructor);
+		data->tokkens = NULL;
+	}
+	return (true);
 }
