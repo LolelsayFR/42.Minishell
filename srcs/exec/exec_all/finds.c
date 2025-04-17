@@ -6,11 +6,31 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 11:00:05 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:28:44 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
+
+int	find_outfile(int outfile, int *pipe)
+{
+	if (outfile != 1)
+		return (close(pipe[1]), outfile);
+	return (close(pipe[0]), pipe[1]);
+}
+
+int	find_infile(int infile, int *pipe)
+{
+	if (infile != 0)
+	{
+		if (pipe != NULL)
+			close(pipe[0]);
+		return (infile);
+	}
+	if (pipe == NULL)
+		return (0);
+	return (close(pipe[1]), pipe[0]);
+}
 
 int	*find_previous_pipe(t_ex_data *data, int *pipe)
 {

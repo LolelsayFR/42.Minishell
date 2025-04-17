@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:49:29 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 11:11:28 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 12:54:45 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	find_files(t_one_data *o_data, t_list *tokkens)
 		else if (tokken->type == OUTF_R || tokken->type == OUTF_A)
 			find_one_outfile(o_data, tokken);
 		if (o_data->inf == -1 || o_data->outf == -1)
-			return (-1);
+			return (ft_printfd(2, "%s: No such file or directory\n",
+					tokken->content), -1);
 		tokkens = tokkens->next;
 	}
 	return (0);
