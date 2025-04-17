@@ -6,29 +6,29 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 10:12:56 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:28:43 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-void	exec_one_built_in(t_ms_data *data, t_ms_tokken *tokken, char **cmd)
+void	exec_one_built_in(t_ms_data *data, t_one_data *o_data, char **cmd)
 {
 	ft_free_strtab(cmd);
-	if (ft_strncmp(tokken->content, "echo\0", 5) == 0)
-		do_echo(data, tokken);
-	else if (ft_strncmp(tokken->content, "pwd\0", 4) == 0)
+	if (ft_strncmp(o_data->tokken->content, "echo\0", 5) == 0)
+		do_echo(data, o_data->tokken);
+	else if (ft_strncmp(o_data->tokken->content, "pwd\0", 4) == 0)
 		ms_pwd(data);
-	else if (ft_strncmp(tokken->content, "export\0", 7) == 0)
-		do_export(data, tokken);
-	else if (ft_strncmp(tokken->content, "unset\0", 6) == 0)
-		do_unset(data, tokken);
-	else if (ft_strncmp(tokken->content, "env\0", 4) == 0)
+	else if (ft_strncmp(o_data->tokken->content, "export\0", 7) == 0)
+		do_export(data, o_data->tokken);
+	else if (ft_strncmp(o_data->tokken->content, "unset\0", 6) == 0)
+		do_unset(data, o_data->tokken);
+	else if (ft_strncmp(o_data->tokken->content, "env\0", 4) == 0)
 		ms_env(data);
-	else if (ft_strncmp(tokken->content, "exit\0", 5) == 0)
-		do_exit(data, tokken);
-	else if (ft_strncmp(tokken->content, "cd\0", 3) == 0)
-		do_cd(data, tokken);
+	else if (ft_strncmp(o_data->tokken->content, "exit\0", 5) == 0)
+		do_exit(data, o_data);
+	else if (ft_strncmp(o_data->tokken->content, "cd\0", 3) == 0)
+		do_cd(data, o_data->tokken);
 }
 
 void	exec_cmd(char **cmd, char **env)
@@ -73,7 +73,7 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 		return (free_data(o_data), -1);
 	tokkens = find_cmd(tokkens);
 	if (tokkens == NULL)
-		return (-1);
+		return (free_data(o_data), -1);
 	cmd = tokken_id_join(data->tokkens, o_data->tokken->id);
 	if (o_data->tokken->type != B_IN)
 		cmd[0] = add_path(data, cmd[0]);
@@ -83,7 +83,7 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 	check_standard(0);
 	choose_files(o_data->inf, o_data->outf);
 	if (o_data->tokken->type == B_IN)
-		exec_one_built_in(data, o_data->tokken, cmd);
+		exec_one_built_in(data, o_data, cmd);
 	else
 		exec_cmd(cmd, data->env_var);
 	return (unlink_all(), check_standard(1), free_data(o_data), 0);

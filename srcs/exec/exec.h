@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 09:53:51 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:29:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		do_echo(t_ms_data *data, t_ms_tokken *tokken);
 void		do_unset(t_ms_data *data, t_ms_tokken *tokken);
 void		do_export(t_ms_data *data, t_ms_tokken *tokken);
 void		do_cd(t_ms_data *data, t_ms_tokken *tokken);
-void		do_exit(t_ms_data *data, t_ms_tokken *tokken);
+void		do_exit(t_ms_data *data, t_one_data *o_data);
 
 t_ex_data	*exec_init(t_list *tokkens);
 void		exec_end(t_ex_data *data);
