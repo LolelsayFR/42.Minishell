@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/17 14:50:02 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:58:21 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,16 @@ int	var_placer(char **str, t_pars_args *arg)
 	if (middle != NULL)
 		(ft_strcat(&begin, middle));
 	(ft_strcat(&begin, ending), free(ending));
-	ft_alist_add_back(begin);
+	free(*str);
 	*str = begin;
-	printf(RED"%s = %ld"RES, middle, ft_strlen(middle));
 	arg->len = (int)ft_strlen(middle);
-	return (free(middle), arg->len - 1);
+	return (free(middle), arg->len - 2);
 }
 
-static void	tokken_unquote(char **str, t_pars_args arg)
+static char	*tokken_unquote(char **str, t_pars_args arg)
 {
+	char	*result;
+
 	while (*str != NULL && (*str)[arg.i])
 	{
 		if ((*str)[arg.i] == '"' && arg.quote % 2 == 0)
@@ -95,12 +96,16 @@ static void	tokken_unquote(char **str, t_pars_args arg)
 			arg.i += var_placer(str, &arg);
 		arg.i++;
 	}
+	result = ft_strdup(*str);
+	free(*str);
+	return (result);
 }
 
 char	*tokken_cleaner(char *str, int *flag, int type)
 {
 	char		*trim;
 	t_pars_args	arg;
+	char		*result;
 
 	ft_bzero(&arg, sizeof(t_pars_args));
 	trim = ft_strtrim(str, "<> ");
@@ -114,8 +119,6 @@ char	*tokken_cleaner(char *str, int *flag, int type)
 	else
 		*flag = NONE;
 	if (type != H_D)
-		tokken_unquote(&trim, arg);
-	if (trim == NULL)
-		trim = ft_strdup("");
-	return (trim);
+		result = tokken_unquote(&trim, arg);
+	return (result);
 }
