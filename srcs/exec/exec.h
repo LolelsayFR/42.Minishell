@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 17:46:01 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:45:54 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ typedef struct s_ex_data
 	int			nb_cmd;
 	int			i;
 }	t_ex_data;
+
+typedef struct s_one_data
+{
+	int			inf;
+	int			outf;
+	t_ms_tokken	*tokken;
+}	t_one_data;
 
 int			outfile_open(int outfile, int type, char *file);
 int			infile_open(int outfile, int type, char *file);
@@ -59,7 +66,7 @@ void		do_echo(t_ms_data *data, t_ms_tokken *tokken);
 void		do_unset(t_ms_data *data, t_ms_tokken *tokken);
 void		do_export(t_ms_data *data, t_ms_tokken *tokken);
 void		do_cd(t_ms_data *data, t_ms_tokken *tokken);
-void		do_exit(t_ms_data *data, t_ms_tokken *tokken);
+void		do_exit(t_ms_data *data, t_one_data *o_data);
 
 t_ex_data	*exec_init(t_list *tokkens);
 void		exec_end(t_ex_data *data);
@@ -68,13 +75,17 @@ void		exec_close(t_ex_data *ex_data, char **tab, int status, int err);
 
 //Part of exec_one
 
-int			find_one_infile(t_list *tokkens);
-int			find_one_outfile(t_list *tokkens);
+void		find_one_infile(t_one_data *o_data, t_ms_tokken *tokken);
+void		find_one_outfile(t_one_data *o_data, t_ms_tokken *tokken);
 t_list		*find_cmd(t_list *tokkens);
 void		free_tab_err(char **tab);
+int			find_files(t_one_data *o_data, t_list *tokkens);
 
 void		choose_files(int infile, int outfile);
 
 char		*ft_strjointab(char **tab);
+
+t_one_data	*data_init(void);
+void		free_data(t_one_data *data);
 
 #endif

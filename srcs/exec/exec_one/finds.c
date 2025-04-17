@@ -6,54 +6,46 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:49:29 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 13:53:34 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:11:28 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-int	find_one_infile(t_list *tokkens)
+int	find_files(t_one_data *o_data, t_list *tokkens)
 {
 	t_ms_tokken	*tokken;
-	int			infile;
 
-	infile = 0;
 	while (tokkens != NULL)
 	{
 		tokken = tokkens->content;
 		if (tokken->type == INF || tokken->type == H_D)
-		{
-			if (infile != 0)
-				close(infile);
-			infile = infile_open(infile, tokken->type, tokken->content);
-			if (infile == -2)
-				return (-1);
-		}
+			find_one_infile(o_data, tokken);
+		else if (tokken->type == OUTF_R || tokken->type == OUTF_A)
+			find_one_outfile(o_data, tokken);
+		if (o_data->inf == -1 || o_data->outf == -1)
+			return (-1);
 		tokkens = tokkens->next;
 	}
-	return (infile);
+	return (0);
 }
 
-int	find_one_outfile(t_list *tokkens)
+void	find_one_infile(t_one_data *o_data, t_ms_tokken *tokken)
 {
-	t_ms_tokken	*tokken;
-	int			outfile;
+	if (o_data->inf != 0)
+		close(o_data->inf);
+	o_data->inf = infile_open(o_data->inf, tokken->type, tokken->content);
+	if (o_data->inf == -2)
+		o_data->inf = -1;
+}
 
-	outfile = 1;
-	while (tokkens != NULL)
-	{
-		tokken = tokkens->content;
-		if (tokken->type == OUTF_R || tokken->type == OUTF_A)
-		{
-			if (outfile != 1)
-				close(outfile);
-			outfile = outfile_open(outfile, tokken->type, tokken->content);
-			if (outfile == -2)
-				return (-1);
-		}
-		tokkens = tokkens->next;
-	}
-	return (outfile);
+void	find_one_outfile(t_one_data *o_data, t_ms_tokken *tokken)
+{
+	if (o_data->outf != 1)
+		close(o_data->outf);
+	o_data->outf = outfile_open(o_data->outf, tokken->type, tokken->content);
+	if (o_data->outf == -2)
+		o_data->outf = -1;
 }
 
 t_list	*find_cmd(t_list *tokkens)

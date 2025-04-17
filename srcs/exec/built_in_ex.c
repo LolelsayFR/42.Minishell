@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:53:41 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 17:22:43 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:29:10 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,12 @@ void	do_cd(t_ms_data *data, t_ms_tokken *tokken)
 	ft_free_strtab(tab);
 }
 
-void	do_exit(t_ms_data *data, t_ms_tokken *tokken)
+void	do_exit(t_ms_data *data, t_one_data *o_data)
 {
 	char	**tab;
 
-	tab = tokken_id_join(data->tokkens, tokken->id);
+	tab = tokken_id_join(data->tokkens, o_data->tokken->id);
+	free_data(o_data);
 	ms_exit(data, tab);
 	ft_free_strtab(tab);
 }

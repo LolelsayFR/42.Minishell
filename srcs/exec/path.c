@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 08:56:49 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:45:38 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ char	*add_path(t_ms_data *data, char *cmd)
 	i = 0;
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
-	env = ft_split(get_env(data, "PATH") + 5, ':');
+	temp = get_env(data, "PATH");
+	if (temp == NULL || temp[0] == '\0')
+		return (ft_printfd(2, LANG_PREFIX "%s: command not found\n",
+				cmd), NULL);
+	env = ft_split(temp + 5, ':');
 	while (env != NULL && env[i] != NULL)
 	{
 		temp = ft_strjoin(env[i], "/");
