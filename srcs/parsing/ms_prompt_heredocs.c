@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/17 13:44:09 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:39:43 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 	free(tmp);
 	tmp = ft_strjoin(data->init_pwd, name);
 	free(name);
-	heredoc_loop(tokken, heredoc_unquote((*tokken)->content), open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644));
+	heredoc_loop(tokken, heredoc_unquote((*tokken)->content),
+		open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644));
 	(*tokken)->content = tmp;
-	rl_redisplay();
 	ms_sig_init(ms_get_data());
 }

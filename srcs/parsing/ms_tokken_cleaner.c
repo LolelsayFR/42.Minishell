@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/17 14:50:02 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:47:47 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,17 @@ int	var_placer(char **str, t_pars_args *arg)
 		ending = NULL;
 	else
 		ending = ft_substr(*str, arg->i + arg->count, ft_strlen(*str));
+	free(*str);
 	replace_middle(&middle);
 	if (middle != NULL)
 		(ft_strcat(&begin, middle));
 	(ft_strcat(&begin, ending), free(ending));
-	ft_alist_add_back(begin);
 	*str = begin;
-	printf(RED"%s = %ld"RES, middle, ft_strlen(middle));
 	arg->len = (int)ft_strlen(middle);
-	return (free(middle), arg->len - 1);
+	return (free(middle), arg->len - 2);
 }
 
-static void	tokken_unquote(char **str, t_pars_args arg)
+static char	*tokken_unquote(char **str, t_pars_args arg)
 {
 	while (*str != NULL && (*str)[arg.i])
 	{
@@ -89,18 +88,22 @@ static void	tokken_unquote(char **str, t_pars_args arg)
 			(*str) = pars_injector((*str), NULL, &arg);
 			arg.quote++;
 		}
-		else if ((*str)[++arg.i - 1] == '$' && ((*str)[arg.i] == '?'
+		else if (arg.i > 1 && (*str)[arg.i - 1] == '$' && ((*str)[arg.i] == '?'
 				|| (*str)[arg.i] == '_' || (*str)[arg.i] == '$'
 				|| ft_isalnum((*str)[arg.i])))
 			arg.i += var_placer(str, &arg);
 		arg.i++;
 	}
+	if (*str == NULL)
+		return (ft_strdup("\0"));
+	return (*str);
 }
 
 char	*tokken_cleaner(char *str, int *flag, int type)
 {
 	char		*trim;
 	t_pars_args	arg;
+	char		*result;
 
 	ft_bzero(&arg, sizeof(t_pars_args));
 	trim = ft_strtrim(str, "<> ");
@@ -114,8 +117,8 @@ char	*tokken_cleaner(char *str, int *flag, int type)
 	else
 		*flag = NONE;
 	if (type != H_D)
-		tokken_unquote(&trim, arg);
-	if (trim == NULL)
-		trim = ft_strdup("");
-	return (trim);
+		result = tokken_unquote(&trim, arg);
+	if (type == H_D && *flag == EMPTY_QUOTE)
+		return (ft_strdup("\0"));
+	return (result);
 }
