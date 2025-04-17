@@ -6,38 +6,11 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/16 17:22:26 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 12:19:50 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-
-static void	new_env_export(char *name, char *content, t_env_lst **head)
-{
-	t_env_lst	*new;
-	t_env_lst	*tmp;
-
-	if (ft_strlen(content) == 0)
-		(free(content), content = NULL);
-	new = NULL;
-	tmp = *head;
-	while (tmp->next != NULL && ft_strcmp(tmp->var_name, name))
-		tmp = tmp->next;
-	if (ft_strcmp(tmp->var_name, name))
-	{
-		new = ft_calloc(1, sizeof(t_env_lst));
-		tmp->next = new;
-		new->next = NULL;
-		new->var_name = name;
-		if (content == NULL)
-			new->var_cont = NULL;
-		else
-			new->var_cont = ft_strdup(content);
-	}
-	else if (content != NULL)
-		(tmp->var_cont = ft_strdup(content));
-	free(content);
-}
 
 static void	print_export(t_env_lst *head)
 {
@@ -77,7 +50,7 @@ int	ms_export(t_ms_data *data, char **av)
 		here = name_convertor(a.len, av, i);
 		while (av[i][a.len + a.count])
 			a.count++;
-		new_env_export(ft_substr(here, 0, a.len + 1),
+		env_export(ft_substr(here, 0, a.len + 1),
 			ft_substr(av[i], a.len + 1, a.count), &data->env_lst);
 		free(here);
 		i++;

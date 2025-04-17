@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 15:22:33 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 12:21:11 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ bool		ft_is_only_quote_sp(char *str);
 char		**args_split(int i, char *str);
 int			ms_ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*str_unquote(char *str);
+void		env_export(char *name, char *content, t_env_lst **head);
 
 #endif
 /* ************************************************************************** */
