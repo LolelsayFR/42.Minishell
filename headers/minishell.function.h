@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #ifndef MINISHELL_FUNCTION_H
 # define MINISHELL_FUNCTION_H
 
@@ -51,6 +52,7 @@ void		ms_close(unsigned char exit_value, t_ms_data *data);
 /* ************************************************************************** */
 
 bool		ms_sig_init(t_ms_data *data);
+void		heredoc_sig(int sig);
 
 /* ************************************************************************** */
 /*  Minishell Prefix functions                                                */
@@ -71,6 +73,7 @@ void		tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id);
 bool		tokkens_checker(t_list *lst, t_ms_data *data);
 char		*tokken_cleaner(char *str, int *flag, int type);
 void		heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken);
+int			var_placer(char **str, t_pars_args *arg);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */
@@ -116,6 +119,9 @@ bool		ft_is_only_quote_sp(char *str);
 char		**args_split(int i, char *str);
 int			ms_ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*str_unquote(char *str);
+char		*pars_injector(char *str, char *temp, t_pars_args *arg);
+void		env_export(char *name, char *content, t_env_lst **head);
+char		*pars_injector(char *str, char *temp, t_pars_args *arg);
 void		env_export(char *name, char *content, t_env_lst **head);
 
 #endif

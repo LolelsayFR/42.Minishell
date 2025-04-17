@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 13:50:08 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 09:13:29 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,12 @@ bool	ms_sig_init(t_ms_data *data)
 	signal(SIGSEGV, ms_sig_handler);
 	(void) data;
 	return (true);
+}
+
+void	heredoc_sig(int sig)
+{
+	(void)sig;
+	ms_get_data()->context->hd_ctrl_c = true;
+	close(STDIN_FILENO);
+	ms_get_data()->last_return = 130;
 }

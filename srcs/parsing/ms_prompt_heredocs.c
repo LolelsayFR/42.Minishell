@@ -6,23 +6,62 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 17:36:14 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:44:09 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static void	heredoc_sig(int sig)
+static char	*heredoc_expand(char *str)
 {
-	(void)sig;
-	ms_get_data()->context->hd_ctrl_c = true;
-	close(STDIN_FILENO);
-	ms_get_data()->last_return = 130;
+	t_pars_args	arg;
+
+	ft_bzero(&arg, sizeof(t_pars_args));
+	while (str[0] && str[arg.i])
+	{
+		if (str[arg.i] == '"' && arg.quote % 2 == 0)
+			arg.d_quote++;
+		else if (str[arg.i] == '\'' && arg.d_quote % 2 == 0)
+			arg.quote++;
+		else if (str[++arg.i - 1] == '$' && (str[arg.i] == '?'
+				|| str[arg.i] == '_'
+				|| str[arg.i] == '$' || ft_isalnum(str[arg.i])))
+			arg.i += var_placer(&str, &arg);
+	}
+	return (ft_strdup(str));
 }
 
-static void	heredoc_loop(t_ms_tokken **tok, t_list **lst, char *eof)
+static char	*heredoc_unquote(char *str)
+{
+	t_pars_args	arg;
+
+	ft_bzero(&arg, sizeof(t_pars_args));
+	if (str[0] == '$' && str[1] == '\0')
+		return (str);
+	while (str[arg.i])
+	{
+		if (str[arg.i] == '"' && arg.quote % 2 == 0)
+		{
+			str = pars_injector(str, NULL, &arg);
+			arg.d_quote++;
+		}
+		else if (str[arg.i] == '\'' && arg.d_quote % 2 == 0)
+		{
+			str = pars_injector(str, NULL, &arg);
+			arg.quote++;
+		}
+		else if (str[arg.i] == '$' && ft_strchr("\"'", str[arg.i + 1]) 
+			&& (arg.d_quote + arg.quote) % 2 == 0)
+			str = pars_injector(str, NULL, &arg);
+		arg.i++;
+	}
+	return (str);
+}
+
+static void	heredoc_loop(t_ms_tokken **tok, char *eof, int fd)
 {
 	char	*hdp;
+	char	*expand;
 
 	hdp = NULL;
 	ms_get_data()->context->last_fd = dup(STDIN_FILENO);
@@ -39,22 +78,19 @@ static void	heredoc_loop(t_ms_tokken **tok, t_list **lst, char *eof)
 		}
 		else if (ms_get_data()->context->hd_ctrl_c)
 			break ;
-		ft_lstadd_back(lst, ft_lstnew(ft_strdup(hdp)));
+		expand = heredoc_expand(hdp);
+		ft_putendl_fd(expand, fd);
+		free(expand);
 	}
+	close(fd);
 	dup2(ms_get_data()->context->last_fd, STDIN_FILENO);
 	free(eof);
-}
-
-static void	ms_putherdoc(char *str)
-{
-	ft_putendl_fd(str, ms_get_data()->context->last_fd);
 }
 
 void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 {
 	char	*name;
 	char	*tmp;
-	t_list	*lst;
 
 	data->context->heredocs++;
 	signal(SIGINT, heredoc_sig);
@@ -64,12 +100,8 @@ void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 	free(tmp);
 	tmp = ft_strjoin(data->init_pwd, name);
 	free(name);
-	lst = NULL;
-	heredoc_loop(tokken, &lst, str_unquote((*tokken)->content));
-	data->context->last_fd = open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	ft_lstiter(lst, (void *)ms_putherdoc);
+	heredoc_loop(tokken, heredoc_unquote((*tokken)->content), open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644));
 	(*tokken)->content = tmp;
-	ft_lstclear(&lst, free);
 	rl_redisplay();
 	ms_sig_init(ms_get_data());
 }

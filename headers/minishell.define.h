@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 17:07:07 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:44:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_ms_context
 	int		nb_cmd;
 	int		nb_tkn;
 	int		last_fd;
+	bool	hd_is_expand;
 	bool	hd_ctrl_c;
 }	t_ms_context;
 
