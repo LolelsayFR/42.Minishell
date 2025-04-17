@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 11:17:48 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:53:46 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void	exec_one_built_in(t_ms_data *data, t_one_data *o_data, char **cmd)
 	else if (ft_strncmp(o_data->tokken->content, "env\0", 4) == 0)
 		ms_env(data);
 	else if (ft_strncmp(o_data->tokken->content, "exit\0", 5) == 0)
-		do_exit(data, o_data);
+		return (do_exit(data, o_data), (void)1);
 	else if (ft_strncmp(o_data->tokken->content, "cd\0", 3) == 0)
 		do_cd(data, o_data->tokken);
+	free_data(o_data);
 }
 
 void	exec_cmd(char **cmd, char **env)
@@ -82,5 +83,5 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 		exec_one_built_in(data, o_data, cmd);
 	else
 		exec_cmd(cmd, data->env_var);
-	return (check_standard(1), free_data(o_data), 0);
+	return (check_standard(1), 0);
 }
