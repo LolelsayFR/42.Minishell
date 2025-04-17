@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/16 17:45:49 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 12:08:22 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ void	exec_built_in(t_ms_tokken *tokken, t_ms_data *data,
 		do_echo(data, tokken);
 	else if (ft_strncmp(tokken->content, "pwd\0", 4) == 0)
 		ms_pwd(data);
+	else if (ft_strncmp(tokken->content, "export\0", 7) == 0)
+		do_export(data, tokken);
 	else if (ft_strncmp(tokken->content, "unset\0", 6) == 0)
 		do_unset(data, tokken);
 	else if (ft_strncmp(tokken->content, "env\0", 4) == 0)
 		ms_env(data);
+	else if (ft_strncmp(tokken->content, "cd\0", 3) == 0)
+		do_cd(data, tokken);
 	free_ex_data((*ex_data));
 	ft_free_strtab(cmd);
 	ms_close(data->last_return, data);
