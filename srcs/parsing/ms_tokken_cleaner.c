@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/17 17:58:21 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:31:58 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int	var_placer(char **str, t_pars_args *arg)
 		ending = NULL;
 	else
 		ending = ft_substr(*str, arg->i + arg->count, ft_strlen(*str));
+	free(*str);
 	replace_middle(&middle);
 	if (middle != NULL)
 		(ft_strcat(&begin, middle));
 	(ft_strcat(&begin, ending), free(ending));
-	free(*str);
 	*str = begin;
 	arg->len = (int)ft_strlen(middle);
 	return (free(middle), arg->len - 2);
@@ -76,8 +76,6 @@ int	var_placer(char **str, t_pars_args *arg)
 
 static char	*tokken_unquote(char **str, t_pars_args arg)
 {
-	char	*result;
-
 	while (*str != NULL && (*str)[arg.i])
 	{
 		if ((*str)[arg.i] == '"' && arg.quote % 2 == 0)
@@ -90,15 +88,15 @@ static char	*tokken_unquote(char **str, t_pars_args arg)
 			(*str) = pars_injector((*str), NULL, &arg);
 			arg.quote++;
 		}
-		else if ((*str)[++arg.i - 1] == '$' && ((*str)[arg.i] == '?'
+		else if (arg.i > 1 && (*str)[arg.i - 1] == '$' && ((*str)[arg.i] == '?'
 				|| (*str)[arg.i] == '_' || (*str)[arg.i] == '$'
 				|| ft_isalnum((*str)[arg.i])))
 			arg.i += var_placer(str, &arg);
 		arg.i++;
 	}
-	result = ft_strdup(*str);
-	free(*str);
-	return (result);
+	if (*str == NULL)
+		return (ft_strdup("\0"));
+	return (*str);
 }
 
 char	*tokken_cleaner(char *str, int *flag, int type)
