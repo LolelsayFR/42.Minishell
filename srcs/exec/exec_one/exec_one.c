@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 12:28:46 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:46:17 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_one_built_in(t_ms_data *data, t_one_data *o_data, char **cmd)
 	free_data(o_data);
 }
 
-void	exec_cmd(char **cmd, char **env)
+void	exec_cmd(char **cmd, char **env, t_one_data *o_data)
 {
 	int	pid;
 
@@ -40,6 +40,7 @@ void	exec_cmd(char **cmd, char **env)
 	if (pid == 0)
 		execve(cmd[0], cmd, env);
 	waitpid(pid, NULL, 0);
+	free_data(o_data);
 	ft_free_strtab(cmd);
 }
 
@@ -67,7 +68,7 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 	o_data = data_init();
 	o_data->tokken = tokkens->content;
 	if (find_files(o_data, tokkens))
-		return (free_data(o_data), -1);
+		return (free_data(o_data),  write(1, "ici\n", 4), -1);
 	tokkens = find_cmd(tokkens);
 	if (tokkens == NULL)
 		return (free_data(o_data), -1);
@@ -82,6 +83,6 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 	if (o_data->tokken->type == B_IN)
 		exec_one_built_in(data, o_data, cmd);
 	else
-		exec_cmd(cmd, data->env_var);
+		exec_cmd(cmd, data->env_var, o_data);
 	return (check_standard(1), 0);
 }
