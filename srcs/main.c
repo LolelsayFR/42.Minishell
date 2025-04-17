@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 16:28:04 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:51:30 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,10 @@ int	minishell_main_loop(t_ms_data *data)
 	while (data->is_running == true)
 	{
 		data->prompt = readline(ms_prefix(data));
-		if (data->prompt[0] != '\0' && ft_str_is_space(data->prompt) == false)
-			add_history(data->prompt);
 		if (data->prompt == NULL)
 			break ;
-		if (!(data->prompt[0] != '\0'
-				&& ft_str_is_space(data->prompt) == false))
-			continue ;
+		if (data->prompt[0] != '\0' && ft_str_is_space(data->prompt) == false)
+			add_history(data->prompt);
 		if (prompt_handler(data) == EXIT_SUCCESS)
 		{
 			if (find_nb_cmd(data->tokkens) == 1)
