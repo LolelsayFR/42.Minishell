@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 17:12:14 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 08:56:49 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*add_path(t_ms_data *data, char *cmd)
 		free(joined);
 		i++;
 	}
+	ft_printfd(2, LANG_PREFIX "%s: command not found\n", cmd);
 	free(cmd);
 	ft_free_strtab(env);
 	return (NULL);
