@@ -6,9 +6,10 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/17 15:02:06 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:02:43 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_FUNCTION_H
 # define MINISHELL_FUNCTION_H
@@ -120,6 +121,7 @@ int			ms_ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*str_unquote(char *str);
 char		*pars_injector(char *str, char *temp, t_pars_args *arg);
 void		env_export(char *name, char *content, t_env_lst **head);
+char		*pars_injector(char *str, char *temp, t_pars_args *arg);
 
 #endif
 /* ************************************************************************** */
