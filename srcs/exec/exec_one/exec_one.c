@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 17:46:36 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:12:56 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,33 +60,31 @@ void	check_standard(int i)
 
 int	exec_one(t_ms_data *data, t_list *tokkens)
 {
-	t_ms_tokken	*tokken;
+	t_one_data	*o_data;
 	char		**cmd;
-	int			infile;
-	int			outfile;
 
-	tokken = tokkens->content;
-	outfile = find_one_outfile(tokkens);
-	if (outfile == -1)
-		return (-1);
-	infile = find_one_infile(tokkens);
-	if (infile == -1 && outfile != 1)
-		close(outfile);
-	if (infile == -1)
-		return (-1);
+	o_data = data_init();
+	o_data->tokken = tokkens->content;
+	o_data->outf = find_one_outfile(tokkens);
+	if (o_data->outf == -1)
+		return (free_data(o_data), -1);
+	o_data->inf = find_one_infile(tokkens);
+	if (o_data->inf == -1)
+		return (free_data(o_data), -1);
 	tokkens = find_cmd(tokkens);
 	if (tokkens == NULL)
 		return (-1);
-	cmd = tokken_id_join(data->tokkens, tokken->id);
-	if (tokken->type != B_IN)
+	cmd = tokken_id_join(data->tokkens, o_data->tokken->id);
+	if (o_data->tokken->type != B_IN)
 		cmd[0] = add_path(data, cmd[0]);
-	if (cmd[0] == NULL && tokken->type != B_IN)
-		return (free_tab_err(cmd), data->last_return = 1, -1);
+	if (cmd[0] == NULL && o_data->tokken->type != B_IN)
+		return (free_tab_err(cmd), data->last_return = 127, 
+			free_data(o_data), -1);
 	check_standard(0);
-	choose_files(infile, outfile);
-	if (tokken->type == B_IN)
-		exec_one_built_in(data, tokken, cmd);
+	choose_files(o_data->inf, o_data->outf);
+	if (o_data->tokken->type == B_IN)
+		exec_one_built_in(data, o_data->tokken, cmd);
 	else
 		exec_cmd(cmd, data->env_var);
-	return (unlink_all(), check_standard(1), 0);
+	return (unlink_all(), check_standard(1), free_data(o_data), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 17:46:01 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/17 09:53:51 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ typedef struct s_ex_data
 	int			nb_cmd;
 	int			i;
 }	t_ex_data;
+
+typedef struct s_one_data
+{
+	int			inf;
+	int			outf;
+	t_ms_tokken	*tokken;
+}	t_one_data;
 
 int			outfile_open(int outfile, int type, char *file);
 int			infile_open(int outfile, int type, char *file);
@@ -76,5 +83,8 @@ void		free_tab_err(char **tab);
 void		choose_files(int infile, int outfile);
 
 char		*ft_strjointab(char **tab);
+
+t_one_data	*data_init(void);
+void		free_data(t_one_data *data);
 
 #endif
