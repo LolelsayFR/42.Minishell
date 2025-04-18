@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 18:39:18 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 08:39:49 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	check_standard(int i)
 	{
 		dup2(standard[0], STDIN_FILENO);
 		dup2(standard[1], STDOUT_FILENO);
+		double_close(standard[0], standard[1]);
 	}
 }
 

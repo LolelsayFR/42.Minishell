@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 18:41:38 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 08:43:16 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ char		*ft_strjointab(char **tab);
 
 t_one_data	*data_init(void);
 void		free_data(t_one_data *data);
+void		check_standard(int i);
 
 #endif
