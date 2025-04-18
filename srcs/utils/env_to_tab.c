@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 15:20:18 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/15 18:42:40 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:44:41 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	**env_to_tab(t_env_lst *env)
 	int			y;
 	int			i;
 
+	if (env == NULL)
+		return (NULL);
 	i = 0;
 	y = env_len(env);
 	temp = env;
