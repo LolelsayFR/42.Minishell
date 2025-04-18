@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/18 08:42:12 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/18 14:36:46 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static char	*tokken_unquote(char **str, t_pars_args arg)
 			(*str) = pars_injector((*str), NULL, &arg);
 			arg.quote++;
 		}
-		else if (arg.i > 1 && (*str)[arg.i - 1] == '$' && ((*str)[arg.i] == '?'
+		else if (arg.i > 0 && (*str)[arg.i - 1] == '$' && ((*str)[arg.i] == '?'
 				|| (*str)[arg.i] == '_' || (*str)[arg.i] == '$'
 				|| ft_isalnum((*str)[arg.i])))
 			arg.i += var_placer(str, &arg);
