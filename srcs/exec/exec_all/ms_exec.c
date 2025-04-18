@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/18 13:44:48 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:30:09 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	exec_built_in(t_ms_tokken *tokken, t_ms_data *data,
 		ms_env(data);
 	else if (ft_strncmp(tokken->content, "cd\0", 3) == 0)
 		do_cd(data, tokken);
+	check_standard(4);
 	free_ex_data((*ex_data));
 	ft_free_strtab(cmd);
 	ms_close(data->last_return, data);
@@ -82,8 +83,9 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		ex_data->tokken = tokkens->content;
 		if (ex_data->tokken->type == CMD || ex_data->tokken->type == B_IN)
 		{
-			if (new_pipe(ex_data) == -1)
-				break ;
+			if (ex_data->nb_cmd - 1 < ex_data->i)
+				if (new_pipe(ex_data) == -1)
+					break ;
 			finds_files(ex_data, first_in_id(data->tokkens, ex_data->tokken->id), ex_data->tokken->id);
 			ex_data->pid[ex_data->i] = fork();
 			if (ex_data->pid[ex_data->i++] == 0)
@@ -91,6 +93,5 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		}
 		tokkens = tokkens->next;
 	}
-	check_standard(1);
-	return (exec_end(ex_data), 0);
+	return (check_standard(3), exec_end(ex_data), 0);
 }
