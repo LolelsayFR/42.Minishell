@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 08:43:16 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 13:39:54 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_ex_data
 	t_list		*save;
 	int			*pid;
 	int			*file;
-	int			*prev_pi;
+	int			*prev_pipe;
 	int			nb_cmd;
 	int			i;
 }	t_ex_data;
@@ -91,5 +91,9 @@ char		*ft_strjointab(char **tab);
 t_one_data	*data_init(void);
 void		free_data(t_one_data *data);
 void		check_standard(int i);
+
+//NEW EXEC
+
+int			new_pipe(t_ex_data *ex_data);
 
 #endif
