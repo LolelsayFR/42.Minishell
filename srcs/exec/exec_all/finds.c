@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 11:35:07 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:41:06 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	find_outfile(int outfile, int *pipe)
 {
 	if (outfile != 1)
-		return (double_close(pipe[1], pipe[0]), outfile);
+		return (close(pipe[0]), outfile);
 	return (close(pipe[0]), pipe[1]);
 }
 
@@ -30,21 +30,6 @@ int	find_infile(int infile, int *pipe)
 	if (pipe == NULL)
 		return (0);
 	return (close(pipe[1]), pipe[0]);
-}
-
-int	*find_previous_pipe(t_ex_data *data, int *pipe)
-{
-	t_pipe	*temp;
-
-	temp = data->pipes;
-	while (temp != NULL && temp->next != NULL)
-	{
-		if (temp->next->pipe[0] == pipe[0] && temp->next->pipe[1] == pipe[1])
-			return (temp->pipe);
-		//double_close(temp->pipe[0], temp->pipe[1]);
-		temp = temp->next;
-	}
-	return (NULL);
 }
 
 int	find_nb_cmd(t_list *tokkens)

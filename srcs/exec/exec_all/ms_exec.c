@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/18 15:30:09 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:40:37 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 			if (ex_data->nb_cmd - 1 < ex_data->i)
 				if (new_pipe(ex_data) == -1)
 					break ;
-			finds_files(ex_data, first_in_id(data->tokkens, ex_data->tokken->id), ex_data->tokken->id);
+			finds_files(ex_data, first_in_id(data->tokkens,
+					ex_data->tokken->id), ex_data->tokken->id);
 			ex_data->pid[ex_data->i] = fork();
 			if (ex_data->pid[ex_data->i++] == 0)
 				cmd_exec(ex_data->tokken, &ex_data);
