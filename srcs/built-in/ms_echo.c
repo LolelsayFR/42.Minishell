@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/18 11:00:13 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 13:41:04 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int	ms_echo(char *str, int arg)
 {
-	//int	i;
 	int	k;
 
-	//i = 0;
 	k = 0;
 	if (str == NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 13:04:35 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 14:08:48 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,6 @@ void	exec_cmd(char **cmd, char **env, t_one_data *o_data)
 	ft_free_strtab(cmd);
 }
 
-void	check_standard(int i)
-{
-	static int	standard[2];
-
-	if (i == 0)
-	{
-		standard[0] = dup(STDIN_FILENO);
-		standard[1] = dup(STDOUT_FILENO);
-	}
-	else if (i == 1)
-	{
-		dup2(standard[0], STDIN_FILENO);
-		dup2(standard[1], STDOUT_FILENO);
-		double_close(standard[0], standard[1]);
-	}
-}
-
 int	exec_one(t_ms_data *data, t_list *tokkens)
 {
 	t_one_data	*o_data;
@@ -86,5 +69,5 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 		exec_one_built_in(data, o_data, cmd);
 	else
 		exec_cmd(cmd, data->env_var, o_data);
-	return (check_standard(1), 0);
+	return (check_standard(3), 0);
 }

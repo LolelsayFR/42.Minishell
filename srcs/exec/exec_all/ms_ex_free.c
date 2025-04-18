@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 11:32:19 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 13:45:43 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	free_ex_data(t_ex_data *data)
 		close(data->file[0]);
 	if (data->file[1] != 1)
 		close(data->file[1]);
+	free(data->prev_pipe);
 	free(data->file);
 	free(data->pid);
 	free(data);
