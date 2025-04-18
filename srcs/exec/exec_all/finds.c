@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 18:28:44 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:43:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	find_outfile(int outfile, int *pipe)
 {
 	if (outfile != 1)
-		return (close(pipe[1]), outfile);
+		return (double_close(pipe[1], pipe[0]), outfile);
 	return (close(pipe[0]), pipe[1]);
 }
 

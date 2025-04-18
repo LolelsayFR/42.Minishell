@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/17 18:41:56 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:47:27 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data, int *pi)
 
 	data = ms_get_data();
 	(*ex_data)->prev_pi = find_previous_pipe((*ex_data), pi);
-	if (finds_files((*ex_data), (*ex_data)->save, pi, tokken->id) == -1)
-		exec_close((*ex_data), NULL, 2, 0);
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
 		exec_close((*ex_data), cmd, 2, 1);
+	if (finds_files((*ex_data), (*ex_data)->save, pi, tokken->id) == -1)
+		exec_close((*ex_data), NULL, 2, 0);
 	dup2((*ex_data)->file[0], STDIN_FILENO);
-	dup2((*ex_data)->file[1], STDOUT_FILENO);
 	if ((*ex_data)->file[0] != 0)
 		close((*ex_data)->file[0]);
+	dup2((*ex_data)->file[1], STDOUT_FILENO);
 	if ((*ex_data)->file[1] != 1)
 		close((*ex_data)->file[1]);
 	if (tokken->type == B_IN)
