@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/16 17:18:35 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/18 11:28:46 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static void	ft_envremoveone(t_env_lst **head, t_env_lst *lst)
 
 	if (lst == NULL || *head == NULL)
 		return ;
+	if ((*head)->next == NULL && (*head) == lst)
+	{
+		nufree((*head)->var_cont);
+		nufree((*head)->var_name);
+		nufree((*head));
+		*head = NULL;
+		return ;
+	}
 	if (*head == lst)
 		*head = (*head)->next;
 	tmp_head = *head;
