@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:20:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 10:47:05 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/18 12:20:11 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_env_lst	*new_env(char *name, char *content)
 		new->var_cont = NULL;
 	else
 		new->var_cont = ft_strdup(content);
-	return (ms_get_data()->env_var = env_to_tab(new), new);
+	return (free(content), ms_get_data()->env_var = env_to_tab(new), new);
 }
 
 int	env_export(char *name, char *content, t_env_lst **head)
