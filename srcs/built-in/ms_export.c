@@ -6,22 +6,31 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/17 12:19:50 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:07:17 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static void	print_export(t_env_lst *head)
+static int	print_export(t_env_lst *head)
 {
+	int	count;
+
 	while (head != NULL && head->var_name != NULL)
 	{
-		ft_putstr_fd("export ", 1);
-		ft_putstr_fd(head->var_name, 1);
-		ft_putstr_fd(head->var_cont, 1);
-		ft_putstr_fd("\n", 1);
+		count = printf("export %s", head->var_name);
+		if (count == -1)
+			return (ft_printfd(2, NO_SPACE, ms_prefix(ms_get_data())));
+		if (head->var_cont != NULL)
+			count = printf("%s", head->var_cont);
+		if (count == -1)
+			return (ft_printfd(2, NO_SPACE, ms_prefix(ms_get_data())));
+		count = printf("\n");
+		if (count == -1)
+			return (ft_printfd(2, NO_SPACE, ms_prefix(ms_get_data())));
 		head = head->next;
 	}
+	return (0);
 }
 
 static char	*name_convertor(int len, char **av, int i)
