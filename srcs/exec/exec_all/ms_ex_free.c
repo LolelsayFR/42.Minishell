@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 17:45:38 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 09:33:53 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	close_all_pipes(t_ex_data *data)
 	pipes = data->pipes;
 	while (pipes != NULL)
 	{
-		if (pipes->pipe[0] != 0 && pipes->pipe[0] != 1)
+		if (pipes->pipe[0] != 0 && pipes->pipe[0] != -1)
 			close(pipes->pipe[0]);
-		if (pipes->pipe[1] != 0 && pipes->pipe[1] != 1)
+		if (pipes->pipe[1] != 1 && pipes->pipe[1] != -1)
 			close(pipes->pipe[1]);
 		pipes = pipes->next;
 	}
