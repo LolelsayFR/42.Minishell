@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:18:46 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 15:33:45 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/20 01:45:39 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,34 @@ int	*pipe_savedup(int *pipe)
 	return (new_pipe);
 }
 
-int	new_pipe(t_ex_data *ex_data)
+int	close_pipe(t_ex_data *ex_data)
 {
-	int			*pipes;
-
-	pipes = malloc(2 * sizeof(int));
-	if (pipe(pipes) == -1)
-		return (-1);
-	if (ex_data->prev_pipe != NULL)
-	{
-		dup2(ex_data->prev_pipe[0], STDIN_FILENO);
-		close(ex_data->prev_pipe[1]);
-		free(ex_data->prev_pipe);
-	}
 	if (ex_data->nb_cmd - 1 > ex_data->i)
-		dup2(pipes[1], STDOUT_FILENO);
+		if (ex_data->pipe != NULL)
+			close(ex_data->pipe[1]);
+	if (ex_data->prev_pipe != NULL)
+		close(ex_data->prev_pipe[0]);
+	return (0);
+}
+
+int	open_pipe(t_ex_data *ex_data)
+{
+	if (ex_data->pipe != NULL)
+	{
+		dup2(ex_data->pipe[0], STDIN_FILENO);
+		free(ex_data->prev_pipe);
+		ex_data->prev_pipe = pipe_savedup(ex_data->pipe);
+	}
+	if (ex_data->i < ex_data->nb_cmd - 1)
+	{
+		free(ex_data->pipe);
+		ex_data->pipe = malloc(2 * sizeof(int));
+		if (pipe(ex_data->pipe) == -1)
+			return (-1);
+	}
+	if (ex_data->i < ex_data->nb_cmd - 1)
+		dup2(ex_data->pipe[1], STDOUT_FILENO);
 	else
 		check_standard(2);
-	ex_data->prev_pipe = pipe_savedup(pipes);
-	free(pipes);
 	return (0);
 }

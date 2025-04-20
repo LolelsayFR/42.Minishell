@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:00:40 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 15:12:20 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/20 01:59:03 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	infile_open(int infile, int type, char *file)
 	if (infile != 0)
 		close(infile);
 	infile = open(file, O_RDONLY);
-	dup2(infile, STDOUT_FILENO);
+	dup2(infile, STDIN_FILENO);
 	if (infile == -1)
 		return (-2);
 	if (type == H_D)
