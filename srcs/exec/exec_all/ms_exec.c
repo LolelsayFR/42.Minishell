@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/20 01:55:05 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/20 02:17:06 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,19 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		{
 			if (open_pipe(ex_data) == -1)
 				break ;
-			finds_files(ex_data, first_in_id(data->tokkens,
-					ex_data->tokken->id), ex_data->tokken->id);
-			ex_data->pid[ex_data->i] = fork();
-			if (ex_data->pid[ex_data->i] == 0)
-				cmd_exec(ex_data->tokken, &ex_data);
+			if (finds_files(ex_data, first_in_id(data->tokkens,
+					ex_data->tokken->id), ex_data->tokken->id) != -1)
+			{
+				ex_data->pid[ex_data->i] = fork();
+				if (ex_data->pid[ex_data->i] == 0)
+					cmd_exec(ex_data->tokken, &ex_data);
+			}
 			close_pipe(ex_data);
 			ex_data->i++;
 		}
 		tokkens = tokkens->next;
 	}
+	close(ex_data->prev_pipe[1]);
+	close(ex_data->pipe[0]);
 	return (check_standard(3), exec_end(ex_data), 0);
 }

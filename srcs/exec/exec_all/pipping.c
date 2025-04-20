@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:18:46 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/20 01:45:39 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/20 02:08:28 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ int	open_pipe(t_ex_data *ex_data)
 		ex_data->pipe = malloc(2 * sizeof(int));
 		if (pipe(ex_data->pipe) == -1)
 			return (-1);
-	}
-	if (ex_data->i < ex_data->nb_cmd - 1)
 		dup2(ex_data->pipe[1], STDOUT_FILENO);
+	}
 	else
 		check_standard(2);
 	return (0);
