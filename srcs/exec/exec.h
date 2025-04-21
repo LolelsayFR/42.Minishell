@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 13:39:54 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:39:35 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,13 @@
 
 # include "minishell.function.h"
 
-typedef struct s_pipe
-{
-	int				pipe[2];
-	struct s_pipe	*next;
-}	t_pipe;
-
 typedef struct s_ex_data
 {
 	t_ms_tokken	*tokken;
-	t_pipe		*pipes;
 	t_list		*save;
 	int			*pid;
 	int			*file;
+	int			*pipe;
 	int			*prev_pipe;
 	int			nb_cmd;
 	int			i;
@@ -57,8 +51,6 @@ void		wait_all_pids(t_ex_data *data);
 int			files_access(t_list *tokkens);
 
 char		*add_path(t_ms_data *data, char *cmd);
-
-t_pipe		*pipe_init(void);
 
 void		unlink_all(void);
 
@@ -94,6 +86,7 @@ void		check_standard(int i);
 
 //NEW EXEC
 
-int			new_pipe(t_ex_data *ex_data);
+int			open_pipe(t_ex_data *ex_data);
+int			close_pipe(t_ex_data *ex_data);
 
 #endif
