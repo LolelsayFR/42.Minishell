@@ -39,6 +39,7 @@ int	infile_open(int infile, int type, char *file)
 		close(infile);
 	infile = open(file, O_RDONLY);
 	dup2(infile, STDIN_FILENO);
+	close(infile);
 	if (infile == -1)
 		return (-2);
 	if (type == H_D)
