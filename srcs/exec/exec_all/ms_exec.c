@@ -94,7 +94,6 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 				if (ex_data->pid[ex_data->i] == 0)
 					cmd_exec(ex_data->tokken, &ex_data);
 			}
-			close(0);
 			close_pipe(ex_data);
 			ex_data->i++;
 		}

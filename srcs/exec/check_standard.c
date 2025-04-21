@@ -31,7 +31,6 @@ void	check_standard(int i)
 	}
 	else if (i == 3)
 	{
-		double_close(STDIN_FILENO, STDOUT_FILENO);
 		dup2(standard[0], STDIN_FILENO);
 		dup2(standard[1], STDOUT_FILENO);
 		double_close(standard[0], standard[1]);
