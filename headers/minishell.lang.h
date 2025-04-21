@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:01 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 17:16:52 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:01:08 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define CD_DIR_ERROR "%scd: %s: No such file or directory\n"
 # define CD_NOHOME "%scd: HOME not set\n"
 # define CD_DIR_COUNT "%scd: too many arguments\n"
-# define ECHO_NO_SPACE "%s write error: no space left to write\n"
+# define NO_SPACE "%s write error: no space left to write\n"
 
 /* ************************************************************************** */
 /*  Other language constant                                                   */

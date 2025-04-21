@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/18 13:20:39 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:29:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 	env_export(ft_strdup("PATH="),
 		ft_strdupnull(getenv("PATH")), &data->env_lst);
 	env_export(ft_strdup("_="), ft_strdupnull(getenv("_")), &data->env_lst);
-	data->prefix = ft_strdup_lst(LANG_PREFIX);
+	data->prefix = LANG_PREFIX;
 	data->is_inited = true;
 	ft_alist_add_front(data->context = ft_calloc(1, sizeof(t_ms_context)));
 	data->tokkens = NULL;
