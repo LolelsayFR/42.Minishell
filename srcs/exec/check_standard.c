@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:55:21 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 14:08:15 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:29:40 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@ void	check_standard(int i)
 	else if (i == 1)
 	{
 		dup2(standard[0], STDIN_FILENO);
-		close(standard[0]);
 	}
 	else if (i == 2)
 	{
 		dup2(standard[1], STDOUT_FILENO);
-		close(standard[1]);
 	}
 	else if (i == 3)
 	{
+		double_close(STDIN_FILENO, STDOUT_FILENO);
 		dup2(standard[0], STDIN_FILENO);
 		dup2(standard[1], STDOUT_FILENO);
 		double_close(standard[0], standard[1]);
 	}
+	else if (i == 4)
+		double_close(standard[0], standard[1]);
 }

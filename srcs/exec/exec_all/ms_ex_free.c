@@ -6,26 +6,11 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 13:45:43 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/20 01:46:45 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-
-void	close_all_pipes(t_ex_data *data)
-{
-	t_pipe	*pipes;
-
-	pipes = data->pipes;
-	while (pipes != NULL)
-	{
-		if (pipes->pipe[0] != 0 && pipes->pipe[0] != -1)
-			close(pipes->pipe[0]);
-		if (pipes->pipe[1] != 1 && pipes->pipe[1] != -1)
-			close(pipes->pipe[1]);
-		pipes = pipes->next;
-	}
-}
 
 void	wait_all_pids(t_ex_data *data)
 {
@@ -38,21 +23,12 @@ void	wait_all_pids(t_ex_data *data)
 
 void	free_ex_data(t_ex_data *data)
 {
-	t_pipe	*pipes;
-	t_pipe	*temp;
-
-	pipes = data->pipes;
-	while (pipes != NULL)
-	{
-		temp = pipes->next;
-		free(pipes);
-		pipes = temp;
-	}
 	if (data->file[0] != 0)
 		close(data->file[0]);
 	if (data->file[1] != 1)
 		close(data->file[1]);
 	free(data->prev_pipe);
+	free(data->pipe);
 	free(data->file);
 	free(data->pid);
 	free(data);
@@ -61,7 +37,6 @@ void	free_ex_data(t_ex_data *data)
 void	exec_end(t_ex_data *data)
 {
 	wait_all_pids(data);
-	close_all_pipes(data);
 	free_ex_data(data);
 	unlink_all();
 }
