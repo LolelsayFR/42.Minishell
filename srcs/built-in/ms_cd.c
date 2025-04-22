@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:20:45 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 08:38:58 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:43:17 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	ms_cd_exec(t_ms_data *data, char **path, char *temp, char *home)
 {
-	if (path[0][0] == '~')
-		path[0] = home;
 	if (chdir(path[0]) == -1)
 	{
 		path[0] = temp;
@@ -25,6 +23,7 @@ int	ms_cd_exec(t_ms_data *data, char **path, char *temp, char *home)
 	}
 	free(data->cur_pwd);
 	data->cur_pwd = getcwd(NULL, 0);
+	env_export(ft_strdup("PWD="), getcwd(NULL, 0), &data->env_lst);
 	path[0] = temp;
 	free(home);
 	return (0);
