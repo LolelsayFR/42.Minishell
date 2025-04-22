@@ -6,31 +6,11 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 15:41:06 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:09:18 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-
-int	find_outfile(int outfile, int *pipe)
-{
-	if (outfile != 1)
-		return (close(pipe[0]), outfile);
-	return (close(pipe[0]), pipe[1]);
-}
-
-int	find_infile(int infile, int *pipe)
-{
-	if (infile != 0)
-	{
-		if (pipe != NULL)
-			close(pipe[0]);
-		return (infile);
-	}
-	if (pipe == NULL)
-		return (0);
-	return (close(pipe[1]), pipe[0]);
-}
 
 int	find_nb_cmd(t_list *tokkens)
 {

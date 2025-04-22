@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/19 23:39:35 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:26:56 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_ex_data
 	int			*pipe;
 	int			*prev_pipe;
 	int			nb_cmd;
+	int			id;
 	int			i;
 }	t_ex_data;
 
@@ -38,6 +39,8 @@ int			outfile_open(int outfile, int type, char *file);
 int			infile_open(int outfile, int type, char *file);
 int			find_infile(int outfile, int *pipe);
 int			find_outfile(int outfile, int *pipe);
+int			infile_access(char *infile);
+int			outfile_access(char *outfile);
 
 char		*tokken_join_id(t_list *tokkens, int id);
 char		**tokken_id_join(t_list *tokkens, int id);
