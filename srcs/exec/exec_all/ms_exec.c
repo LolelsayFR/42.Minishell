@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/22 09:42:49 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:49:55 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 
 	data = ms_get_data();
 	cmd = tokken_id_join(data->tokkens, tokken->id);
-	cmd[0] = add_path(data, cmd[0]);
+	if (tokken->type != B_IN)
+		cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
 		exec_close(ex_data, cmd, 127, 1);
 	if (tokken->type == B_IN)
