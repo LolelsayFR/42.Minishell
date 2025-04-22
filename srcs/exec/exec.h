@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 13:26:56 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:52:08 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ t_ex_data	*exec_init(t_list *tokkens);
 void		exec_end(t_ex_data *data);
 void		free_ex_data(t_ex_data *data);
 void		exec_close(t_ex_data *ex_data, char **tab, int status, int err);
+
+int			is_cmd_in_id(t_ms_data *data, int id);
 
 //Part of exec_one
 

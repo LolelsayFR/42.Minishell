@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/22 15:38:19 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:46:17 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 		else if (tokken->type == OUTF_R || tokken->type == OUTF_A)
 			ex_data->file[1] = outfile_open(ex_data->file[1],
 					tokken->type, tokken->content);
-		if (ex_data->file[0] == -2 || ex_data->file[1] == -2)
+		if ((ex_data->file[0] == -2 || ex_data->file[1] == -2)
+				&& tokken->type != CMD && tokken->type != B_IN)
 			return (ft_printfd(2, LANG_PREFIX "%s: No such file or directory\n",
 					tokken->content), -1);
 		tokkens = tokkens->next;
@@ -67,7 +68,11 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 	if (tokken->type != B_IN)
 		cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
+	{
+		close_pipe(ex_data);
+		close(ex_data->pipe[0]);
 		exec_close(ex_data, cmd, 127, 1);
+	}
 	if (tokken->type == B_IN)
 		exec_built_in(tokken, data, ex_data, cmd);
 	else
@@ -80,6 +85,7 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 
 int	ms_exec(t_ms_data *data, t_list *tokkens)
 {
+	int			id = 0;
 	t_ex_data	*ex_data;
 
 	ex_data = exec_init(tokkens);
@@ -87,17 +93,23 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 	while (tokkens != NULL)
 	{
 		ex_data->tokken = tokkens->content;
-		ex_data->id = ex_data->tokken ->id;
-		if (ex_data->id == ex_data->i)
+		if (ex_data->tokken->id == ex_data->i)
 		{
 			if (open_pipe(ex_data) == -1)
 				break ;
-			if (finds_files(ex_data, first_in_id(data->tokkens,
-						ex_data->tokken->id), ex_data->tokken->id) != -1)
+			finds_files(ex_data, first_in_id(data->tokkens,
+						ex_data->tokken->id), ex_data->tokken->id);
+			if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
 			{
-				ex_data->pid[ex_data->i] = fork();
-				if (ex_data->pid[ex_data->i] == 0)
+				ex_data->pid[id] = fork();
+				if (ex_data->pid[id] == 0)
 					cmd_exec(ex_data->tokken, ex_data);
+				id++;
+			}
+			else if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
+			{
+				close(ex_data->pipe[1]);
+				ex_data->nb_cmd--;
 			}
 			close_pipe(ex_data);
 			ex_data->i++;
