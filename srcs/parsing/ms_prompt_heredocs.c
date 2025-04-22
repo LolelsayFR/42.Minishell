@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 17:29:58 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:36:42 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	heredoc_loop(t_ms_tokken **tok, char *eof, int fd)
 	}
 	close(fd);
 	dup2(ms_get_data()->context->last_fd, STDIN_FILENO);
-	free(eof);
+	(free(hdp), free(eof));
 }
 
 void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)

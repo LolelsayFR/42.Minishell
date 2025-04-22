@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 16:52:24 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:50:25 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	if (data == NULL)
 		return (EXIT_FAILURE);
 	minishell_data_init(data, envp);
+	data->is_running = true;
 	if (data->is_inited == true)
 		minishell_main_loop(data);
 	ft_putstr_fd("exit\n", 2);
@@ -53,7 +54,6 @@ t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 
 int	minishell_main_loop(t_ms_data *data)
 {
-	data->is_running = true;
 	while (data->is_running == true)
 	{
 		data->prompt = readline(ms_prefix(data));
@@ -93,6 +93,7 @@ t_ms_data	*ms_get_data(void)
 
 void	ms_close(unsigned char exit_value, t_ms_data *data)
 {
+	free(data->prompt);
 	free(data->cur_pwd);
 	free(data->init_pwd);
 	ft_free_strtab(data->env_var);
