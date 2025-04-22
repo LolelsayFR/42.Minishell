@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/22 16:19:18 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:29:55 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,6 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 	exec_close(ex_data, cmd, 255, 0);
 }
 
-void	del_one_cmd(t_ex_data *ex_data)
-{
-	close_pipe(ex_data);
-	ex_data->nb_cmd--;
-}
-
 int	ms_exec(t_ms_data *data, t_list *tokkens)
 {
 	t_ex_data	*ex_data;
@@ -110,7 +104,10 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 					cmd_exec(ex_data->tokken, ex_data);
 			}
 			else if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
-				del_one_cmd(ex_data);
+			{
+				close_pipe(ex_data);
+				ex_data->nb_cmd--;
+			}
 			close_pipe(ex_data);
 			ex_data->i++;
 		}
