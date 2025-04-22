@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/22 15:30:20 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:00:51 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static bool	export_checker(char *str)
 			return (false);
 		i++;
 	}
+	if (i <= 0)
+		return (false);
 	return (true);
 }
 
