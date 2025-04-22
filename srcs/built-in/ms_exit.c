@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/22 16:45:52 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:48:33 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ static int	ms_exit_msg(char **exit_args, int i, int j, t_ms_data *data)
 	}
 	if ((exit_args[1][0] == '-' || exit_args[1][0] == '+')
 			&& exit_args[1][1] == '\0')
+	{
 		ft_printfd(2, EXIT_NUM_ERROR, ms_prefix(data), exit_args[1]);
+		data->last_return = 2;
+	}
 	ms_exit_exit((unsigned char)ft_atol(exit_args[1]), data, exit_args);
 	return (EXIT_FAILURE);
 }
