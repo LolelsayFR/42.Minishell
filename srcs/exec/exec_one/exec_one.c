@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 11:25:06 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:50:10 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,14 @@ void	exec_cmd(char **cmd, char **env, t_one_data *o_data)
 
 	pid = fork();
 	if (pid == 0)
+	{
 		execve(cmd[0], cmd, env);
+		ft_printfd(2, "Command Error\n");
+		check_standard(4);
+		ft_free_strtab(cmd);
+		free_data(o_data);
+		ms_close(2, ms_get_data());
+	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		ms_get_data()->last_return = WEXITSTATUS(status);

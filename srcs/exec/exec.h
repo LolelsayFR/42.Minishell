@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:06:32 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 13:52:08 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:32:08 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_ex_data
 	int			*file;
 	int			*pipe;
 	int			*prev_pipe;
+	int			good_file;
 	int			nb_cmd;
 	int			id;
 	int			i;

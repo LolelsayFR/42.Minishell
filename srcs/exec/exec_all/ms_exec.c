@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
+/*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/22 15:46:17 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:33:30 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 			ex_data->file[1] = outfile_open(ex_data->file[1],
 					tokken->type, tokken->content);
 		if ((ex_data->file[0] == -2 || ex_data->file[1] == -2)
-				&& tokken->type != CMD && tokken->type != B_IN)
+			&& tokken->type != CMD && tokken->type != B_IN)
 			return (ft_printfd(2, LANG_PREFIX "%s: No such file or directory\n",
 					tokken->content), -1);
 		tokkens = tokkens->next;
@@ -83,13 +83,28 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 	exec_close(ex_data, cmd, 255, 0);
 }
 
+static inline void	exec_launch(t_ms_data *data, t_ex_data *ex_data)
+{
+	if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
+	{
+		ex_data->pid[ex_data->id] = fork();
+		if (ex_data->pid[ex_data->id++] == 0)
+			cmd_exec(ex_data->tokken, ex_data);
+	}
+	else if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
+	{
+		close_pipe(ex_data);
+		ex_data->nb_cmd--;
+	}
+	close_pipe(ex_data);
+	ex_data->i++;
+}
+
 int	ms_exec(t_ms_data *data, t_list *tokkens)
 {
-	int			id = 0;
 	t_ex_data	*ex_data;
 
 	ex_data = exec_init(tokkens);
-	check_standard(0);
 	while (tokkens != NULL)
 	{
 		ex_data->tokken = tokkens->content;
@@ -97,22 +112,9 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		{
 			if (open_pipe(ex_data) == -1)
 				break ;
-			finds_files(ex_data, first_in_id(data->tokkens,
+			ex_data->good_file = finds_files(ex_data, first_in_id(data->tokkens,
 						ex_data->tokken->id), ex_data->tokken->id);
-			if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
-			{
-				ex_data->pid[id] = fork();
-				if (ex_data->pid[id] == 0)
-					cmd_exec(ex_data->tokken, ex_data);
-				id++;
-			}
-			else if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
-			{
-				close(ex_data->pipe[1]);
-				ex_data->nb_cmd--;
-			}
-			close_pipe(ex_data);
-			ex_data->i++;
+			exec_launch(data, ex_data);
 		}
 		tokkens = tokkens->next;
 	}
