@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/20 01:46:45 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 09:31:50 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	wait_all_pids(t_ex_data *data)
 {
 	int	i;
+	int	status;
 
 	i = 0;
 	while (i < data->nb_cmd)
-		waitpid(data->pid[i++], NULL, 0);
+		waitpid(data->pid[i++], &status, 0);
+	ms_get_data()->last_return = (unsigned char)status;
 }
 
 void	free_ex_data(t_ex_data *data)

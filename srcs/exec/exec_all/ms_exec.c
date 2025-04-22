@@ -6,14 +6,14 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/20 02:17:06 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 09:33:53 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
 void	exec_built_in(t_ms_tokken *tokken, t_ms_data *data,
-		t_ex_data **ex_data, char **cmd)
+		t_ex_data *ex_data, char **cmd)
 {
 	if (ft_strncmp(tokken->content, "echo\0", 5) == 0)
 		do_echo(data, tokken);
@@ -27,10 +27,10 @@ void	exec_built_in(t_ms_tokken *tokken, t_ms_data *data,
 		ms_env(data);
 	else if (ft_strncmp(tokken->content, "cd\0", 3) == 0)
 		do_cd(data, tokken);
-	close_pipe((*ex_data));
-	close((*ex_data)->pipe[0]);
+	close_pipe(ex_data);
+	close(ex_data->pipe[0]);
 	check_standard(4);
-	free_ex_data((*ex_data));
+	free_ex_data(ex_data);
 	ft_free_strtab(cmd);
 	ms_close(data->last_return, data);
 }
@@ -57,7 +57,7 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 	return (0);
 }
 
-void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data)
+void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 {
 	t_ms_data	*data;
 	char		**cmd;
@@ -66,12 +66,15 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data **ex_data)
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	cmd[0] = add_path(data, cmd[0]);
 	if (cmd[0] == NULL && tokken->type != B_IN)
-		exec_close((*ex_data), cmd, 2, 1);
+		exec_close(ex_data, cmd, 2, 1);
 	if (tokken->type == B_IN)
 		exec_built_in(tokken, data, ex_data, cmd);
 	else
+	{
+		close(ex_data->pipe[0]);
 		execve(cmd[0], cmd, data->env_var);
-	exec_close((*ex_data), cmd, 2, 0);
+	}
+	exec_close(ex_data, cmd, 2, 0);
 }
 
 int	ms_exec(t_ms_data *data, t_list *tokkens)
@@ -92,9 +95,8 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 			{
 				ex_data->pid[ex_data->i] = fork();
 				if (ex_data->pid[ex_data->i] == 0)
-					cmd_exec(ex_data->tokken, &ex_data);
+					cmd_exec(ex_data->tokken, ex_data);
 			}
-			close(0);
 			close_pipe(ex_data);
 			ex_data->i++;
 		}
