@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/18 14:36:46 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:51:40 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*tokken_cleaner(char *str, int *flag, int type)
 	char		*result;
 
 	ft_bzero(&arg, sizeof(t_pars_args));
-	trim = ft_strtrim(str, "<> ");
+	trim = ft_strtrim(str, "<> \t");
 	free(str);
 	if (ft_is_only_quote_sp(trim))
 	{

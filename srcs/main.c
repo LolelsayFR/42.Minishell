@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 15:38:30 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:52:24 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	minishell_main_loop(t_ms_data *data)
 			add_history(data->prompt);
 		else
 			continue ;
-		if (prompt_handler(data) == EXIT_SUCCESS)
+		if (prompt_handler(data) == EXIT_SUCCESS && !data->context->hd_ctrl_c)
 		{
 			data->context->rl_redisplay = false;
 			signal(SIGQUIT, exec_sig);
