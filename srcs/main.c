@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 12:44:43 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:21:24 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 	ft_alist_add_front(data->context = ft_calloc(1, sizeof(t_ms_context)));
 	data->tokkens = NULL;
 	ms_sig_init(data);
+	data->context->rl_redisplay = true;
 	return (NULL);
 }
 
@@ -63,10 +64,12 @@ int	minishell_main_loop(t_ms_data *data)
 			continue ;
 		if (prompt_handler(data) == EXIT_SUCCESS)
 		{
+			data->context->rl_redisplay = false;
 			if (find_nb_cmd(data->tokkens) == 1)
 				exec_one(data, data->tokkens);
-			else if (find_nb_cmd(data->tokkens) > 1)
+			else
 				ms_exec(data, data->tokkens);
+			data->context->rl_redisplay = true;
 		}
 		else
 			ft_printfd(2, LANG_PARS_ERROR, ms_prefix(data), data->prompt);
