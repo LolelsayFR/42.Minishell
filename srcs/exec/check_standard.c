@@ -24,12 +24,10 @@ void	check_standard(int i)
 	else if (i == 1)
 	{
 		dup2(standard[0], STDIN_FILENO);
-		close(standard[0]);
 	}
 	else if (i == 2)
 	{
 		dup2(standard[1], STDOUT_FILENO);
-		close(standard[1]);
 	}
 	else if (i == 3)
 	{

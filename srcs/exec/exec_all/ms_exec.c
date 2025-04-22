@@ -99,7 +99,5 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		}
 		tokkens = tokkens->next;
 	}
-	close(ex_data->prev_pipe[1]);
-	close(ex_data->pipe[0]);
 	return (check_standard(3), exec_end(ex_data), 0);
 }
