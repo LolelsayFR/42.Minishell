@@ -71,6 +71,7 @@ int	minishell_main_loop(t_ms_data *data)
 		else
 			ft_printfd(2, LANG_PARS_ERROR, ms_prefix(data), data->prompt);
 	}
+	ft_putstr_fd("exit\n", 2);
 	return (EXIT_SUCCESS);
 }
 
