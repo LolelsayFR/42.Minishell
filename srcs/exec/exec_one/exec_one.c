@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 10:40:34 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:25:06 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,19 @@ void	exec_one_built_in(t_ms_data *data, t_one_data *o_data, char **cmd)
 void	exec_cmd(char **cmd, char **env, t_one_data *o_data)
 {
 	int	pid;
+	int	status;
 
 	pid = fork();
 	if (pid == 0)
 		execve(cmd[0], cmd, env);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		ms_get_data()->last_return = WEXITSTATUS(status);
+	else if (WTERMSIG(status) == SIGSEGV)
+	{
+		ms_get_data()->last_return = 139;
+		ft_printfd(2, EXEC_SIGSEGV, ms_prefix(ms_get_data()));
+	}
 	free_data(o_data);
 	ft_free_strtab(cmd);
 }
