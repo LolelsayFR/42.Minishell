@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/22 16:29:55 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:33:30 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,23 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 	exec_close(ex_data, cmd, 255, 0);
 }
 
+static inline void	exec_launch(t_ms_data *data, t_ex_data *ex_data)
+{
+	if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
+	{
+		ex_data->pid[ex_data->id] = fork();
+		if (ex_data->pid[ex_data->id++] == 0)
+			cmd_exec(ex_data->tokken, ex_data);
+	}
+	else if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
+	{
+		close_pipe(ex_data);
+		ex_data->nb_cmd--;
+	}
+	close_pipe(ex_data);
+	ex_data->i++;
+}
+
 int	ms_exec(t_ms_data *data, t_list *tokkens)
 {
 	t_ex_data	*ex_data;
@@ -95,21 +112,9 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		{
 			if (open_pipe(ex_data) == -1)
 				break ;
-			finds_files(ex_data, first_in_id(data->tokkens,
-					ex_data->tokken->id), ex_data->tokken->id);
-			if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
-			{
-				ex_data->pid[ex_data->id] = fork();
-				if (ex_data->pid[ex_data->id++] == 0)
-					cmd_exec(ex_data->tokken, ex_data);
-			}
-			else if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
-			{
-				close_pipe(ex_data);
-				ex_data->nb_cmd--;
-			}
-			close_pipe(ex_data);
-			ex_data->i++;
+			ex_data->good_file = finds_files(ex_data, first_in_id(data->tokkens,
+						ex_data->tokken->id), ex_data->tokken->id);
+			exec_launch(data, ex_data);
 		}
 		tokkens = tokkens->next;
 	}
