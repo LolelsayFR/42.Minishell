@@ -3,6 +3,8 @@
 
 # Minishell
 
+BETA TESTING HERE : ![Google form](https://docs.google.com/forms/d/e/1FAIpQLScpXpGZWBs7grCInh9560HIQY6VZxfgs-WxS3ewAxDvpDtGGA/viewform?usp=dialog)
+
 ## Description 🇫🇷
 
 Minishell est une implémentation simple d'un shell Unix, conçu pour reproduire le comportement de base de Bash. Ce projet a été réalisé dans le cadre d'un exercice éducatif pour apprendre à manipuler les processus, les signaux et les entrées/sorties en C.
