@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/18 15:09:16 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 08:29:13 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_ms_data
 	char			*prefix;
 	char			*prompt;
 	char			*init_pwd;
-	char			*old_pwd;
+	char			*cur_pwd;
 	t_list			*tokkens;
 	t_env_lst		*env_lst;
 	t_ms_context	*context;
