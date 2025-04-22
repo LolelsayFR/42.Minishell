@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 13:21:24 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:51:39 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	minishell_data_init(data, envp);
 	if (data->is_inited == true)
 		minishell_main_loop(data);
+	ft_putstr_fd("exit\n", 2);
 	ms_close(data->last_return, data);
 	return (EXIT_SUCCESS);
 }
@@ -65,16 +66,18 @@ int	minishell_main_loop(t_ms_data *data)
 		if (prompt_handler(data) == EXIT_SUCCESS)
 		{
 			data->context->rl_redisplay = false;
+			signal(SIGQUIT, exec_sig);
 			if (find_nb_cmd(data->tokkens) == 1)
 				exec_one(data, data->tokkens);
 			else
 				ms_exec(data, data->tokkens);
 			data->context->rl_redisplay = true;
+			signal(SIGQUIT, SIG_IGN);
 		}
 		else
 			ft_printfd(2, LANG_PARS_ERROR, ms_prefix(data), data->prompt);
 	}
-	ft_putstr_fd("exit\n", 2);
+
 	return (EXIT_SUCCESS);
 }
 

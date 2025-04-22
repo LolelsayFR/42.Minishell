@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/18 15:18:20 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:51:29 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void		ms_close(unsigned char exit_value, t_ms_data *data);
 
 bool		ms_sig_init(t_ms_data *data);
 void		heredoc_sig(int sig);
+void		exec_sig(int sig);
 
 /* ************************************************************************** */
 /*  Minishell Prefix functions                                                */
