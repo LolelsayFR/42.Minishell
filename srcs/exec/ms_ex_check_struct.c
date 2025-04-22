@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/20 01:44:42 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:28:33 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_ex_data	*exec_init(t_list *tokkens)
 	ex_data->file = malloc(2 * sizeof(int));
 	ex_data->file[0] = 0;
 	ex_data->file[1] = 1;
+	ex_data->id = 0;
 	ex_data->i = 0;
 	return (ex_data);
 }

@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 10:56:05 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:33:11 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	wait_all_pids(t_ex_data *data)
 
 void	free_ex_data(t_ex_data *data)
 {
-	if (data->file[0] != 0)
+	if (data->file[0] != 0 && data->file[0] != -1 && data->file[0] != -2)
 		close(data->file[0]);
-	if (data->file[1] != 1)
+	if (data->file[1] != 1 && data->file[1] != -1 && data->file[1] != -2)
 		close(data->file[1]);
 	free(data->prev_pipe);
 	free(data->pipe);
@@ -54,5 +54,6 @@ void	exec_close(t_ex_data *ex_data, char **tab, int status, int err)
 		ft_free_strtab(tab);
 	else
 		free_tab_err(tab);
+	check_standard(4);
 	ms_close(status, data);
 }

@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/22 12:49:55 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:29:10 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 			ex_data->file[1] = outfile_open(ex_data->file[1],
 					tokken->type, tokken->content);
 		if (ex_data->file[0] == -2 || ex_data->file[1] == -2)
-			return (ft_printfd(2, "%s: No such file or directory\n",
+			return (ft_printfd(2, LANG_PREFIX "%s: No such file or directory\n",
 					tokken->content), -1);
 		tokkens = tokkens->next;
 	}
@@ -87,12 +87,13 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 	while (tokkens != NULL)
 	{
 		ex_data->tokken = tokkens->content;
-		if (ex_data->tokken->type == CMD || ex_data->tokken->type == B_IN)
+		ex_data->id = ex_data->tokken ->id;
+		if (ex_data->id == ex_data->i)
 		{
 			if (open_pipe(ex_data) == -1)
 				break ;
 			if (finds_files(ex_data, first_in_id(data->tokkens,
-					ex_data->tokken->id), ex_data->tokken->id) != -1)
+						ex_data->tokken->id), ex_data->tokken->id) != -1)
 			{
 				ex_data->pid[ex_data->i] = fork();
 				if (ex_data->pid[ex_data->i] == 0)
