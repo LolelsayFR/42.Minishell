@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/18 15:29:57 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 08:30:32 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 t_ms_data	*minishell_data_init(t_ms_data *data, char **envp)
 {
 	data->init_pwd = getcwd(NULL, 0);
-	data->old_pwd = getcwd(NULL, 0);
+	data->cur_pwd = getcwd(NULL, 0);
 	data->env_lst = env_to_lst(envp);
 	data->env_var = env_to_tab(data->env_lst);
 	env_export(ft_strdup("PWD="), getcwd(NULL, 0), &data->env_lst);
@@ -87,7 +87,7 @@ t_ms_data	*ms_get_data(void)
 
 void	ms_close(unsigned char exit_value, t_ms_data *data)
 {
-	free(data->old_pwd);
+	free(data->cur_pwd);
 	free(data->init_pwd);
 	ft_free_strtab(data->env_var);
 	free_env(data->env_lst);

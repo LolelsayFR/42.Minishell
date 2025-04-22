@@ -90,7 +90,7 @@ typedef struct s_ms_data
 	char			*prefix;
 	char			*prompt;
 	char			*init_pwd;
-	char			*old_pwd;
+	char			*cur_pwd;
 	t_list			*tokkens;
 	t_env_lst		*env_lst;
 	t_ms_context	*context;
