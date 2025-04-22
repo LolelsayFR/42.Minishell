@@ -21,7 +21,7 @@
 /* ************************************************************************** */
 
 //Global Debug mod
-# define MS_DEBUG false
+# define MS_DEBUG true
 //Tokken printer
 # define MS_DE_TOKPRINT true
 //Split_tab parsing printer

@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 09:44:03 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 12:47:23 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:15:13 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	free_data(t_one_data *data)
 		close(data->inf);
 	if (data->outf != 1 && data->outf != -1)
 		close(data->outf);
+	check_standard(3);
 	free(data);
 }
