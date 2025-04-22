@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:49:29 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 12:54:45 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/22 10:39:48 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	find_one_infile(t_one_data *o_data, t_ms_tokken *tokken)
 	if (o_data->inf != 0)
 		close(o_data->inf);
 	o_data->inf = infile_open(o_data->inf, tokken->type, tokken->content);
+	dup2(o_data->inf, STDIN_FILENO);
 	if (o_data->inf == -2)
 		o_data->inf = -1;
 }
@@ -45,6 +46,7 @@ void	find_one_outfile(t_one_data *o_data, t_ms_tokken *tokken)
 	if (o_data->outf != 1)
 		close(o_data->outf);
 	o_data->outf = outfile_open(o_data->outf, tokken->type, tokken->content);
+	dup2(o_data->outf, STDOUT_FILENO);
 	if (o_data->outf == -2)
 		o_data->outf = -1;
 }
@@ -65,6 +67,14 @@ t_list	*find_cmd(t_list *tokkens)
 
 void	choose_files(int infile, int outfile)
 {
-	dup2(infile, STDIN_FILENO);
-	dup2(outfile, STDOUT_FILENO);
+	if (infile != 0)
+	{
+		dup2(infile, STDIN_FILENO);
+		close(infile);
+	}
+	if (outfile != 1)
+	{
+		dup2(outfile, STDOUT_FILENO);
+		close(outfile);
+	}
 }
