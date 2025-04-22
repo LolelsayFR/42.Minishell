@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:01 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 11:25:13 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:31:45 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define CD_DIR_COUNT "%scd: too many arguments\n"
 # define NO_SPACE "%swrite error: no space left to write\n"
 # define EXEC_SIGSEGV "%sSegmentation fault (execve)\n"
+# define EXPORT_ERROR "%sexport: `%s': not a valid identifier\n"
 
 /* ************************************************************************** */
 /*  Other language constant                                                   */

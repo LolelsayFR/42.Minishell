@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 01:32:43 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/18 15:50:00 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:34:23 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ms_prefix(t_ms_data *data)
 {
-	const char *custom = get_env_var(data, "ms_prefix");
+	const char	*custom = get_env_var(data, "ms_prefix");
 
 	if (data->prompt == NULL)
 		return (data->prefix);
