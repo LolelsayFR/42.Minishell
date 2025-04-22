@@ -6,12 +6,11 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:20:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 13:31:35 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:36:06 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-
 
 static t_env_lst	*new_env_free_cont(char *name, char *content)
 {
@@ -62,7 +61,6 @@ int	env_export(char *name, char *content, t_env_lst **head)
 		tmp->var_cont = NULL;
 		if (content != NULL)
 			tmp->var_cont = ft_strdup(content);
-
 	}
 	return (ms_get_data()->env_var = env_to_tab(*head), free(content), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/18 16:07:17 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:30:20 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,59 @@ static char	*name_convertor(int len, char **av, int i)
 		return (ft_strdup(av[i]));
 }
 
+static bool	export_checker(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (ft_isdigit(str[0]))
+		return (false);
+	while (str[i] != '\0' && str[i] != '=')
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+static void	ms_export_loop(char **av, t_pars_args *a, char *here, int i)
+{
+	t_ms_data	*data;
+
+	data = ms_get_data();
+	while (av[i] != NULL)
+	{
+		ft_bzero(a, sizeof(t_pars_args));
+		while (av[i][a->len] && av[i][a->len] != '=')
+			a->len++;
+		while (av[i][a->len + a->count])
+			a->count++;
+		if (export_checker(av[i]) == true)
+		{
+			here = name_convertor(a->len, av, i);
+			env_export(ft_substr(here, 0, a->len + 1),
+				ft_substr(av[i], a->len + 1, a->count), &data->env_lst);
+		}
+		else
+			ft_printfd(2, EXPORT_ERROR, ms_prefix(data), av[i]);
+		free(here);
+		i++;
+	}
+}
+
 int	ms_export(t_ms_data *data, char **av)
 {
 	t_pars_args	a;
 	int			i;
 	char		*here;
 
+	here = NULL;
 	ft_bzero(&a, sizeof(t_pars_args));
 	if (ft_tabstr_len(av) <= 0)
-		return (print_export(data->env_lst), data->last_return = 1);
+		return (print_export(data->env_lst), data->last_return = 0);
 	i = 0;
-	while (av[i] != NULL)
-	{
-		ft_bzero(&a, sizeof(t_pars_args));
-		while (av[i][a.len] && av[i][a.len] != '=')
-			a.len++;
-		here = name_convertor(a.len, av, i);
-		while (av[i][a.len + a.count])
-			a.count++;
-		env_export(ft_substr(here, 0, a.len + 1),
-			ft_substr(av[i], a.len + 1, a.count), &data->env_lst);
-		free(here);
-		i++;
-	}
+	ms_export_loop(av, &a, here, i);
 	ft_free_strtab(data->env_var);
 	data->env_var = env_to_tab(data->env_lst);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:29:46 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/18 13:15:11 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:35:50 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static t_env_lst	*new_env(void)
 	env->next = NULL;
 	return (env);
 }
-
 
 t_env_lst	*env_to_lst(char **env)
 {
