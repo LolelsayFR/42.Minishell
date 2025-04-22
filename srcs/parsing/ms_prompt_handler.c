@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:30:33 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/16 14:20:10 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:52:42 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	prompt_handler(t_ms_data *data)
 	if (prompt_checker(data, 0, 0, 0) == false || parsing_init(data) == false)
 		return (EXIT_FAILURE);
 	tab_prompt = prompt_split(data);
+	free(data->prompt);
+	data->prompt = NULL;
 	tab_to_tokken(tab_prompt, data, 0, 0);
 	if (!tokkens_checker(data->tokkens, data))
 		return (EXIT_FAILURE);
