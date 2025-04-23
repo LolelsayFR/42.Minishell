@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/23 17:08:56 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:51:03 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 
 	data->context->heredocs++;
 	signal(SIGINT, heredoc_sig);
+	data->context->temp_hd_fd = dup(STDIN_FILENO);
 	name = ft_strdup("/tmp/ms_hd_");
 	tmp = ft_itoa(data->context->heredocs);
 	ft_strcat(&name, tmp);
@@ -97,5 +98,6 @@ void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 	heredoc_loop(tokken, heredoc_unquote((*tokken)->content),
 		open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644));
 	(*tokken)->content = tmp;
+	dup2(data->context->temp_hd_fd, STDIN_FILENO);
 	ms_sig_init(data);
 }
