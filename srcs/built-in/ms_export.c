@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/22 18:00:51 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:39:54 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ static void	ms_export_loop(char **av, t_pars_args *a, char *here, int i)
 			a->len++;
 		while (av[i][a->len + a->count])
 			a->count++;
-		if (export_checker(av[i]) == true)
+		if (export_checker(av[i]) == true && av[i][a->len] != '=')
+			env_export(name_convertor(a->len, av, i), NULL, &data->env_lst);
+		else if (export_checker(av[i]) == true)
 		{
 			here = name_convertor(a->len, av, i);
 			env_export(ft_substr(here, 0, a->len + 1),
