@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:20:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/23 18:41:08 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:02:30 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	env_export(char *name, char *content, t_env_lst **head)
 {
 	t_env_lst	*tmp;
 
-	printf(RED"NAME = %s CONTENT = %s"RES, name, content);
+	if (MS_DEBUG == true && MS_DE_EXPORT == true)
+		printf("Debug Exported : "RED"%s"YEL"%s"RES, name, content);
 	ft_free_strtab(ms_get_data()->env_var);
 	if (ms_get_data()->env_lst == NULL)
 		return (ms_get_data()->env_lst = new_env_free_cont(name, content), 1);

@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/23 18:48:30 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:13:04 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # define MS_DE_PARS_TAB false
 //Unset debug print
 # define MS_DE_UNSET false
+//Unset export print
+# define MS_DE_EXPORT false
+//Unset expand env-var print
+# define MS_DE_EXPAND false
 
 /* ************************************************************************** */
 /*  Tokken info                                                               */
