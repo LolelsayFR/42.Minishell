@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:25:16 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 13:42:10 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:52:19 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	exec_close(t_ex_data *ex_data, char **tab, int status, int err)
 	t_ms_data	*data;
 
 	data = ms_get_data();
-	ft_printfd(2, "%s: command not found\n", ex_data->tokken->content);
 	free_ex_data(ex_data);
 	if (err == 0)
 		ft_free_strtab(tab);

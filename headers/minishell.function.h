@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/23 17:00:33 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:58:02 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include "../submodules/42.libft/libft.h"
-# include "../srcs/exec/exec.h"
 
 /* ************************************************************************** */
 /*  Minishell main functions                                                  */
@@ -82,6 +81,50 @@ int			var_placer(char **str, t_pars_args *arg, bool qte_ign);
 int			ms_exec(t_ms_data *data, t_list *tokkens);
 int			exec_one(t_ms_data *data, t_list *tokkens);
 
+void		find_one_infile(t_one_data *o_data, t_ms_tokken *tokken);
+void		find_one_outfile(t_one_data *o_data, t_ms_tokken *tokken);
+void		choose_files(int infile, int outfile);
+void		unlink_all(void);
+int			outfile_access(char *outfile);
+int			infile_access(char *infile);
+int			find_outfile(int outfile, int *pipe);
+int			find_infile(int outfile, int *pipe);
+int			infile_open(int outfile, int type, char *file);
+int			outfile_open(int outfile, int type, char *file);
+int			files_access(t_list *tokkens);
+int			find_files(t_one_data *o_data, t_list *tokkens);
+
+t_list		*first_in_id(t_list *tokkens, int id);
+char		**tokken_id_join(t_list *tokkens, int id);
+char		*add_path(t_ms_data *data, char *cmd);
+void		wait_all_pids(t_ex_data *data);
+int			find_nb_cmd(t_list *data);
+int			*find_previous_pipe(t_ex_data *data, int *pipe);
+int			arg_nb(t_list *tokkens, int id);
+int			numb_of_no_nl(char **tab);
+
+void		do_echo(t_ms_data *data, t_ms_tokken *tokken);
+void		do_unset(t_ms_data *data, t_ms_tokken *tokken);
+void		do_export(t_ms_data *data, t_ms_tokken *tokken);
+void		do_cd(t_ms_data *data, t_ms_tokken *tokken);
+void		do_exit(t_ms_data *data, t_one_data *o_data);
+
+t_ex_data	*exec_init(t_list *tokkens);
+t_one_data	*data_init(void);
+void		free_ex_data(t_ex_data *data);
+void		free_data(t_one_data *data);
+void		exec_close(t_ex_data *ex_data, char **tab, int status, int err);
+void		exec_end(t_ex_data *data);
+
+int			is_cmd_in_id(t_ms_data *data, int id);
+
+t_list		*find_cmd(t_list *tokkens);
+void		free_tab_err(char **tab);
+
+void		check_standard(int i);
+int			open_pipe(t_ex_data *ex_data);
+int			close_pipe(t_ex_data *ex_data);
+
 /* ************************************************************************** */
 /*  Built-In                                                                  */
 /* ************************************************************************** */
@@ -121,6 +164,7 @@ int			ms_ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*str_unquote(char *str);
 char		*pars_injector(char *str, char *temp, t_pars_args *arg);
 int			env_export(char *name, char *content, t_env_lst **head);
+char		*ft_strjointab(char **tab);
 
 #endif
 /* ************************************************************************** */
