@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/23 09:47:11 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:03:49 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 	{
 		close_pipe(ex_data);
 		close(ex_data->pipe[0]);
+		ft_printfd(2, "%s: Command Error\n", cmd[0]);
 		exec_close(ex_data, cmd, 127, 1);
 	}
 	if (tokken->type == B_IN)
@@ -84,7 +85,8 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 		check_standard(4);
 		execve(cmd[0], cmd, data->env_var);
 	}
-	exec_close(ex_data, cmd, 255, 0);
+	ft_printfd(2, "%s: Command Error\n", cmd[0]);
+	exec_close(ex_data, cmd, 2, 0);
 }
 
 static inline void	exec_launch(t_ms_data *data, t_ex_data *ex_data)
