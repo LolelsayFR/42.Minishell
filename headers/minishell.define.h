@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/23 16:05:56 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:13:04 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # define MS_DE_PARS_TAB false
 //Unset debug print
 # define MS_DE_UNSET false
+//Unset export print
+# define MS_DE_EXPORT false
+//Unset expand env-var print
+# define MS_DE_EXPAND false
 
 /* ************************************************************************** */
 /*  Tokken info                                                               */
@@ -69,6 +73,7 @@ typedef struct s_ms_context
 	int		hd_is_expand;
 	bool	hd_ctrl_c;
 	bool	rl_redisplay;
+	int		temp_hd_fd;
 }	t_ms_context;
 
 //Env struct
