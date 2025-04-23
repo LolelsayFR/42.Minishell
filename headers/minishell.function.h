@@ -72,7 +72,7 @@ void		tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id);
 bool		tokkens_checker(t_list *lst, t_ms_data *data);
 char		*tokken_cleaner(char *str, int *flag, int type);
 void		heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken);
-int			var_placer(char **str, t_pars_args *arg);
+int			var_placer(char **str, t_pars_args *arg, bool qte_ign);
 
 /* ************************************************************************** */
 /*  Exec functions                                                            */

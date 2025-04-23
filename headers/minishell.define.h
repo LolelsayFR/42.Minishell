@@ -21,7 +21,7 @@
 /* ************************************************************************** */
 
 //Global Debug mod
-# define MS_DEBUG true
+# define MS_DEBUG false
 //Tokken printer
 # define MS_DE_TOKPRINT true
 //Split_tab parsing printer
@@ -60,14 +60,13 @@ typedef struct s_ms_tokken
 	int		id;
 }	t_ms_tokken;
 
-//Context struct for exec by parsing
+//Context struct for exec by parsing	int		last_fd;
 typedef struct s_ms_context
 {
 	int		heredocs;
 	int		nb_cmd;
-	int		nb_tkn;
-	int		last_fd;
-	bool	hd_is_expand;
+	int		nb_tkn;	
+	int		hd_is_expand;
 	bool	hd_ctrl_c;
 	bool	rl_redisplay;
 }	t_ms_context;

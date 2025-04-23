@@ -6,29 +6,26 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 19:36:42 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:08:56 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static char	*heredoc_expand(char *str)
+static char	*heredoc_expand(char **str, int flag)
 {
 	t_pars_args	arg;
 
 	ft_bzero(&arg, sizeof(t_pars_args));
-	while (str[0] && str[arg.i])
+	if (ms_get_data()->context->hd_is_expand > 0 || flag == EMPTY_QUOTE)
+		return (*str);
+	while (*str != NULL && (*str)[arg.i])
 	{
-		if (str[arg.i] == '"' && arg.quote % 2 == 0)
-			arg.d_quote++;
-		else if (str[arg.i] == '\'' && arg.d_quote % 2 == 0)
-			arg.quote++;
-		else if (str[++arg.i - 1] == '$' && (str[arg.i] == '?'
-				|| str[arg.i] == '_'
-				|| str[arg.i] == '$' || ft_isalnum(str[arg.i])))
-			arg.i += var_placer(&str, &arg);
+		if ((*str)[arg.i] == '$')
+			arg.i += var_placer(str, &arg, true);
+		arg.i++;
 	}
-	return (ft_strdup(str));
+	return (*str);
 }
 
 static char	*heredoc_unquote(char *str)
@@ -36,22 +33,21 @@ static char	*heredoc_unquote(char *str)
 	t_pars_args	arg;
 
 	ft_bzero(&arg, sizeof(t_pars_args));
-	if (str[0] == '$' && str[1] == '\0')
-		return (str);
 	while (str[arg.i])
 	{
 		if (str[arg.i] == '"' && arg.quote % 2 == 0)
 		{
-			str = pars_injector(str, NULL, &arg);
 			arg.d_quote++;
+			ms_get_data()->context->hd_is_expand++;
+			str = pars_injector(str, NULL, &arg);
 		}
 		else if (str[arg.i] == '\'' && arg.d_quote % 2 == 0)
 		{
-			str = pars_injector(str, NULL, &arg);
 			arg.quote++;
+			ms_get_data()->context->hd_is_expand++;
+			str = pars_injector(str, NULL, &arg);
 		}
-		else if (str[arg.i] == '$' && ft_strchr("\"'", str[arg.i + 1])
-			&& (arg.d_quote + arg.quote) % 2 == 0)
+		else if (str[arg.i] == '$' && (arg.d_quote + arg.quote) % 2 == 0)
 			str = pars_injector(str, NULL, &arg);
 		arg.i++;
 	}
@@ -61,12 +57,11 @@ static char	*heredoc_unquote(char *str)
 static void	heredoc_loop(t_ms_tokken **tok, char *eof, int fd)
 {
 	char	*hdp;
-	char	*expand;
 
 	hdp = NULL;
-	ms_get_data()->context->last_fd = dup(STDIN_FILENO);
 	while (true)
 	{
+		free(hdp);
 		hdp = readline(">");
 		if (!ft_strcmp(hdp, eof) && hdp != NULL)
 			break ;
@@ -78,13 +73,12 @@ static void	heredoc_loop(t_ms_tokken **tok, char *eof, int fd)
 		}
 		else if (ms_get_data()->context->hd_ctrl_c)
 			break ;
-		expand = heredoc_expand(hdp);
-		ft_putendl_fd(expand, fd);
-		free(expand);
+		heredoc_expand(&hdp, (*tok)->flag);
+		ft_putendl_fd(hdp, fd);
 	}
+	free(hdp);
 	close(fd);
-	dup2(ms_get_data()->context->last_fd, STDIN_FILENO);
-	(free(hdp), free(eof));
+	free(eof);
 }
 
 void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
@@ -103,5 +97,5 @@ void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 	heredoc_loop(tokken, heredoc_unquote((*tokken)->content),
 		open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644));
 	(*tokken)->content = tmp;
-	ms_sig_init(ms_get_data());
+	ms_sig_init(data);
 }
