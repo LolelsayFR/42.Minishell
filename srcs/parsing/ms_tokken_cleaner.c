@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/23 17:01:26 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:11:07 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,12 @@ int	var_placer(char **str, t_pars_args *arg, bool qte_ign)
 		ending = NULL;
 	else
 		ending = ft_substr(*str, arg->i + arg->count, ft_strlen(*str));
-	printf("Begin = %s\nMiddle = %s\nEnding = %s\n", begin, middle, ending);
+	if (MS_DEBUG == true && MS_DE_EXPAND == true)
+		printf("Debug Expand : \n"RED"Begin = %s\nMiddle = %s", begin, middle);
 	free(*str);
 	replace_middle(&middle);
-	printf("Replace Middle = %s\n", middle);
+	if (MS_DEBUG == true && MS_DE_EXPAND == true)
+		printf("\nEnding = %s\nReplace Middle = %s"RES, ending, middle);
 	if (middle != NULL)
 		(ft_strcat(&begin, middle));
 	(ft_strcat(&begin, ending), free(ending));
