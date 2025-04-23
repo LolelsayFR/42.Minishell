@@ -6,24 +6,29 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 19:51:30 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:01:26 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static void	env_var_count(char *str, t_pars_args *arg)
+static void	env_var_count_len(char *str, t_pars_args *arg)
 {
-	arg->count = 0;
-	if (str[arg->i + arg->count] == '$' || str[arg->i + arg->count] == '?'
-		|| (ft_isdigit(str[arg->i + arg->count])))
+	char	*temp;
+
+	temp = ft_itoa(ms_get_data()->last_return);
+	arg->count = 1;
+	if (str[arg->i + arg->count] == '$' || ft_isdigit(str[arg->i + arg->count]))
 		arg->count = 1;
+	else if (str[arg->i + arg->count] == '?')
+		arg->count = ft_strlen(temp) + 1;
 	else
 	{
 		while (ft_isalnum(str[arg->i + arg->count])
 			|| str[arg->i + arg->count] == '_')
 			arg->count++;
 	}
+	free(temp);
 }
 
 static void	replace_middle(char **middle)
@@ -31,15 +36,13 @@ static void	replace_middle(char **middle)
 	t_env_lst	*var_link;
 	char		*result;
 
-	if ((*middle)[0] == '$')
-		result = ft_strdup("$");
-	else if ((*middle)[0] == '?')
+	if ((*middle)[1] == '?')
 		result = ft_itoa(ms_get_data()->last_return);
-	else if (ft_isdigit((*middle)[0]))
+	else if (ft_isdigit((*middle)[1]) || (*middle)[1] == '$')
 		result = NULL;
 	else
 	{
-		var_link = get_env_lst(ms_get_data(), *middle);
+		var_link = get_env_lst(ms_get_data(), *middle + 1);
 		if (var_link == NULL || var_link->var_cont == NULL)
 			result = NULL;
 		else
@@ -49,29 +52,31 @@ static void	replace_middle(char **middle)
 	*middle = result;
 }
 
-int	var_placer(char **str, t_pars_args *arg)
+int	var_placer(char **str, t_pars_args *arg, bool qte_ign)
 {
 	char		*begin;
 	char		*middle;
 	char		*ending;
 
-	if (arg->quote % 2 == 1)
+	if (arg->quote % 2 == 1 && qte_ign == false)
 		return (0);
-	env_var_count(*str, arg);
-	begin = ft_substr(*str, 0, arg->i - 1);
+	env_var_count_len(*str, arg);
+	begin = ft_substr(*str, 0, arg->i);
 	middle = ft_substr(*str, arg->i, arg->count);
 	if (arg->i + arg->count >= (int)ft_strlen(*str))
 		ending = NULL;
 	else
 		ending = ft_substr(*str, arg->i + arg->count, ft_strlen(*str));
+	printf("Begin = %s\nMiddle = %s\nEnding = %s\n", begin, middle, ending);
 	free(*str);
 	replace_middle(&middle);
+	printf("Replace Middle = %s\n", middle);
 	if (middle != NULL)
 		(ft_strcat(&begin, middle));
 	(ft_strcat(&begin, ending), free(ending));
 	*str = begin;
 	arg->len = (int)ft_strlen(middle);
-	return (free(middle), arg->len - 2);
+	return (free(middle), arg->len - 1);
 }
 
 static char	*tokken_unquote(char **str, t_pars_args arg)
@@ -88,10 +93,8 @@ static char	*tokken_unquote(char **str, t_pars_args arg)
 			(*str) = pars_injector((*str), NULL, &arg);
 			arg.quote++;
 		}
-		else if (arg.i > 0 && (*str)[arg.i - 1] == '$' && ((*str)[arg.i] == '?'
-				|| (*str)[arg.i] == '_' || (*str)[arg.i] == '$'
-				|| ft_isalnum((*str)[arg.i])))
-			arg.i += var_placer(str, &arg);
+		else if ((*str)[arg.i] == '$')
+			arg.i += var_placer(str, &arg, false);
 		arg.i++;
 	}
 	if (*str == NULL)

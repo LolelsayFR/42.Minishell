@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 13:18:22 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:06:16 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,13 @@ typedef struct s_ms_tokken
 	int		id;
 }	t_ms_tokken;
 
-//Context struct for exec by parsing
+//Context struct for exec by parsing	int		last_fd;
 typedef struct s_ms_context
 {
 	int		heredocs;
 	int		nb_cmd;
-	int		nb_tkn;
-	int		last_fd;
-	bool	hd_is_expand;
+	int		nb_tkn;	
+	int		hd_is_expand;
 	bool	hd_ctrl_c;
 	bool	rl_redisplay;
 }	t_ms_context;
