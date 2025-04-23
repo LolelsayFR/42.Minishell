@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 13:18:22 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:39:34 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,29 @@ typedef struct s_pars_args
 	int		d_quote;
 	int		count;
 }	t_pars_args;
+
+//Exec full struct with pipe
+typedef struct s_ex_data                                                                                 
+{
+	t_ms_tokken	*tokken;
+	t_list		*save;
+	int			*pid;
+	int			*file;
+	int			*pipe;
+	int			*prev_pipe;
+	int			good_file;
+	int			nb_cmd;
+	int			id;
+	int			i;
+}	t_ex_data;
+
+//Exec struct with pipe
+typedef struct s_one_data
+{
+	int			inf;
+	int			outf;
+	t_ms_tokken	*tokken;
+}	t_one_data;
 
 #endif
 /* ************************************************************************** */
