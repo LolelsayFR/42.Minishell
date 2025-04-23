@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/22 19:30:36 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:23:46 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 	cmd = tokken_id_join(data->tokkens, tokken->id);
 	if (tokken->type != B_IN)
 		cmd[0] = add_path(data, cmd[0]);
-	if (cmd[0] == NULL && tokken->type != B_IN)
+	ex_data->good_file = finds_files(ex_data, first_in_id(data->tokkens,
+			ex_data->tokken->id), ex_data->tokken->id);
+	if ((cmd[0] == NULL && tokken->type != B_IN) || ex_data->good_file == -1)
 	{
 		close_pipe(ex_data);
 		close(ex_data->pipe[0]);
@@ -113,8 +115,8 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 		{
 			if (open_pipe(ex_data) == -1)
 				break ;
-			ex_data->good_file = finds_files(ex_data, first_in_id(data->tokkens,
-						ex_data->tokken->id), ex_data->tokken->id);
+			//ex_data->good_file = finds_files(ex_data, first_in_id(data->tokkens,
+			//			ex_data->tokken->id), ex_data->tokken->id);
 			exec_launch(data, ex_data);
 		}
 		tokkens = tokkens->next;
