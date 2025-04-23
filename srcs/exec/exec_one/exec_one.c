@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 19:17:23 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:28:24 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	exec_cmd(char **cmd, char **env, t_one_data *o_data)
 	int	status;
 
 	pid = fork();
-	check_standard(4);
 	if (pid == 0)
 	{
+		check_standard(4);
 		execve(cmd[0], cmd, env);
 		ft_printfd(2, "Command Error\n");
 		ft_free_strtab(cmd);
@@ -83,5 +83,5 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 		exec_one_built_in(data, o_data, cmd);
 	else
 		exec_cmd(cmd, data->env_var, o_data);
-	return (check_standard(3), 0);
+	return (0);
 }
