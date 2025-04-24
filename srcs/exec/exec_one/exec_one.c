@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/24 13:23:38 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:41:14 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 		cmd[0] = add_path(data, cmd[0]);
 	if ((cmd[0] == NULL && o_data->tokken->type != B_IN)
 		|| o_data->tokken->flag == EMPTY_QUOTE)
-		return (ft_free_strtab(cmd), data->last_return = 127,
+		return (free_tab_err(cmd), data->last_return = 127,
 			free_data(o_data), -1);
 	if (o_data->tokken->type == B_IN)
 		exec_one_built_in(data, o_data, cmd);
