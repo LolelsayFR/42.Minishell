@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/24 15:10:11 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:35:45 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 	t_ms_tokken	*tokken;
 
 	tokken = tokkens->content;
-	while (tokkens != NULL && tokken->id == id)
+	while (tokkens != NULL)
 	{
 		tokken = tokkens->content;
+		if (tokken->id != id)
+			break ;
 		if (tokken->type == INF || tokken->type == H_D)
 			ex_data->file[0] = infile_open(ex_data->file[0],
 					tokken->type, tokken->content);
