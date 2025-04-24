@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/24 09:36:26 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:47:39 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 //Unset debug print
 # define MS_DE_UNSET false
 //Unset export print
-# define MS_DE_EXPORT false
+# define MS_DE_EXPORT true
 //Unset expand env-var print
 # define MS_DE_EXPAND true
 
