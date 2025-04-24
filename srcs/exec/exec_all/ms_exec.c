@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/24 13:01:13 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:14:48 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 		exec_built_in(tokken, data, ex_data, ex_data->cmd);
 	else
 	{
-		if (ex_data->pipe != NULL)
-			double_close(ex_data->pipe[0], ex_data->pipe[1]);
-		close_pipe(ex_data);
-		check_standard(4);
+		execve_file_closing(ex_data);
 		execve(ex_data->cmd[0], ex_data->cmd, data->env_var);
 	}
 	ft_printfd(2, "%s: Command Error\n", ex_data->cmd[0]);
