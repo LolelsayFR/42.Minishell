@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/24 11:14:17 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:16:07 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ int	minishell_main_loop(t_ms_data *data)
 			add_history(data->prompt);
 		else
 			continue ;
-		if (prompt_handler(data) == EXIT_SUCCESS && !data->context->hd_ctrl_c)
+		if (prompt_handler(data) == EXIT_SUCCESS)
 		{
+			if (data->context->hd_ctrl_c)
+				continue ;
 			data->context->rl_redisplay = false;
 			signal(SIGQUIT, exec_sig);
 			if (find_nb_pipe(data->tokkens) == 0)
@@ -75,6 +77,8 @@ int	minishell_main_loop(t_ms_data *data)
 			data->context->rl_redisplay = true;
 			signal(SIGQUIT, SIG_IGN);
 		}
+		else
+			data->last_return = 2;
 	}
 	return (EXIT_SUCCESS);
 }
