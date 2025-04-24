@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/23 18:39:54 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:57:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static bool	export_checker(char *str)
 		return (false);
 	return (true);
 }
+
 static char	*name_convertor(int len, char **av, int i)
 {
 	if (len == (int)ft_strlen(av[i]))
@@ -57,6 +58,7 @@ static char	*name_convertor(int len, char **av, int i)
 	else
 		return (ft_strdup(av[i]));
 }
+
 static void	ms_export_loop(char **av, t_pars_args *a, int i)
 {
 	t_ms_data	*data;

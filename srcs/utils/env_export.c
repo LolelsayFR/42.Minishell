@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:20:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/23 19:02:30 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:58:30 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_env_lst	*new_env(char *name, char *content)
 	new = ft_calloc(1, sizeof(t_env_lst));
 	new->next = NULL;
 	if (content == NULL)
-	{	
+	{
 		new->var_cont = NULL;
 		new->var_name = ft_substr(name, 0, ft_strlen(name) - 1);
 		free(name);
