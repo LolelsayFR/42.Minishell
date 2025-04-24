@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/24 11:55:22 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:11:32 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,14 @@ void	exec_cmd(char **cmd, char **env, t_one_data *o_data)
 	{
 		check_standard(4);
 		execve(cmd[0], cmd, env);
-		ft_printfd(2, "Command Error\n");
-		ft_free_strtab(cmd);
 		free_data(o_data);
+		if (access(cmd[0], X_OK) == -1)
+		{
+			ft_free_strtab(cmd);
+			ms_close(126, ms_get_data());
+		}
+		ft_printfd(2, "%s: Command Error\n", cmd[0]);
+		ft_free_strtab(cmd);
 		ms_close(2, ms_get_data());
 	}
 	waitpid(pid, &status, 0);
