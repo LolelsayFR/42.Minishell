@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/23 18:53:55 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/24 08:35:07 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void	exec_sig(int sig)
 	if (sig == SIGQUIT)
 	{
 		fd = dup(STDIN_FILENO);
-		close(STDIN_FILENO);
 		ms_get_data()->context->hd_ctrl_c = true;
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		ft_printfd(2, "Quit\n");
 		ms_get_data()->last_return = 131;
 		dup2(fd, STDIN_FILENO);
+		close(fd);
 	}
 }
