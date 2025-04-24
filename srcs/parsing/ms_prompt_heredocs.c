@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/24 08:43:18 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:50:05 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static char	*heredoc_expand(char **str, int flag)
 		return (*str);
 	while (*str != NULL && (*str)[arg.i])
 	{
-		if ((*str)[arg.i] == '$')
+		if ((*str)[arg.i] == '$' && (ft_isalnum((*str)[arg.i + 1])
+			|| (*str)[arg.i + 1] == '_'))
 			arg.i += var_placer(str, &arg, true);
 		arg.i++;
 	}

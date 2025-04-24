@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/23 19:13:04 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:36:26 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 /* ************************************************************************** */
 
 //Global Debug mod
-# define MS_DEBUG false
+# define MS_DEBUG true
 //Tokken printer
 # define MS_DE_TOKPRINT true
 //Split_tab parsing printer
@@ -31,7 +31,7 @@
 //Unset export print
 # define MS_DE_EXPORT false
 //Unset expand env-var print
-# define MS_DE_EXPAND false
+# define MS_DE_EXPAND true
 
 /* ************************************************************************** */
 /*  Tokken info                                                               */

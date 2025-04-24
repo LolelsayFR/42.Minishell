@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/23 19:11:07 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:49:45 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	env_var_count_len(char *str, t_pars_args *arg)
 
 	temp = ft_itoa(ms_get_data()->last_return);
 	arg->count = 1;
-	if (str[arg->i + arg->count] == '$' || ft_isdigit(str[arg->i + arg->count]))
+	if (ft_isdigit(str[arg->i + arg->count]))
 		arg->count = 1;
 	else if (str[arg->i + arg->count] == '?')
 		arg->count = ft_strlen(temp) + 1;
@@ -95,7 +95,8 @@ static char	*tokken_unquote(char **str, t_pars_args arg)
 			(*str) = pars_injector((*str), NULL, &arg);
 			arg.quote++;
 		}
-		else if ((*str)[arg.i] == '$')
+		else if ((*str)[arg.i] == '$' && (ft_isalnum((*str)[arg.i + 1])
+			|| (*str)[arg.i + 1] == '_'))
 			arg.i += var_placer(str, &arg, false);
 		arg.i++;
 	}

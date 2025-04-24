@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/24 08:35:07 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/24 09:00:13 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	heredoc_sig(int sig)
 {
 	if (sig == SIGINT)
 	{
-		close(STDIN_FILENO);
 		ms_get_data()->context->hd_ctrl_c = true;
+		close(STDIN_FILENO);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		ft_printfd(2, "\n");
