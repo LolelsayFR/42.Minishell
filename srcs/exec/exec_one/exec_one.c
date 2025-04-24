@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:39:01 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/23 13:28:24 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:55:22 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	exec_one(t_ms_data *data, t_list *tokkens)
 	o_data->tokken = tokkens->content;
 	check_standard(0);
 	if (find_files(o_data, tokkens))
-		return (free_data(o_data), -1);
+		return (free_data(o_data), data->last_return = 1, -1);
 	tokkens = find_cmd(tokkens);
 	if (tokkens == NULL)
 		return (free_data(o_data), -1);

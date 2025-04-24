@@ -6,11 +6,24 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/17 18:38:41 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:21:25 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
+
+static char	*error_messages(char *cmd, char **env)
+{
+	if (access(cmd, F_OK) == -1)
+	{
+		ft_printfd(2, LANG_PREFIX "%s: command not found\n", cmd);
+		free(cmd);
+		cmd = NULL;
+	}
+	else
+		ft_printfd(2, LANG_PREFIX "%s: Permission Denied\n", cmd);
+	return (ft_free_strtab(env), cmd);
+}
 
 char	*add_path(t_ms_data *data, char *cmd)
 {
@@ -37,6 +50,5 @@ char	*add_path(t_ms_data *data, char *cmd)
 		free(joined);
 		i++;
 	}
-	ft_printfd(2, LANG_PREFIX "%s: command not found\n", cmd);
-	return (free(cmd), ft_free_strtab(env), NULL);
+	return (error_messages(cmd, env));
 }
