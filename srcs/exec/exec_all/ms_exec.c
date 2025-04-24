@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/23 16:03:32 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:51:17 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,18 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 	if (ex_data->cmd[0] == NULL || ex_data->good_file == -1)
 	{
 		close_pipe(ex_data);
-		close(ex_data->pipe[0]);
-		exec_close(ex_data, ex_data->cmd, 127, 1);
+		if (ex_data->pipe != NULL)
+			close(ex_data->pipe[0]);
+		if (ex_data->cmd[0] == NULL)
+			exec_close(ex_data, ex_data->cmd, 127, 1);
+		exec_close(ex_data, ex_data->cmd, 1, 1);
 	}
 	if (tokken->type == B_IN)
 		exec_built_in(tokken, data, ex_data, ex_data->cmd);
 	else
 	{
-		double_close(ex_data->pipe[0], ex_data->pipe[1]);
+		if (ex_data->pipe != NULL)
+			double_close(ex_data->pipe[0], ex_data->pipe[1]);
 		close_pipe(ex_data);
 		check_standard(4);
 		execve(ex_data->cmd[0], ex_data->cmd, data->env_var);
@@ -95,11 +99,8 @@ static inline void	exec_launch(t_ms_data *data, t_ex_data *ex_data)
 		if (ex_data->pid[ex_data->id++] == 0)
 			cmd_exec(ex_data->tokken, ex_data);
 	}
-	else if (is_cmd_in_id(data, ex_data->tokken->id) == 0)
-	{
-		close_pipe(ex_data);
-		ex_data->nb_cmd--;
-	}
+	else
+		are_files_good(data, ex_data);
 	close_pipe(ex_data);
 	ex_data->i++;
 }

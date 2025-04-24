@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/23 15:58:02 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:39:09 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void		find_one_infile(t_one_data *o_data, t_ms_tokken *tokken);
 void		find_one_outfile(t_one_data *o_data, t_ms_tokken *tokken);
 void		choose_files(int infile, int outfile);
 void		unlink_all(void);
+void		are_files_good(t_ms_data *data, t_ex_data *ex_data);
 int			outfile_access(char *outfile);
 int			infile_access(char *infile);
 int			find_outfile(int outfile, int *pipe);
@@ -99,6 +100,7 @@ char		**tokken_id_join(t_list *tokkens, int id);
 char		*add_path(t_ms_data *data, char *cmd);
 void		wait_all_pids(t_ex_data *data);
 int			find_nb_cmd(t_list *data);
+int			find_nb_pipe(t_list *tokkens);
 int			*find_previous_pipe(t_ex_data *data, int *pipe);
 int			arg_nb(t_list *tokkens, int id);
 int			numb_of_no_nl(char **tab);
