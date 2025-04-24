@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/24 12:32:00 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:18:04 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,11 @@ int			var_placer(char **str, t_pars_args *arg, bool qte_ign);
 int			ms_exec(t_ms_data *data, t_list *tokkens);
 int			exec_one(t_ms_data *data, t_list *tokkens);
 
+void		execve_file_closing(t_ex_data *ex_data);
+void		close_file_permission(t_ex_data *ex_data);
 void		close_cmd_permission(t_ex_data *ex_data);
-void		close_cmd_or_file(t_ex_data *ex_data);
+void		close_cmd_none(t_ex_data *ex_data);
+void		close_execve_one(t_one_data *o_data, char **cmd);
 
 void		find_one_infile(t_one_data *o_data, t_ms_tokken *tokken);
 void		find_one_outfile(t_one_data *o_data, t_ms_tokken *tokken);

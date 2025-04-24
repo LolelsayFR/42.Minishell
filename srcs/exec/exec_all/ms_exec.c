@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/24 12:32:51 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:14:48 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,17 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 		ex_data->cmd[0] = add_path(data, ex_data->cmd[0]);
 	ex_data->good_file = finds_files(ex_data, first_in_id(data->tokkens,
 				ex_data->tokken->id), ex_data->tokken->id);
+	if (ex_data->good_file == -1)
+		close_file_permission(ex_data);
 	if (ex_data->cmd[0] != NULL && access(ex_data->cmd[0], X_OK) == -1)
 		close_cmd_permission(ex_data);
 	if (ex_data->cmd[0] == NULL || ex_data->good_file == -1)
-		close_cmd_or_file(ex_data);
+		close_cmd_none(ex_data);
 	if (tokken->type == B_IN)
 		exec_built_in(tokken, data, ex_data, ex_data->cmd);
 	else
 	{
-		if (ex_data->pipe != NULL)
-			double_close(ex_data->pipe[0], ex_data->pipe[1]);
-		close_pipe(ex_data);
-		check_standard(4);
+		execve_file_closing(ex_data);
 		execve(ex_data->cmd[0], ex_data->cmd, data->env_var);
 	}
 	ft_printfd(2, "%s: Command Error\n", ex_data->cmd[0]);
