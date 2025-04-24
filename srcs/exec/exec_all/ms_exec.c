@@ -6,7 +6,7 @@
 /*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/24 11:51:17 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:21:54 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ void	cmd_exec(t_ms_tokken *tokken, t_ex_data *ex_data)
 		ex_data->cmd[0] = add_path(data, ex_data->cmd[0]);
 	ex_data->good_file = finds_files(ex_data, first_in_id(data->tokkens,
 				ex_data->tokken->id), ex_data->tokken->id);
+	if (ex_data->cmd[0] != NULL && access(ex_data->cmd[0], X_OK) == -1)
+	{
+		close_pipe(ex_data);
+		if (ex_data->pipe != NULL)
+			close(ex_data->pipe[0]);
+		exec_close(ex_data, ex_data->cmd, 126, 0);
+	}
 	if (ex_data->cmd[0] == NULL || ex_data->good_file == -1)
 	{
 		close_pipe(ex_data);
