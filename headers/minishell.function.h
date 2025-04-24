@@ -170,6 +170,7 @@ char		*str_unquote(char *str);
 char		*pars_injector(char *str, char *temp, t_pars_args *arg);
 int			env_export(char *name, char *content, t_env_lst **head);
 char		*ft_strjointab(char **tab);
+int			ms_strcmp_e(char *s1, const char *s2);
 
 #endif
 /* ************************************************************************** */

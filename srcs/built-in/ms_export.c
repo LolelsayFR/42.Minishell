@@ -33,14 +33,6 @@ static int	print_export(t_env_lst *head)
 	return (0);
 }
 
-static char	*name_convertor(int len, char **av, int i)
-{
-	if (len == (int)ft_strlen(av[i]))
-		return (ft_strjoin(av[i], "="));
-	else
-		return (ft_strdup(av[i]));
-}
-
 static bool	export_checker(char *str)
 {
 	int	i;
@@ -58,8 +50,14 @@ static bool	export_checker(char *str)
 		return (false);
 	return (true);
 }
-
-static void	ms_export_loop(char **av, t_pars_args *a, char *here, int i)
+static char	*name_convertor(int len, char **av, int i)
+{
+	if (len == (int)ft_strlen(av[i]))
+		return (ft_strjoin(av[i], "="));
+	else
+		return (ft_strdup(av[i]));
+}
+static void	ms_export_loop(char **av, t_pars_args *a, int i)
 {
 	t_ms_data	*data;
 
@@ -74,14 +72,10 @@ static void	ms_export_loop(char **av, t_pars_args *a, char *here, int i)
 		if (export_checker(av[i]) == true && av[i][a->len] != '=')
 			env_export(name_convertor(a->len, av, i), NULL, &data->env_lst);
 		else if (export_checker(av[i]) == true)
-		{
-			here = name_convertor(a->len, av, i);
-			env_export(ft_substr(here, 0, a->len + 1),
+			env_export(ft_substr(av[i], 0, a->len + 1),
 				ft_substr(av[i], a->len + 1, a->count), &data->env_lst);
-		}
 		else
 			ft_printfd(2, EXPORT_ERROR, ms_prefix(data), av[i]);
-		free(here);
 		i++;
 	}
 }
@@ -90,14 +84,12 @@ int	ms_export(t_ms_data *data, char **av)
 {
 	t_pars_args	a;
 	int			i;
-	char		*here;
 
-	here = NULL;
 	ft_bzero(&a, sizeof(t_pars_args));
 	if (ft_tabstr_len(av) <= 0)
 		return (print_export(data->env_lst), data->last_return = 0);
 	i = 0;
-	ms_export_loop(av, &a, here, i);
+	ms_export_loop(av, &a, i);
 	ft_free_strtab(data->env_var);
 	data->env_var = env_to_tab(data->env_lst);
 	return (1);

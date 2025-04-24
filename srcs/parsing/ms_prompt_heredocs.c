@@ -21,7 +21,8 @@ static char	*heredoc_expand(char **str, int flag)
 		return (*str);
 	while (*str != NULL && (*str)[arg.i])
 	{
-		if ((*str)[arg.i] == '$')
+		if ((*str)[arg.i] == '$' && (ft_isalnum((*str)[arg.i + 1])
+			|| (*str)[arg.i + 1] == '_'))
 			arg.i += var_placer(str, &arg, true);
 		arg.i++;
 	}
