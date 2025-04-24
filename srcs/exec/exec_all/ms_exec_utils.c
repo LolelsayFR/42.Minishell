@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 12:25:43 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/24 13:30:05 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:45:23 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	close_execve_one(t_one_data *o_data, char **cmd)
 		ft_free_strtab(cmd);
 		ms_close(126, ms_get_data());
 	}
-	write(1, "ici\n", 4);
 	ft_printfd(2, "%s: Command Error\n", cmd[0]);
 	ft_free_strtab(cmd);
 	ms_close(2, ms_get_data());
