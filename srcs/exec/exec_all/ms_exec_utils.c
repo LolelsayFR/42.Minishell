@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 12:25:43 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/24 13:45:23 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:56:51 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	execve_file_closing(t_ex_data *ex_data)
 		double_close(ex_data->pipe[0], ex_data->pipe[1]);
 	close_pipe(ex_data);
 	check_standard(4);
+	if (ex_data->tokken->flag == EMPTY_QUOTE)
+	{
+		ft_printfd(2, "\'\': command not found\n");
+		exec_close(ex_data, ex_data->cmd, 2, 0);
+	}
 }
 
 void	close_file_permission(t_ex_data *ex_data)
