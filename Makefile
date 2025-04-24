@@ -21,6 +21,7 @@ SRC				=	srcs/main.c\
 					srcs/exec/unlink_all.c\
 					srcs/exec/exec_all/finds.c\
 					srcs/exec/exec_all/ms_exec.c\
+					srcs/exec/exec_all/ms_exec_utils.c\
 					srcs/exec/exec_all/ms_ex_free.c\
 					srcs/exec/exec_all/opens.c\
 					srcs/exec/exec_all/pipping.c\
