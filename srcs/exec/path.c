@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/25 10:54:45 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:07:31 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ static char	*error_messages(char *cmd, char **env)
 {
 	if (access(cmd, F_OK) == -1)
 	{
+		ms_get_data()->last_return = 127;
 		ft_printfd(2, EXEC_NOFOUND, ms_prefix(ms_get_data()), cmd);
 		free(cmd);
 		cmd = NULL;
 	}
 	else
+	{
+		ms_get_data()->last_return = 126;
 		ft_printfd(2, EXEC_NOPERM, ms_prefix(ms_get_data()), cmd);
+	}
 	return (ft_free_strtab(env), cmd);
 }
 
