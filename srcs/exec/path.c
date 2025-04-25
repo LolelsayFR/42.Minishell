@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/25 15:07:31 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:19:12 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ char	*add_path(t_ms_data *data, char *cmd)
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
 	temp = get_env(data, "PATH");
-	if (temp == NULL || temp[0] == '\0')
-		return (ft_printfd(2, EXEC_NOFOUND, ms_prefix(ms_get_data())
-				, cmd), free(cmd), NULL);
-	env = ft_split(temp + 5, ':');
+	if (temp == NULL)
+		env = NULL;
+	else
+		env = ft_split(temp + 5, ':');
 	if (ft_strncmp(cmd, "./", 2) == 0)
 		return (error_messages(cmd, env));
-	while (env != NULL && env[i] != NULL)
+	while (temp != NULL && temp[0] != '\0' && env != NULL && env[i] != NULL)
 	{
 		temp = ft_strjoin(env[i++], "/");
 		joined = ft_strjoin(temp, cmd);
