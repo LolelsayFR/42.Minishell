@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/25 12:53:05 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:45:43 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	tokken_count(t_ms_data *data, t_pars_args *a)
 	while (ft_isspace(data->prompt[a->i])
 		|| ft_strchr("<>", data->prompt[a->i]))
 		a->i++;
-	while (data->prompt[a->i] && data->prompt[a->i] != '\n')
+	while (data->prompt[a->i])
 	{
 		if (data->prompt[a->i] == '"' && a->quote % 2 == 0)
 			a->d_quote++;
@@ -51,7 +51,7 @@ static void	prompt_cutter(t_ms_data *data, char **result, t_pars_args *a)
 			a->i++;
 			a->len++;
 		}
-		while (ft_isspace(data->prompt[a->i + 1]))
+		while (ft_isspace(data->prompt[a->i + 1]) || data->prompt[a->i] == '\n')
 		{
 			a->i++;
 			a->len++;
@@ -70,7 +70,7 @@ char	**prompt_split(t_ms_data *data)
 	while (ft_isspace(data->prompt[a.i]) || ft_strchr("<>", data->prompt[a.i]))
 		a.i++;
 	a.len = a.i;
-	while (data->prompt[a.i] && data->prompt[a.i] != '\n')
+	while (data->prompt[a.i])
 	{
 		if (((ft_strchr("<>| \t", data->prompt[a.i])
 					&& (a.quote + a.d_quote) % 2 == 0))
@@ -119,17 +119,12 @@ bool	tokkens_checker(t_list *lst, t_ms_data *data)
 
 char	*readline_cleaner(t_ms_data *data)
 {
-	char	*readed;
-	char	*result;
-	int		i;
+	char		*readed;
+	char		*result;
 
 	readed = readline(ms_prefix(data));
 	if (readed == NULL)
 		return (NULL);
-	i = 0;
-	while (readed[i] != '\0' && readed[i] != '\n')
-		i++;
-	readed[i] = '\0';
 	result = ft_strdup(readed);
 	free(readed);
 	readed = NULL;
