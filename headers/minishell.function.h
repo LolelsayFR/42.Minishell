@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/24 13:18:04 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:47:40 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool		tokkens_checker(t_list *lst, t_ms_data *data);
 char		*tokken_cleaner(char *str, int *flag, int type);
 void		heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken);
 int			var_placer(char **str, t_pars_args *arg, bool qte_ign);
-
+char		*readline_cleaner(t_ms_data *data);
 /* ************************************************************************** */
 /*  Exec functions                                                            */
 /* ************************************************************************** */
