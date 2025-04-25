@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 09:44:03 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 13:15:13 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:42:52 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ t_one_data	*data_init(void)
 
 void	free_data(t_one_data *data)
 {
-	if (data->inf != 0 && data->inf != -1)
+	if (data->inf != 0 && data->inf != -1 && data->inf != -2)
 		close(data->inf);
-	if (data->outf != 1 && data->outf != -1)
+	if (data->outf != 1 && data->outf != -1 && data->outf != -2)
 		close(data->outf);
 	check_standard(3);
 	free(data);

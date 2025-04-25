@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:49:29 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 13:18:07 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:38:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ int	find_files(t_one_data *o_data, t_list *tokkens)
 			find_one_infile(o_data, tokken);
 		else if (tokken->type == OUTF_R || tokken->type == OUTF_A)
 			find_one_outfile(o_data, tokken);
-		if (o_data->inf == -1 || o_data->outf == -1)
+		if (o_data->inf == -2)
 			return (ft_printfd(2, "%s: No such file or directory\n",
+					tokken->content), -1);
+		else if (o_data->outf == -1 || o_data->outf == -2
+				|| o_data->inf == -1)
+			return (ft_printfd(2, "%s: Permission Denied\n",
 					tokken->content), -1);
 		tokkens = tokkens->next;
 	}
@@ -33,32 +37,30 @@ int	find_files(t_one_data *o_data, t_list *tokkens)
 
 void	find_one_infile(t_one_data *o_data, t_ms_tokken *tokken)
 {
-	if (o_data->inf != 0)
+	if (o_data->inf != 0 && o_data->inf != -1 && o_data->inf != -2)
 		close(o_data->inf);
-	if (infile_access(tokken->content) == -1)
-	{
-		o_data->inf = -1;
+	o_data->inf = infile_access(tokken->content);
+	if (o_data->inf == -1)
 		return ;
-	}
-	o_data->inf = infile_open(o_data->inf, tokken->type, tokken->content);
-	dup2(o_data->inf, STDIN_FILENO);
 	if (o_data->inf == -2)
-		o_data->inf = -1;
+		return ;
+	o_data->inf = infile_open(o_data->inf, tokken->type, tokken->content);
+	if (o_data->inf == -2)
+		return ;
+	dup2(o_data->inf, STDIN_FILENO);
 }
 
 void	find_one_outfile(t_one_data *o_data, t_ms_tokken *tokken)
 {
-	if (o_data->outf != 1)
+	if (o_data->outf != 1 && o_data->outf != -1 && o_data->outf != -2)
 		close(o_data->outf);
-	if (outfile_access(tokken->content) == -1)
-	{
-		o_data->outf = -1;
+	o_data->outf = outfile_access(tokken->content);
+	if (o_data->outf == -1)
 		return ;
-	}
 	o_data->outf = outfile_open(o_data->outf, tokken->type, tokken->content);
-	dup2(o_data->outf, STDOUT_FILENO);
 	if (o_data->outf == -2)
-		o_data->outf = -1;
+		return ;
+	dup2(o_data->outf, STDOUT_FILENO);
 }
 
 t_list	*find_cmd(t_list *tokkens)
@@ -73,18 +75,4 @@ t_list	*find_cmd(t_list *tokkens)
 		tokkens = tokkens->next;
 	}
 	return (NULL);
-}
-
-void	choose_files(int infile, int outfile)
-{
-	if (infile != 0)
-	{
-		dup2(infile, STDIN_FILENO);
-		close(infile);
-	}
-	if (outfile != 1)
-	{
-		dup2(outfile, STDOUT_FILENO);
-		close(outfile);
-	}
 }
