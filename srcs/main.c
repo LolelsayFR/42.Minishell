@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/25 11:09:19 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:24:03 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ void	ms_close(unsigned char exit_value, t_ms_data *data)
 	if (data->tokkens != NULL)
 		(ft_lstclear(&data->tokkens, tokken_destructor), data->context = NULL);
 	ft_alist_free();
+	rl_clear_history();
 	exit((unsigned char)exit_value);
 }
