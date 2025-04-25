@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/24 08:35:07 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:25:33 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ static void	ms_sig_handler(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		printf("\n");
+		rl_redisplay();
 		ms_get_data()->last_return = 130;
-		if (ms_get_data()->context->rl_redisplay)
-			rl_redisplay();
 	}
 }
 
@@ -54,7 +53,6 @@ void	exec_sig(int sig)
 	if (sig == SIGQUIT)
 	{
 		fd = dup(STDIN_FILENO);
-		ms_get_data()->context->hd_ctrl_c = true;
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		ft_printfd(2, "Quit\n");
