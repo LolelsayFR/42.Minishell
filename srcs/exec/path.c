@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:08:35 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/25 09:20:33 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:54:45 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static char	*error_messages(char *cmd, char **env)
 {
 	if (access(cmd, F_OK) == -1)
 	{
-		ft_printfd(2, LANG_PREFIX "%s: command not found\n", cmd);
+		ft_printfd(2, EXEC_NOFOUND, ms_prefix(ms_get_data()), cmd);
 		free(cmd);
 		cmd = NULL;
 	}
 	else
-		ft_printfd(2, LANG_PREFIX "%s: Permission Denied\n", cmd);
+		ft_printfd(2, EXEC_NOPERM, ms_prefix(ms_get_data()), cmd);
 	return (ft_free_strtab(env), cmd);
 }
 
@@ -37,8 +37,8 @@ char	*add_path(t_ms_data *data, char *cmd)
 		return (cmd);
 	temp = get_env(data, "PATH");
 	if (temp == NULL || temp[0] == '\0')
-		return (ft_printfd(2, LANG_PREFIX "%s: command not found\n",
-				cmd), free(cmd), NULL);
+		return (ft_printfd(2, EXEC_NOFOUND, ms_prefix(ms_get_data())
+				, cmd), free(cmd), NULL);
 	env = ft_split(temp + 5, ':');
 	if (ft_strncmp(cmd, "./", 2) == 0)
 		return (error_messages(cmd, env));

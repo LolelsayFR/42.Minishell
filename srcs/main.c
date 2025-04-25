@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/24 16:16:07 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:57:09 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ int	minishell_main_loop(t_ms_data *data)
 				continue ;
 			data->context->rl_redisplay = false;
 			signal(SIGQUIT, exec_sig);
-			if (find_nb_pipe(data->tokkens) == 0)
-				exec_one(data, data->tokkens);
-			else
-				ms_exec(data, data->tokkens);
+			ms_exec(data, data->tokkens);
 			data->context->rl_redisplay = true;
 			signal(SIGQUIT, SIG_IGN);
 		}

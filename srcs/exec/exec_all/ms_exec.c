@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johnrandom <marvin@42.fr>                  +#+  +:+       +#+        */
+/*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/25 09:20:05 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:58:20 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 					tokken->type, tokken->content);
 		if ((ex_data->file[0] == -2 || ex_data->file[1] == -2)
 			&& tokken->type != CMD && tokken->type != B_IN)
-			return (ft_printfd(2, LANG_PREFIX "%s: No such file or directory\n",
-					tokken->content), -1);
+			return (ft_printfd(2, EXEC_NOFOUND, ms_prefix(ms_get_data())
+					, tokken->content), -1);
 		tokkens = tokkens->next;
 	}
 	return (0);
@@ -106,6 +106,8 @@ int	ms_exec(t_ms_data *data, t_list *tokkens)
 {
 	t_ex_data	*ex_data;
 
+	if (find_nb_pipe(tokkens) == 0)
+		return (exec_one(data, tokkens));
 	ex_data = exec_init(tokkens);
 	while (tokkens != NULL)
 	{
