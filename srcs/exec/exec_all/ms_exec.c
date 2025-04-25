@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:23:43 by johnrandom        #+#    #+#             */
-/*   Updated: 2025/04/25 10:58:20 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:04:19 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,12 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 					tokken->type, tokken->content);
 		if ((ex_data->file[0] == -2 || ex_data->file[1] == -2)
 			&& tokken->type != CMD && tokken->type != B_IN)
-			return (ft_printfd(2, EXEC_NOFOUND, ms_prefix(ms_get_data())
-					, tokken->content), -1);
+			return (ft_printfd(2, LANG_PREFIX "%s: No such file or directory\n",
+					tokken->content), -1);
+		else if ((ex_data->file[0] == -1 || ex_data->file[1] == -1)
+			&& tokken->type != CMD && tokken->type != B_IN)
+			return (ft_printfd(2, LANG_PREFIX "%s: Permission Denied\n",
+					tokken->content), -1);
 		tokkens = tokkens->next;
 	}
 	return (0);
