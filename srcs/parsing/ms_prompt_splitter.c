@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/25 13:45:43 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:50:52 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	prompt_cutter(t_ms_data *data, char **result, t_pars_args *a)
 			a->i++;
 			a->len++;
 		}
-		while (ft_isspace(data->prompt[a->i + 1]) || data->prompt[a->i] == '\n')
+		while (ft_isspace(data->prompt[a->i + 1]))
 		{
 			a->i++;
 			a->len++;
