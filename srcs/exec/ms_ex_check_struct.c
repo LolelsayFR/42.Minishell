@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 09:29:57 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/22 16:03:30 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/25 09:08:19 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_ex_data	*exec_init(t_list *tokkens)
 	ex_data->pipe = NULL;
 	ex_data->prev_pipe = NULL;
 	ex_data->file = malloc(2 * sizeof(int));
+	ex_data->good_file = 0;
 	ex_data->file[0] = 0;
 	ex_data->file[1] = 1;
 	ex_data->id = 0;
