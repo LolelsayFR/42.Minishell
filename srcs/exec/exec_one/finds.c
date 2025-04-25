@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:49:29 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/25 10:38:20 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:05:18 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	find_files(t_one_data *o_data, t_list *tokkens)
 			return (ft_printfd(2, "%s: No such file or directory\n",
 					tokken->content), -1);
 		else if (o_data->outf == -1 || o_data->outf == -2
-				|| o_data->inf == -1)
+			|| o_data->inf == -1)
 			return (ft_printfd(2, "%s: Permission Denied\n",
 					tokken->content), -1);
 		tokkens = tokkens->next;

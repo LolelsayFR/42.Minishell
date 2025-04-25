@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:07:48 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/25 10:16:50 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:06:21 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,16 @@ static int	outfile_rights(char *file)
 void	are_files_good(t_ms_data *data, t_ex_data *ex_data)
 {
 	int			i;
-	int			id;
 	t_ms_tokken	*tokken;
 	t_list		*temp;
 
 	i = 0;
-	id = ex_data->tokken->id;
 	temp = first_in_id(data->tokkens, ex_data->tokken->id);
 	tokken = temp->content;
 	while (temp != NULL)
 	{
 		tokken = temp->content;
-		if (tokken->id != id)
+		if (tokken->id != ex_data->tokken->id)
 			break ;
 		if (tokken->type == H_D || tokken->type == INF)
 			i = infile_rights(tokken->content);
