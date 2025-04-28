@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/28 17:47:28 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:49:26 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static inline void	heredoc_infork(t_ms_data *d, t_ms_tokken **tok, char *tmp)
 	signal(SIGINT, heredoc_sig);
 	heredoc_loop(tok, heredoc_unquote((*tok)->content),
 		open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644));
-	free(*tokken);
+	free(*tok);
 	if (d->context->hd_ctrl_c == true)
 		dup2(d->context->temp_hd_fd, STDIN_FILENO);
 	close(d->context->temp_hd_fd);
