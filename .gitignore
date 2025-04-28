@@ -1,0 +1,11 @@
+minishell
+*.swp
+*.a
+*.out
+*.o
+.vscode
+en.subject.pdf
+test.c
+*/ms_hd*
+.nfs*
+.gitgnore
