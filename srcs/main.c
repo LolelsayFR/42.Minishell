@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/25 12:49:05 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:57:55 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	minishell_main_loop(t_ms_data *data)
 {
 	while (data->is_running == true)
 	{
+		unlink_all();
 		free(data->prompt);
 		data->prompt = readline_cleaner(data);
 		if (data->prompt == NULL)

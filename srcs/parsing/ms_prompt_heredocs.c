@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/24 16:00:21 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:58:19 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ static void	heredoc_loop(t_ms_tokken **tok, char *eof, int fd)
 	char	*hdp;
 
 	hdp = NULL;
-	while (true)
+	while (!ms_get_data()->context->hd_ctrl_c)
 	{
 		free(hdp);
-		hdp = readline(">");
+		hdp = readline("> ");
 		if (!ft_strcmp(hdp, eof) && hdp != NULL)
 			break ;
 		if (hdp == NULL && !ms_get_data()->context->hd_ctrl_c)
