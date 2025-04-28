@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/24 12:57:57 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:31:54 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,20 @@ static int	print_export(t_env_lst *head)
 	{
 		count = printf("export %s", head->var_name);
 		if (count == -1)
-			return (ft_printfd(2, NO_SPACE, ms_prefix(ms_get_data())));
+			return (ms_get_data()->last_return = 1,
+				ft_printfd(2, NO_SPACE, ms_prefix(ms_get_data())));
 		if (head->var_cont != NULL)
 			count = printf("%s", head->var_cont);
 		if (count == -1)
-			return (ft_printfd(2, NO_SPACE, ms_prefix(ms_get_data())));
+			return (ms_get_data()->last_return = 1,
+				ft_printfd(2, NO_SPACE, ms_prefix(ms_get_data())));
 		count = printf("\n");
 		if (count == -1)
-			return (ft_printfd(2, NO_SPACE, ms_prefix(ms_get_data())));
+			return (ms_get_data()->last_return = 1,
+				ft_printfd(2, NO_SPACE, ms_prefix(ms_get_data())));
 		head = head->next;
 	}
-	return (0);
+	return (ms_get_data()->last_return = 0);
 }
 
 static bool	export_checker(char *str)
@@ -89,7 +92,7 @@ int	ms_export(t_ms_data *data, char **av)
 
 	ft_bzero(&a, sizeof(t_pars_args));
 	if (ft_tabstr_len(av) <= 0)
-		return (print_export(data->env_lst), data->last_return = 0);
+		return (print_export(data->env_lst));
 	i = 0;
 	ms_export_loop(av, &a, i);
 	ft_free_strtab(data->env_var);
