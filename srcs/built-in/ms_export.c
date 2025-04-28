@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/28 10:31:54 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:13:36 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@ static int	print_export(t_env_lst *head)
 {
 	int	count;
 
-	while (head != NULL && head->var_name != NULL)
+	while (head != NULL)
 	{
+		if (head->var_name == NULL)
+		{
+			head = head->next;
+			continue ;
+		}
 		count = printf("export %s", head->var_name);
 		if (count == -1)
 			return (ms_get_data()->last_return = 1,
