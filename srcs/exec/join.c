@@ -6,39 +6,11 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 19:23:31 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/16 08:30:54 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:33:24 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
-
-char	*tokken_join_id(t_list *tokkens, int id)
-{
-	char		*str;
-	t_ms_tokken	*tokken;
-	t_list		*temp;
-
-	temp = tokkens;
-	tokken = temp->content;
-	while (temp != NULL && tokken->id != id)
-	{
-		temp = temp->next;
-		tokken = temp->content;
-	}
-	str = NULL;
-	while (temp != NULL && tokken->id == id)
-	{
-		if (tokken->type == ARG)
-			ft_strcat(&str, tokken->content);
-		if (tokken->type == ARG)
-			ft_strcat(&str, " ");
-		temp = temp->next;
-		if (temp == NULL)
-			break ;
-		tokken = temp->content;
-	}
-	return (str);
-}
 
 char	**tokken_id_join(t_list *tokkens, int id)
 {
