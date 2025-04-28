@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/28 09:58:19 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:47:28 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,25 +83,45 @@ static void	heredoc_loop(t_ms_tokken **tok, char *eof, int fd)
 	free(eof);
 }
 
+static inline void	heredoc_infork(t_ms_data *d, t_ms_tokken **tok, char *tmp)
+{
+	d->context->temp_hd_fd = dup(STDIN_FILENO);
+	signal(SIGINT, heredoc_sig);
+	heredoc_loop(tok, heredoc_unquote((*tok)->content),
+		open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644));
+	free(*tokken);
+	if (d->context->hd_ctrl_c == true)
+		dup2(d->context->temp_hd_fd, STDIN_FILENO);
+	close(d->context->temp_hd_fd);
+	ms_sig_init(d);
+	ft_free_strtab(d->tab_prompt);
+	free(tmp);
+	ms_close(0, d);
+}
+
 void	heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken)
 {
 	char	*name;
 	char	*tmp;
+	int		pid;
 
 	data->context->heredocs++;
-	signal(SIGINT, heredoc_sig);
-	data->context->temp_hd_fd = dup(STDIN_FILENO);
 	name = ft_strdup("/tmp/ms_hd_");
 	tmp = ft_itoa(data->context->heredocs);
 	ft_strcat(&name, tmp);
 	free(tmp);
 	tmp = ft_strjoin(data->init_pwd, name);
 	free(name);
-	heredoc_loop(tokken, heredoc_unquote((*tokken)->content),
-		open(tmp, O_CREAT | O_TRUNC | O_WRONLY, 0644));
-	(*tokken)->content = tmp;
-	if (data->context->hd_ctrl_c == true)
-		dup2(data->context->temp_hd_fd, STDIN_FILENO);
-	close(data->context->temp_hd_fd);
-	ms_sig_init(data);
+	pid = fork();
+	ms_get_data()->context->rl_redisplay = true;
+	if (pid != 0)
+	{
+		free((*tokken)->content);
+		(*tokken)->content = tmp;
+		signal(SIGINT, SIG_IGN);
+		waitpid(pid, 0, 0);
+		ms_sig_init(data);
+		return ;
+	}
+	heredoc_infork(data, tokken, tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/28 16:08:02 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:17:54 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_ms_data
 	bool			is_running;
 	bool			easter_rgb;
 	char			**env_var;
+	char			**tab_prompt;
 	char			*prefix;
 	char			*prompt;
 	char			*init_pwd;

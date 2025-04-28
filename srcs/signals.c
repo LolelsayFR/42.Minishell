@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:14:40 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/25 10:25:33 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:24:29 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ static void	ms_sig_handler(int sig)
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		printf("\n");
-		rl_redisplay();
+		ft_printfd(2, "\n");
+		if (ms_get_data()->context->rl_redisplay == true)
+			rl_redisplay();
 		ms_get_data()->last_return = 130;
 	}
 }
@@ -38,11 +39,10 @@ void	heredoc_sig(int sig)
 	if (sig == SIGINT)
 	{
 		ms_get_data()->context->hd_ctrl_c = true;
-		close(STDIN_FILENO);
 		rl_replace_line("", 0);
-		rl_on_new_line();
 		ft_printfd(2, "\n");
 		ms_get_data()->last_return = 130;
+		close(STDIN_FILENO);
 	}
 }
 
