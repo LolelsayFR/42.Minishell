@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:18:46 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/20 02:08:28 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:25:17 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	*pipe_savedup(int *pipe)
 
 int	close_pipe(t_ex_data *ex_data)
 {
-	if (ex_data->nb_cmd - 1 > ex_data->i)
+	if (ex_data->nb_pipe > ex_data->i)
 		if (ex_data->pipe != NULL)
 			close(ex_data->pipe[1]);
 	if (ex_data->prev_pipe != NULL)
@@ -40,7 +40,7 @@ int	open_pipe(t_ex_data *ex_data)
 		free(ex_data->prev_pipe);
 		ex_data->prev_pipe = pipe_savedup(ex_data->pipe);
 	}
-	if (ex_data->i < ex_data->nb_cmd - 1)
+	if (ex_data->i < ex_data->nb_pipe)
 	{
 		free(ex_data->pipe);
 		ex_data->pipe = malloc(2 * sizeof(int));

@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/25 12:55:57 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:08:02 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct s_ex_data
 	int			*pipe;
 	int			*prev_pipe;
 	int			good_file;
+	int			nb_pipe;
 	int			nb_cmd;
 	int			id;
 	int			i;
