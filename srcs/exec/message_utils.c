@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:14:38 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/29 14:38:16 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/30 01:19:24 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	bad_dir(char *str)
 
 void	ambigous(char *str)
 {
-	ft_printfd(2, "%s: %s: ambiguous redirect\n", ms_prefix(ms_get_data()),
+	ft_printfd(2, "%s %s: ambiguous redirect\n", ms_prefix(ms_get_data()),
 		str);
 }
 
