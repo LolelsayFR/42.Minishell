@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/29 15:56:04 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/30 01:02:38 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 /* ************************************************************************** */
 
 //Global Debug mod
-# define MS_DEBUG false
+# define MS_DEBUG true
 //Tokken printer
-# define MS_DE_TOKPRINT false
+# define MS_DE_TOKPRINT true
 //Split_tab parsing printer
 # define MS_DE_PARS_TAB false
 //Unset debug print
