@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 19:23:31 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/29 11:24:31 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:53:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**tokken_id_join(t_list *tokkens, int id)
 
 	i = 0;
 	temp = first_in_id(tokkens, id);
-	cmd = ft_calloc((arg_in_id(temp, id) + 1), sizeof(char *));
+	cmd = malloc((arg_in_id(temp, id) + 1) * sizeof(char *));
 	while (temp != NULL)
 	{
 		tokken = temp->content;

@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:59:30 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/28 16:24:40 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:21:37 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 		tokken = tokkens->content;
 		if (tokken->id != id)
 			break ;
+		if ((tokken->type == INF || tokken->type == H_D || tokken->type == OUTF_A
+			|| tokken->type == OUTF_R) && tokken->flag == ISEXPAND)
+			return (ft_printfd(2, "%s: %s: ambiguous redirect\n",
+					ms_prefix(ms_get_data()), tokken->content), -1);
 		if (tokken->type == INF || tokken->type == H_D)
 			ex_data->file[0] = infile_open(ex_data->file[0],
 					tokken->type, tokken->content);
