@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:53:41 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/29 14:50:21 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:59:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ void	do_cd(t_ms_data *data, t_ms_tokken *tokken)
 	char	**tab;
 
 	tab = tokken_id_join(data->tokkens, tokken->id);
-	if (tab[1][0] == '\0' && tab[2] == NULL)
+	if (tab[1] == NULL)
+		data->last_return = ms_cd(data, &tab[1]);
+	else if (tab[1][0] == '\0' && tab[2] == NULL)
 		data->last_return = 0;
 	else
 		data->last_return = ms_cd(data, &tab[1]);
