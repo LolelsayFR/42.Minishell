@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:44:37 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/28 09:57:55 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:06:24 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	minishell_main_loop(t_ms_data *data)
 			signal(SIGQUIT, SIG_IGN);
 		}
 		else
-			data->last_return = 2;
+			data->last_return = 1;
 	}
 	return (EXIT_SUCCESS);
 }
