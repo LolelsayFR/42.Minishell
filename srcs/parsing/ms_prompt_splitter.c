@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/25 15:50:52 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:00:08 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,9 @@ static int	tokken_count(t_ms_data *data, t_pars_args *a)
 		a->i++;
 	while (data->prompt[a->i])
 	{
-		if (data->prompt[a->i] == '"' && a->quote % 2 == 0)
-			a->d_quote++;
-		else if (data->prompt[a->i] == '\'' && a->d_quote % 2 == 0)
-			a->quote++;
-		if (ft_strchr("<>| \t", data->prompt[a->i])
-			&& a->i >= 1 && (a->quote + a->d_quote) % 2 == 0)
+		if (((ft_strchr("<>| \t", data->prompt[a->i])
+					&& (a->quote + a->d_quote) % 2 == 0))
+			|| ft_isspace(data->prompt[a->i]))
 		{
 			if (data->prompt[a->i] == data->prompt[a->i + 1])
 				a->i++;
@@ -33,6 +30,10 @@ static int	tokken_count(t_ms_data *data, t_pars_args *a)
 				a->i++;
 			a->count++;
 		}
+		else if (data->prompt[a->i] == '"' && a->quote % 2 == 0)
+			a->d_quote++;
+		else if (data->prompt[a->i] == '\'' && a->d_quote % 2 == 0)
+			a->quote++;
 		a->i++;
 	}
 	return (a->count + 1);
