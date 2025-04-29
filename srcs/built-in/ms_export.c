@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/28 18:13:36 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:08:14 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ static bool	export_checker(char *str)
 
 	i = 0;
 	if (ft_isdigit(str[0]))
-		return (false);
+		return (ms_get_data()->last_return = 1, false);
 	while (str[i] != '\0' && str[i] != '=')
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (false);
+			return (ms_get_data()->last_return = 1, false);
 		i++;
 	}
 	if (i <= 0)
-		return (false);
+		return (ms_get_data()->last_return = 1, false);
 	return (true);
 }
 
