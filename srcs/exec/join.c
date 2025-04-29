@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 19:23:31 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/29 12:53:20 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:11:21 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	arg_in_id(t_list *tokkens, int id)
 
 static void	add_tab_in_tab(char **cmd, char *content, int *i)
 {
-	int	j;
+	int		j;
 	char	**temp;
 
 	j = 0;
@@ -72,7 +72,7 @@ char	**tokken_id_join(t_list *tokkens, int id)
 		if (tokken->id != id)
 			break ;
 		if ((tokken->type == CMD || tokken->type == ARG
-			|| tokken->type == B_IN) && tokken->flag == ISEXPAND)
+				|| tokken->type == B_IN) && tokken->flag == ISEXPAND)
 			add_tab_in_tab(cmd, tokken->content, &i);
 		else if (tokken->type == CMD || tokken->type == ARG
 			|| tokken->type == B_IN)

@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/25 12:47:40 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:38:46 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ void		close_file_permission(t_ex_data *ex_data);
 void		close_cmd_permission(t_ex_data *ex_data);
 void		close_cmd_none(t_ex_data *ex_data);
 void		close_execve_one(t_one_data *o_data, char **cmd);
+void		ambigous(char *str);
+void		bad_dir(char *str);
+void		no_permission(char *str);
+int		error_filing(t_ex_data *ex_data, t_ms_tokken *tokken);
 
 void		find_one_infile(t_one_data *o_data, t_ms_tokken *tokken);
 void		find_one_outfile(t_one_data *o_data, t_ms_tokken *tokken);

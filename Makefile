@@ -19,6 +19,7 @@ SRC				=	srcs/main.c\
 					srcs/exec/numb_of_no_nl.c\
 					srcs/exec/path.c\
 					srcs/exec/unlink_all.c\
+					srcs/exec/message_utils.c\
 					srcs/exec/exec_all/finds.c\
 					srcs/exec/exec_all/ms_exec.c\
 					srcs/exec/exec_all/ms_exec_utils.c\

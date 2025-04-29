@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:59:30 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/29 13:21:37 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:37:58 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,18 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 		tokken = tokkens->content;
 		if (tokken->id != id)
 			break ;
-		if ((tokken->type == INF || tokken->type == H_D || tokken->type == OUTF_A
-			|| tokken->type == OUTF_R) && tokken->flag == ISEXPAND)
-			return (ft_printfd(2, "%s: %s: ambiguous redirect\n",
-					ms_prefix(ms_get_data()), tokken->content), -1);
+		if ((tokken->type == INF || tokken->type == H_D
+				|| tokken->type == OUTF_A || tokken->type == OUTF_R)
+			&& tokken->flag == ISEXPAND)
+			return (ambigous(tokken->content), -1);
 		if (tokken->type == INF || tokken->type == H_D)
 			ex_data->file[0] = infile_open(ex_data->file[0],
 					tokken->type, tokken->content);
 		else if (tokken->type == OUTF_R || tokken->type == OUTF_A)
 			ex_data->file[1] = outfile_open(ex_data->file[1],
 					tokken->type, tokken->content);
-		if ((ex_data->file[0] == -2 || ex_data->file[1] == -2)
-			&& tokken->type != CMD && tokken->type != B_IN)
-			return (ft_printfd(2, EXEC_NODIR, ms_prefix(ms_get_data()),
-					tokken->content), -1);
-		else if ((ex_data->file[0] == -1 || ex_data->file[1] == -1)
-			&& tokken->type != CMD && tokken->type != B_IN)
-			return (ft_printfd(2, EXEC_NOPERM, ms_prefix(ms_get_data()),
-					tokken->content), -1);
+		if (error_filing(ex_data, tokken) == -1)
+			return (-1);
 		tokkens = tokkens->next;
 	}
 	return (0);
