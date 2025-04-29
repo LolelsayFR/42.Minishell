@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:20:45 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/22 19:03:57 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:18:57 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@ int	ms_cd_exec(t_ms_data *data, char **path, char *temp, char *home)
 		free(home);
 		return (1);
 	}
-	env_export(ft_strdup("OLDPWD="), ft_strdup(data->cur_pwd), &data->env_lst);
+	if (get_env_lst(data, "PWD") != NULL)
+		env_export(ft_strdup("OLDPWD="),
+			ft_strdup(data->cur_pwd), &data->env_lst);
+	else
+		ms_unset_ex(data, "OLDPWD");
 	free(data->cur_pwd);
 	data->cur_pwd = getcwd(NULL, 0);
-	env_export(ft_strdup("PWD="), getcwd(NULL, 0), &data->env_lst);
+	if (get_env_lst(data, "PWD") != NULL)
+		env_export(ft_strdup("PWD="), getcwd(NULL, 0), &data->env_lst);
 	path[0] = temp;
 	free(home);
 	return (0);

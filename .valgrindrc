@@ -4,3 +4,4 @@
 --show-leak-kinds=all
 --track-origins=yes
 --suppressions=valgrind.supp
+--leak-check=full

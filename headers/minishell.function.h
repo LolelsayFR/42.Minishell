@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/29 14:41:42 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:18:24 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ char		*pars_injector(char *str, char *temp, t_pars_args *arg);
 int			env_export(char *name, char *content, t_env_lst **head);
 char		*ft_strjointab(char **tab);
 int			ms_strcmp_e(char *s1, const char *s2);
+int	        ms_unset_ex(t_ms_data *data, char *arg);
 
 #endif
 /* ************************************************************************** */
