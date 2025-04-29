@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:47:04 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/28 17:17:54 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:39:53 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 /* ************************************************************************** */
 
 //Global Debug mod
-# define MS_DEBUG false
+# define MS_DEBUG true
 //Tokken printer
-# define MS_DE_TOKPRINT false
+# define MS_DE_TOKPRINT true
 //Split_tab parsing printer
 # define MS_DE_PARS_TAB false
 //Unset debug print
@@ -50,6 +50,7 @@
 # define NONE			1
 # define EMPTY_QUOTE 	2
 # define CTRL_D_HD		3
+# define ISEXPAND		4
 
 /* ************************************************************************** */
 /*  Typedef of struct                                                         */

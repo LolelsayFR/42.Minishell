@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:12:58 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/25 14:33:03 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:37:44 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	var_placer(char **str, t_pars_args *arg, bool qte_ign)
 	return (free(middle), arg->len - 1);
 }
 
-static char	*tokken_unquote(char **str, t_pars_args arg)
+static char	*tokken_unquote(char **str, t_pars_args arg, int *flag)
 {
 	while (*str != NULL && (*str)[arg.i])
 	{
@@ -99,7 +99,10 @@ static char	*tokken_unquote(char **str, t_pars_args arg)
 			|| (*str)[arg.i + 1] == '_' || (*str)[arg.i + 1] == '?'
 			|| (*str)[arg.i + 1] == '\''
 			|| (((*str)[arg.i + 1] == '"' ) && arg.d_quote % 2 == 0)))
+		{
 			arg.i += var_placer(str, &arg, false);
+			*flag = ISEXPAND;
+		}
 		arg.i++;
 	}
 	if (*str == NULL)
@@ -125,7 +128,7 @@ char	*tokken_cleaner(char *str, int *flag, int type)
 	else
 		*flag = NONE;
 	if (type != H_D)
-		result = tokken_unquote(&trim, arg);
+		result = tokken_unquote(&trim, arg, flag);
 	if (type == H_D && *flag == EMPTY_QUOTE)
 		return (ft_strdup("\0"));
 	else if (type == H_D)

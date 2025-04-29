@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:26:23 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/15 10:40:17 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:40:34 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static void	print_tokken(t_ms_tokken *tokken)
 {
-	printf(GRN"\nTokken id = %d", tokken->id);
-	printf(YEL"\nType id : %d"RES, tokken->type);
+	printf(GRN"\nTokken id = %d\n", tokken->id);
 	if (tokken->type == INF)
 		printf("Type : INFILE");
 	else if (tokken->type == H_D)
@@ -29,16 +28,17 @@ static void	print_tokken(t_ms_tokken *tokken)
 	else if (tokken->type == OUTF_A)
 		printf("Type : OUTFILE APPEND");
 	else if (tokken->type == OUTF_R)
-		printf("Type : OURFILE REPLACE");
+		printf("Type : OUTFILE REPLACE");
 	else if (tokken->type == END)
 		printf("Type : END");
 	if (tokken->flag == NONE)
 		printf("\nFlag : None");
 	else if (tokken->flag == EMPTY_QUOTE)
-		printf("\nFlag : Only quote");
+		printf("\nFlag : Empty quote");
 	else if (tokken->flag == CTRL_D_HD)
 		printf("\nFlag : Ctrl-D Heredoc");
-	printf(YEL"\nContent = %s\n"RES, tokken->content);
+	else if (tokken->flag == ISEXPAND)
+		printf("\nFlag : Expand tokken");
 }
 
 void	print_all_tokken(t_list *lst_head)
@@ -60,6 +60,7 @@ void	print_all_tokken(t_list *lst_head)
 		i++;
 		tokken = lst->content;
 		print_tokken(tokken);
+		printf(YEL"\nContent = %s\n"RES, tokken->content);
 		lst = lst->next;
 	}
 	printf(RED"Tokken count = %d"RES, i);
