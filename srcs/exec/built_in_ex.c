@@ -6,13 +6,12 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:53:41 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/29 14:49:07 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:50:21 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-//To Do
 void	do_echo(t_ms_data *data, t_ms_tokken *tokken)
 {
 	int		no_nl;
@@ -35,7 +34,6 @@ void	do_echo(t_ms_data *data, t_ms_tokken *tokken)
 	ft_free_strtab(tab);
 }
 
-//To Do
 void	do_unset(t_ms_data *data, t_ms_tokken *tokken)
 {
 	char	**tab;
@@ -45,7 +43,6 @@ void	do_unset(t_ms_data *data, t_ms_tokken *tokken)
 	ft_free_strtab(tab);
 }
 
-//To Do
 void	do_export(t_ms_data *data, t_ms_tokken *tokken)
 {
 	char	**tab;
@@ -55,7 +52,6 @@ void	do_export(t_ms_data *data, t_ms_tokken *tokken)
 	ft_free_strtab(tab);
 }
 
-//To Do
 void	do_cd(t_ms_data *data, t_ms_tokken *tokken)
 {
 	char	**tab;
