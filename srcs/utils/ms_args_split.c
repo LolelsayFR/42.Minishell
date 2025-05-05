@@ -6,13 +6,13 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/14 14:07:44 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/05/05 09:39:26 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static int	tokken_count(char *str, t_pars_args *a)
+static int	tokken_count_as(char *str, t_pars_args *a)
 {
 	ft_bzero(a, sizeof(t_pars_args));
 	if (ft_strchr("<>", str[0]) && str[0] == str[1])
@@ -63,7 +63,7 @@ char	**args_split(int i, char *str)
 	char		**result;
 	t_pars_args	a;
 
-	i = tokken_count(str, &a);
+	i = tokken_count_as(str, &a);
 	ft_bzero(&a, sizeof(t_pars_args));
 	result = ft_calloc(i + 2, sizeof(char *));
 	if (ft_strchr("<>", str[0]) && str[0] == str[1])

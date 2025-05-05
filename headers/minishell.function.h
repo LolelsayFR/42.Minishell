@@ -74,6 +74,8 @@ char		*tokken_cleaner(char *str, int *flag, int type);
 void		heredoc_initer(t_ms_data *data, t_ms_tokken	**tokken);
 int			var_placer(char **str, t_pars_args *arg, bool qte_ign);
 char		*readline_cleaner(t_ms_data *data);
+int			tokken_count(t_ms_data *data, t_pars_args *a);
+
 /* ************************************************************************** */
 /*  Exec functions                                                            */
 /* ************************************************************************** */

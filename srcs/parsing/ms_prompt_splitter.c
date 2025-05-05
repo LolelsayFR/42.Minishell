@@ -6,13 +6,13 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:26:54 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/29 16:00:08 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/05/05 10:34:28 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
 
-static int	tokken_count(t_ms_data *data, t_pars_args *a)
+int	tokken_count(t_ms_data *data, t_pars_args *a)
 {
 	ft_bzero(a, sizeof(t_pars_args));
 	while (ft_isspace(data->prompt[a->i])
@@ -65,7 +65,6 @@ char	**prompt_split(t_ms_data *data)
 	char		**result;
 	t_pars_args	a;
 
-	data->context->nb_tkn = tokken_count(data, &a);
 	ft_bzero(&a, sizeof(t_pars_args));
 	result = ft_calloc(data->context->nb_tkn + 2, sizeof(char *));
 	while (ft_isspace(data->prompt[a.i]) || ft_strchr("<>", data->prompt[a.i]))
@@ -84,7 +83,7 @@ char	**prompt_split(t_ms_data *data)
 		a.len++;
 		a.i++;
 	}
-	ft_strncat(&result[a.tok], data->prompt + a.start, a.len);
+	ft_strcat(&result[a.tok], data->prompt + a.start);
 	result[data->context->nb_tkn + 1] = NULL;
 	return (result);
 }
@@ -125,7 +124,11 @@ char	*readline_cleaner(t_ms_data *data)
 
 	readed = readline(ms_prefix(data));
 	if (readed == NULL)
+	{
+		free(readed);
+		readed = NULL;
 		return (NULL);
+	}
 	result = ft_strdup(readed);
 	free(readed);
 	readed = NULL;
