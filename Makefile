@@ -58,7 +58,8 @@ SRC				=	srcs/main.c\
 					srcs/utils/ms_tokken_printer.c\
 					srcs/utils/pars_injector.c\
 					srcs/utils/print_tab.c\
-					srcs/utils/str_unquote.c
+					srcs/utils/str_unquote.c\
+					srcs/utils/countwords.c
 
 CFLAGS			=	-Wall -Werror -Wextra -Iheaders -lreadline -g
 

@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 10:46:42 by emaillet          #+#    #+#             */
-/*   Updated: 2025/05/05 09:38:21 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/05/05 08:46:08 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ int			env_export(char *name, char *content, t_env_lst **head);
 char		*ft_strjointab(char **tab);
 int			ms_strcmp_e(char *s1, const char *s2);
 int			ms_unset_ex(t_ms_data *data, char *arg);
+int			ft_countwords(char const *s, char c);
 
 #endif
 /* ************************************************************************** */
