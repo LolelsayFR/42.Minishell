@@ -73,7 +73,7 @@ hello:
 
 $(NAME): ${SRC} ${LIBFT}
 	@echo "\e[48;2;0;155;0;1m Compile "$(NAME)" \e[0m\n"
-	gcc ${SRC} ${CFLAGS} ${LIBFT} -o $(NAME)
+	cc ${SRC} ${CFLAGS} ${LIBFT} -o $(NAME)
 	@echo "\e[48;2;0;0;155;1m Done \e[0m\n"
 
 $(LIBFT):
