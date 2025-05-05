@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 08:49:29 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/30 01:20:35 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/05/05 08:49:20 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	find_files(t_one_data *o_data, t_list *tokkens)
 		tokken = tokkens->content;
 		if ((tokken->type == INF || tokken->type == H_D
 				|| tokken->type == OUTF_A || tokken->type == OUTF_R)
-			&& tokken->flag == ISEXPAND)
+			&& tokken->flag == ISEXPAND && ft_countwords(tokken->content, ' ') != 1)
 			return (ft_printfd(2, "%s%s: ambiguous redirect\n",
 					ms_prefix(ms_get_data()), tokken->content), -1);
 		if (tokken->type == INF || tokken->type == H_D)
