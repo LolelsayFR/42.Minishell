@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:14:41 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/30 01:40:19 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/05/05 10:57:10 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ static int	tokken_get_type(char *str, int id, int *save_id)
 	return (ARG);
 }
 
-static int 	tab_to_tokken_utils(int *save_id, char **content, int *i)
+static int	tab_to_tokken_utils(int *save_id, char **str, int *i)
 {
 	if (save_id != NULL)
 		(*save_id)--;
-	free(*content);
+	free(*str);
+	*str = NULL;
 	(*i)++;
 	return (1);
 }
@@ -58,7 +59,7 @@ void	tab_to_tokken(char **tab, t_ms_data *data, int i, int save_id)
 				continue ;
 		tok.type = tokken_get_type(str, tok.id, &save_id);
 		str = tokken_cleaner(str, &tok.flag, tok.type);
-		if ((str == NULL || str[0] == '\0')
+		if (((str == NULL || str[0] == '\0') && tok.flag != EMPTY_QUOTE)
 			&& (tok.type == CMD || tok.type == ARG))
 			if (tab_to_tokken_utils(&save_id, &str, &i))
 				continue ;
