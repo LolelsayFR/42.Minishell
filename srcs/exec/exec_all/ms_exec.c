@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:59:30 by artgirar          #+#    #+#             */
-/*   Updated: 2025/05/05 08:49:29 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/05/05 08:59:08 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 		tokken = tokkens->content;
 		if (tokken->id != id)
 			break ;
-		if ((tokken->type == INF || tokken->type == H_D
-				|| tokken->type == OUTF_A || tokken->type == OUTF_R)
-			&& tokken->flag == ISEXPAND && ft_countwords(tokken->content, ' ') != 1)
+		if ((tokken->type != CMD && tokken->type != ARG)
+			&& tokken->flag == ISEXPAND
+			&& ft_countwords(tokken->content, ' ') != 1)
 			return (ambigous(tokken->content), -1);
 		if (tokken->type == INF || tokken->type == H_D)
 			ex_data->file[0] = infile_open(ex_data->file[0],
