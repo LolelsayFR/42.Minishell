@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 09:00:48 by emaillet          #+#    #+#             */
-/*   Updated: 2025/05/05 13:16:03 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:18:32 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static char	*heredoc_unquote(char *str)
 			str = pars_injector(str, NULL, &arg);
 		}
 		else if (str[arg.i] == '$' && (str[arg.i + 1] == '\''
-			|| str[arg.i + 1] == '"') && (arg.d_quote + arg.quote) % 2 == 0)
+				|| str[arg.i + 1] == '"')
+			&& (arg.d_quote + arg.quote) % 2 == 0)
 			str = pars_injector(str, NULL, &arg);
 		arg.i++;
 	}
