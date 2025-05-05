@@ -6,7 +6,7 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:20:45 by emaillet          #+#    #+#             */
-/*   Updated: 2025/04/29 16:30:57 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:16:28 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ int	ms_cd_exec(t_ms_data *data, char **path, char *temp, char *home)
 	if (chdir(path[0]) == -1)
 	{
 		path[0] = temp;
-		ft_printfd(2, CD_DIR_ERROR, ms_prefix(data), path[0]);
+		if (path[0] == NULL && ft_strlen(home) <= 0)
+			return (free(home), 0);
+		else if (path[0] == NULL && ft_strlen(home) > 0)
+			ft_printfd(2, CD_DIR_ERROR, ms_prefix(data), home);
+		else
+			ft_printfd(2, CD_DIR_ERROR, ms_prefix(data), path[0]);
 		free(home);
 		return (1);
 	}

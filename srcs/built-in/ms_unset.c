@@ -6,11 +6,18 @@
 /*   By: emaillet <emaillet@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:44:02 by maillet           #+#    #+#             */
-/*   Updated: 2025/04/18 11:28:46 by emaillet         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:13:08 by emaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.function.h"
+
+static void	env_free_one(t_env_lst *lst)
+{
+	nufree(lst->var_cont);
+	nufree(lst->var_name);
+	nufree(lst);
+}
 
 static void	ft_envremoveone(t_env_lst **head, t_env_lst *lst)
 {
@@ -20,9 +27,7 @@ static void	ft_envremoveone(t_env_lst **head, t_env_lst *lst)
 		return ;
 	if ((*head)->next == NULL && (*head) == lst)
 	{
-		nufree((*head)->var_cont);
-		nufree((*head)->var_name);
-		nufree((*head));
+		env_free_one(lst);
 		*head = NULL;
 		return ;
 	}
@@ -33,11 +38,7 @@ static void	ft_envremoveone(t_env_lst **head, t_env_lst *lst)
 		tmp_head = tmp_head->next;
 	if (tmp_head->next != NULL)
 		tmp_head->next = tmp_head->next->next;
-	else
-		return ;
-	nufree(lst->var_cont);
-	nufree(lst->var_name);
-	nufree(lst);
+	env_free_one(lst);
 }
 
 int	ms_unset_ex(t_ms_data *data, char *arg)
