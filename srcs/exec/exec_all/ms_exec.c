@@ -6,7 +6,7 @@
 /*   By: artgirar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:59:30 by artgirar          #+#    #+#             */
-/*   Updated: 2025/04/29 14:37:58 by artgirar         ###   ########.fr       */
+/*   Updated: 2025/04/30 01:48:04 by artgirar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	finds_files(t_ex_data *ex_data, t_list *tokkens, int id)
 			break ;
 		if ((tokken->type == INF || tokken->type == H_D
 				|| tokken->type == OUTF_A || tokken->type == OUTF_R)
-			&& tokken->flag == ISEXPAND)
+			&& tokken->flag == ISEXPAND && tokken->content[0] == '\0')
 			return (ambigous(tokken->content), -1);
 		if (tokken->type == INF || tokken->type == H_D)
 			ex_data->file[0] = infile_open(ex_data->file[0],
